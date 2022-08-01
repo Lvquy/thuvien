@@ -1,0 +1,73 @@
+<data noupdate="0">
+    <record id="sach_doc_rule" model="ir.rule">
+        <field name="name">Sach multi company rule</field>
+        <field name="model_id" ref="model_sach_doc"/>
+        <field name="domain_force">[('company_id', 'in', [a.id for a in user.company_ids])]</field>
+    </record>
+
+    <record id="doc_gia_rule" model="ir.rule">
+        <field name="name">Độc giả company rule</field>
+        <field name="model_id" ref="model_doc_gia"/>
+        <field name="domain_force">[('company_id', 'in', [a.id for a in user.company_ids])]</field>
+    </record>
+
+    <record id="lop_hoc_rule" model="ir.rule">
+        <field name="name">Lớp học company rule</field>
+        <field name="model_id" ref="model_lop_hoc"/>
+        <field name="domain_force">[('company_id', 'in', [a.id for a in user.company_ids])]</field>
+    </record>
+
+    <record id="ke_kho_rule" model="ir.rule">
+        <field name="name">Kệ kho company rule</field>
+        <field name="model_id" ref="model_ke_kho"/>
+        <field name="domain_force">[('company_id', 'in', [a.id for a in user.company_ids])]</field>
+    </record>
+
+    <record id="muon_tra_rule" model="ir.rule">
+        <field name="name">Mượn trả company rule</field>
+        <field name="model_id" ref="model_muon_tra"/>
+        <field name="domain_force">[('company_id', 'in', [a.id for a in user.company_ids])]</field>
+    </record>
+
+    <record id="line_muon_tra_rule" model="ir.rule">
+        <field name="name">Line Mượn trả company rule</field>
+        <field name="model_id" ref="model_line_muon_tra"/>
+        <field name="domain_force">[('company_id', 'in', [a.id for a in user.company_ids])]</field>
+    </record>
+
+    <record id="lang_rule" model="ir.rule">
+        <field name="name">Ngôn ngữ company rule</field>
+        <field name="model_id" ref="model_lang"/>
+        <field name="domain_force">[('company_id', 'in', [a.id for a in user.company_ids])]</field>
+    </record>
+
+    <record id="nhan_vien_rule" model="ir.rule">
+        <field name="name">Nhân viên company rule</field>
+        <field name="model_id" ref="model_nhan_vien"/>
+        <field name="domain_force">[('company_id', 'in', [a.id for a in user.company_ids])]</field>
+    </record>
+
+    <record id="xnb_rule" model="ir.rule">
+        <field name="name">Nhà xuất bản company rule</field>
+        <field name="model_id" ref="model_nxb"/>
+        <field name="domain_force">[('company_id', 'in', [a.id for a in user.company_ids])]</field>
+    </record>
+
+    <record id="danh_muc_rule" model="ir.rule">
+        <field name="name">Danh mục company rule</field>
+        <field name="model_id" ref="model_danh_muc"/>
+        <field name="domain_force">[('company_id', 'in', [a.id for a in user.company_ids])]</field>
+    </record>
+
+    <record id="tac_gia_rule" model="ir.rule">
+        <field name="name">Tác giả company rule</field>
+        <field name="model_id" ref="model_tac_gia"/>
+        <field name="domain_force">[('company_id', 'in', [a.id for a in user.company_ids])]</field>
+    </record>
+
+    <record id="the_loai_rule" model="ir.rule">
+        <field name="name">Thể loại company rule</field>
+        <field name="model_id" ref="model_the_loai"/>
+        <field name="domain_force">[('company_id', 'in', [a.id for a in user.company_ids])]</field>
+    </record>
+</data>

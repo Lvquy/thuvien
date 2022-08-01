@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="ngon_ngu_form" model="ir.ui.view">
+            <field name="name">lang.form</field>
+            <field name="model">lang</field>
+            <field name="arch" type="xml">
+                <form string="Ngôn ngữ">
+                    <sheet>
+                        <group>
+                            <group string="Thông tin">
+                                <field name="name"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="ngon_ngu_tree" model="ir.ui.view">
+            <field name="name">lang.tree</field>
+            <field name="model">lang</field>
+            <field name="arch" type="xml">
+                <tree string="Danh sách ngôn ngữ" editable="bottom">
+                    <field name="name" optional="show"/>
+                    <field name="company_id" optional="hide"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- action view-->
+        <record id="action_view_lang" model="ir.actions.act_window">
+            <field name="name">Danh sách ngôn ngữ</field>
+            <field name="res_model">lang</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new ...
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_lang" name="Ngôn ngữ" sequence="1"
+                  web_icon="lib_management,static/src/img/logo.png"
+                  groups="base.group_system,lib_management.group_lib_management"/>
+        <menuitem id="menu_sub_lang" name="Danh sách" parent="menu_lang" action="action_view_lang"
+                  sequence="3" groups="base.group_system,lib_management.group_lib_management"/>
+    </data>
+</odoo>
+

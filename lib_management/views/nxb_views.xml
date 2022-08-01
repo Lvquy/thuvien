@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="nxb_form" model="ir.ui.view">
+            <field name="name">nxb.form</field>
+            <field name="model">nxb</field>
+            <field name="arch" type="xml">
+                <form string="Nhà xuất bản">
+                    <sheet>
+                        <group>
+                            <group string="Thông tin">
+                                <field name="name"/>
+                                <field name="note"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="nxb_tree" model="ir.ui.view">
+            <field name="name">nxb.tree</field>
+            <field name="model">nxb</field>
+            <field name="arch" type="xml">
+                <tree string="Danh sách">
+                    <field name="name" optional="show"/>
+                    <field name="note" optional="show"/>
+                    <field name="company_id" optional="hide"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- action view-->
+        <record id="action_view_nxb" model="ir.actions.act_window">
+            <field name="name">Danh sách Nhà xuất bản</field>
+            <field name="res_model">nxb</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new ...
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_nxb" name="Nhà xuất bản" sequence="1"
+                  web_icon="lib_management,static/src/img/logo.png"
+                  groups="base.group_system,lib_management.group_lib_management"/>
+        <menuitem id="menu_sub_nxb" name="Danh sách" parent="menu_nxb" action="action_view_nxb"
+                  sequence="3" groups="base.group_system,lib_management.group_lib_management"/>
+    </data>
+</odoo>
+

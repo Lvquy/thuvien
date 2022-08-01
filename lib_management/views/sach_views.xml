@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="sach_doc_form" model="ir.ui.view">
+            <field name="name">sach.doc.form</field>
+            <field name="model">sach.doc</field>
+            <field name="arch" type="xml">
+                <form string="Danh sách Sách ">
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_visible="0,1"/>
+                    </header>
+                    <sheet>
+                        <field name="img" widget='image' class="oe_avatar"/>
+                        <div class="oe_title">
+                            <h1 >
+                                <field name="name" class="o_text_overflow" placeholder="Tên sách" required="True"/>
+                            </h1>
+                        </div>
+                        <group string="Thông tin sách">
+                            <group string="">
+                                <field name="ma_sach"/>
+                                <field name="tac_gia"/>
+                                <field name="tinh_trang"/>
+                                <field name="danh_muc_sach"/>
+                            </group>
+                            <group string="">
+                                <field name="the_loai_sach"/>
+                                <field name="nha_xb"/>
+                                <field name="ke_kho"/>
+                                <field name="ngon_ngu"/>
+                            </group>
+                            <group string="">
+                                <field name="so_trang"/>
+                                <field name="nam_xb"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="page_name" string="Tóm tắt nội dung sách">
+                                <field name="note"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="sach_doc_tree" model="ir.ui.view">
+            <field name="name">sach.doc.tree</field>
+            <field name="model">sach.doc</field>
+            <field name="arch" type="xml">
+                <tree string="Danh sách Sách">
+                    <field name="name" optional="show"/>
+                    <field name="company_id" optional="hide"/>
+                    <field name="state" optional="show"/>
+                    <field name="tac_gia" optional="show"/>
+                    <field name="the_loai_sach" optional="show"/>
+                    <field name="nha_xb" optional="show"/>
+                    <field name="ke_kho" optional="show"/>
+                    <field name="ngon_ngu" optional="show"/>
+                    <field name="note" optional="hide"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- action view-->
+        <record id="action_view_sach_doc" model="ir.actions.act_window">
+            <field name="name">Danh sách Sách</field>
+            <field name="res_model">sach.doc</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new ...
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_sach_doc" name="Danh sách Sách " sequence="1"
+                  web_icon="lib_management,static/src/img/logo.png"
+                  groups="base.group_system,lib_management.group_lib_management"/>
+        <menuitem id="menu_sub_sach_doc" name="Danh sách Sách " parent="menu_sach_doc" action="action_view_sach_doc"
+                  sequence="1" groups="base.group_system,lib_management.group_lib_management"/>
+    </data>
+</odoo>
+

@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="doc_gia_form" model="ir.ui.view">
+            <field name="name">doc.gia.form</field>
+            <field name="model">doc.gia</field>
+            <field name="arch" type="xml">
+                <form string="Độc giả">
+                    <header>
+                    </header>
+                    <sheet>
+                        <field name="img" widget='image' class="oe_avatar"/>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" placeholder="Tên độc giả" required="True"/>
+                            </h1>
+                            <h2>
+                                <field name="ma_docgia"/>
+                            </h2>
+                            <h4>
+                                <field name="lop_hoc" placeholder="Lớp học"/>
+                            </h4>
+                        </div>
+                        <group string="Thông tin">
+                            <field name="gioi_tinh"/>
+                            <field name="nam_sinh"/>
+                            <field name="dia_chi"/>
+                        </group>
+                        <notebook>
+                            <page name="thongtin" string="Thông tin thêm">
+                                <field name="note"/>
+                            </page>
+                        </notebook>
+
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="doc_gia_tree" model="ir.ui.view">
+            <field name="name">doc.gia.tree</field>
+            <field name="model">doc.gia</field>
+            <field name="arch" type="xml">
+                <tree string="Danh sách độc giả ">
+                    <field name="name" optional="show"/>
+                    <field name="ma_docgia" optional="show"/>
+                    <field name="gioi_tinh" optional="show"/>
+                    <field name="nam_sinh" optional="show"/>
+                    <field name="dia_chi" optional="hide"/>
+                    <field name="lop_hoc" optional="show"/>
+                    <field name="company_id" optional="hide"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- action view-->
+        <record id="action_view_doc_gia" model="ir.actions.act_window">
+            <field name="name">Danh sách độc giả</field>
+            <field name="res_model">doc.gia</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new ...
+                </p>
+            </field>
+        </record>
+
+        <!--        lop.hoc-->
+        <record id="lop_hoc_form" model="ir.ui.view">
+            <field name="name">lop.hoc.form</field>
+            <field name="model">lop.hoc</field>
+            <field name="arch" type="xml">
+                <form string="Lớp học">
+                    <sheet>
+                        <group>
+                            <group string="Thông tin">
+                                <field name="name"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="lop_hoc_tree" model="ir.ui.view">
+            <field name="name">lop.hoc.tree</field>
+            <field name="model">lop.hoc</field>
+            <field name="arch" type="xml">
+                <tree string="Danh sách lớp học" editable="bottom">
+                    <field name="name" optional="show"/>
+                    <field name="company_id" optional="hide"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- action view lop hoc-->
+        <record id="action_view_lop_hoc" model="ir.actions.act_window">
+            <field name="name">Danh sách lớp học</field>
+            <field name="res_model">lop.hoc</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new ...
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_doc_gia" name="Độc giả" sequence="1"
+                  web_icon="lib_management,static/src/img/logo.png"
+                  groups="base.group_system,lib_management.group_lib_management"/>
+        <menuitem id="menu_sub_doc_gia" name="Danh sách độc giả" parent="menu_doc_gia" action="action_view_doc_gia"
+                  sequence="1" groups="base.group_system,lib_management.group_lib_management"/>
+
+        <menuitem id="menu_lop_hoc" name="Lớp học" sequence="1"
+                  web_icon="lib_management,static/src/img/logo.png"
+                  groups="base.group_system,lib_management.group_lib_management"/>
+        <menuitem id="menu_sub_lop_hoc" name="Danh sách" parent="menu_lop_hoc" action="action_view_lop_hoc"
+                  sequence="1" groups="base.group_system,lib_management.group_lib_management"/>
+    </data>
+</odoo>
+
