@@ -17,11 +17,11 @@
                         </div>
                         <group>
                             <group string="Thông tin">
-                                <field name="nguoi_muon"/>
+                                <field name="nguoi_muon" options="{'no_open': True, 'no_create': True , 'no_quick_create': True}"/>
                                 <field name="ma_doc_gia"/>
                                 <field name="ngay_muon"/>
                                 <field name="ngay_tra"/>
-                                <field name="nhan_vien"/>
+                                <field name="nhan_vien" options="{'no_open': True, 'no_create': True , 'no_quick_create': True}"/>
                             </group>
                         </group>
 

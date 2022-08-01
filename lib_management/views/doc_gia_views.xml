@@ -18,7 +18,7 @@
                                 <field name="ma_docgia"/>
                             </h2>
                             <h4>
-                                <field name="lop_hoc" placeholder="Lớp học"/>
+                                <field name="lop_hoc" placeholder="Lớp học" options="{'no_open': True, 'no_create': True , 'no_quick_create': True}"/>
                             </h4>
                         </div>
                         <group string="Thông tin">
@@ -26,6 +26,7 @@
                             <field name="nam_sinh"/>
                             <field name="mobile"/>
                             <field name="dia_chi"/>
+                            <field name="company_id" options="{'no_open': True, 'no_create': True , 'no_quick_create': True}"/>
                         </group>
                         <notebook>
                             <page name="thongtin" string="Thông tin thêm">

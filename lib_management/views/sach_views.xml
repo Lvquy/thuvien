@@ -19,15 +19,15 @@
                         <group string="Thông tin sách">
                             <group string="">
                                 <field name="ma_sach"/>
-                                <field name="tac_gia"/>
+                                <field name="tac_gia" options="{'no_open': True, 'no_create': True , 'no_quick_create': True}"/>
                                 <field name="tinh_trang"/>
-                                <field name="danh_muc_sach"/>
+                                <field name="danh_muc_sach" options="{'no_open': True, 'no_create': True , 'no_quick_create': True}"/>
                             </group>
                             <group string="">
-                                <field name="the_loai_sach"/>
-                                <field name="nha_xb"/>
-                                <field name="ke_kho"/>
-                                <field name="ngon_ngu"/>
+                                <field name="the_loai_sach" options="{'no_open': True, 'no_create': True , 'no_quick_create': True}"/>
+                                <field name="nha_xb" options="{'no_open': True, 'no_create': True , 'no_quick_create': True}"/>
+                                <field name="ke_kho" options="{'no_open': True, 'no_create': True , 'no_quick_create': True}"/>
+                                <field name="ngon_ngu" options="{'no_open': True, 'no_create': True , 'no_quick_create': True}"/>
                             </group>
                             <group string="">
                                 <field name="so_trang"/>

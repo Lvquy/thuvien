@@ -20,7 +20,7 @@ class DocGia(models.Model):
     lop_hoc = fields.Many2one(comodel_name='lop.hoc', string='Lớp học',
                               domain=lambda self: [('company_id', 'in', [a.id for a in self.env.user.company_ids])])
     company_id = fields.Many2one(
-        'res.company', 'Company', index=1, default=lambda self: self.env.user.company_id.id)
+        'res.company', 'Trường học',readonly=True, index=1, default=lambda self: self.env.user.company_id.id)
     mobile = fields.Char(string='Số điện thoại')
 
     @api.model

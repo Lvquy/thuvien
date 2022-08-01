@@ -21,7 +21,7 @@
                                 <field name="nam_sinh"/>
                                 <field name="dia_chi"/>
                                 <field name="mobile"/>
-                                <field name="phong_ban"/>
+                                <field name="phong_ban" options="{'no_open': True, 'no_create': True , 'no_quick_create': True}"/>
                                 <field name="truong_hoc" options="{'no_open': True, 'no_create': True , 'no_quick_create': True}"/>
                             </group>
                         </group>
