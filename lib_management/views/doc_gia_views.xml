@@ -17,17 +17,23 @@
                             <h2>
                                 <field name="ma_docgia"/>
                             </h2>
-                            <h4>
-                                <field name="lop_hoc" placeholder="Lớp học" options="{'no_open': True, 'no_create': True , 'no_quick_create': True}"/>
-                            </h4>
                         </div>
-                        <group string="Thông tin">
-                            <field name="gioi_tinh"/>
-                            <field name="nam_sinh"/>
-                            <field name="mobile"/>
-                            <field name="dia_chi"/>
-                            <field name="company_id" options="{'no_open': True, 'no_create': True , 'no_quick_create': True}"/>
+                        <group>
+                            <group string="Thông tin">
+                                <field name="gioi_tinh"/>
+                                <field name="lop_hoc"
+                                       options="{'no_open': True, 'no_create': True , 'no_quick_create': True}"/>
+                                <field name="nam_sinh"/>
+                                <field name="mobile"/>
+                                <field name="dia_chi"/>
+                                <field name="company_id"
+                                       options="{'no_open': True, 'no_create': True , 'no_quick_create': True}"/>
+                            </group>
+                            <group>
+                                <button name="taothe" string="Tạo thẻ" type="object" class="btn btn-success"/>
+                            </group>
                         </group>
+
                         <notebook>
                             <page name="thongtin" string="Thông tin thêm">
                                 <field name="note"/>
