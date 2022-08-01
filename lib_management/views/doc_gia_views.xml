@@ -24,6 +24,7 @@
                         <group string="Thông tin">
                             <field name="gioi_tinh"/>
                             <field name="nam_sinh"/>
+                            <field name="mobile"/>
                             <field name="dia_chi"/>
                         </group>
                         <notebook>
@@ -33,9 +34,6 @@
                         </notebook>
 
                     </sheet>
-                    <div class="oe_chatter">
-                        <field name="message_ids"/>
-                    </div>
                 </form>
             </field>
         </record>
@@ -47,10 +45,11 @@
                 <tree string="Danh sách độc giả ">
                     <field name="name" optional="show"/>
                     <field name="ma_docgia" optional="show"/>
-                    <field name="gioi_tinh" optional="show"/>
-                    <field name="nam_sinh" optional="show"/>
-                    <field name="dia_chi" optional="hide"/>
                     <field name="lop_hoc" optional="show"/>
+                    <field name="mobile" optional="show"/>
+                    <field name="nam_sinh" optional="show"/>
+                    <field name="gioi_tinh" optional="show"/>
+                    <field name="dia_chi" optional="hide"/>
                     <field name="company_id" optional="hide"/>
                 </tree>
             </field>

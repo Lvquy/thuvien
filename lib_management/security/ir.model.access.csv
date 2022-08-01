@@ -31,7 +31,10 @@ access_lib_management_lop_hoc_root,lop.hoc.root,model_lop_hoc,base.group_system,
 access_lib_management_lop_hoc_user,lop.hoc.user,model_lop_hoc,lib_management.group_lib_management,1,1,1,1
 
 access_lib_management_muon_tra_root,muon.tra.root,model_muon_tra,base.group_system,1,1,1,1
-access_lib_gement_muon_tra_user,muon.tra.user,model_muon_tra,lib_management.group_lib_management,1,1,1,1
+access_lib_management_muon_tra_user,muon.tra.user,model_muon_tra,lib_management.group_lib_management,1,1,1,1
 
 access_lib_management_line_muon_tra_root,line.muon.tra.root,model_line_muon_tra,base.group_system,1,1,1,1
-access_lib_gement_line_muon_tra_user,line.muon.tra.user,model_line_muon_tra,lib_management.group_lib_management,1,1,1,1
+access_lib_management_line_muon_tra_user,line.muon.tra.user,model_line_muon_tra,lib_management.group_lib_management,1,1,1,1
+
+access_lib_management_phong_ban_root,phong.ban.root,model_phong_ban,base.group_system,1,1,1,1
+access_lib_management_phong_ban_user,phong.ban.user,model_phong_ban,lib_management.group_lib_management,1,1,1,1

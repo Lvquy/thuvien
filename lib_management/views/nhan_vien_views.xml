@@ -20,6 +20,9 @@
                                 <field name="gioi_tinh"/>
                                 <field name="nam_sinh"/>
                                 <field name="dia_chi"/>
+                                <field name="mobile"/>
+                                <field name="phong_ban"/>
+                                <field name="truong_hoc" options="{'no_open': True, 'no_create': True , 'no_quick_create': True}"/>
                             </group>
                         </group>
                         <field name="note"/>
@@ -36,6 +39,9 @@
                     <field name="name" optional="show"/>
                     <field name="gioi_tinh" optional="show"/>
                     <field name="nam_sinh" optional="show"/>
+                    <field name="mobile" optional="show"/>
+                    <field name="phong_ban" optional="show"/>
+                    <field name="truong_hoc" optional="hide"/>
                     <field name="dia_chi" optional="hide"/>
                     <field name="note" optional="hide"/>
                     <field name="company_id" optional="hide"/>
@@ -55,10 +61,37 @@
             </field>
         </record>
 
+<!--        phong ban-->
+
+        <record id="phong_ban_tree" model="ir.ui.view">
+            <field name="name">phong.ban.tree</field>
+            <field name="model">phong.ban</field>
+            <field name="arch" type="xml">
+                <tree string="Danh sách" editable="bottom">
+                    <field name="name" optional="show"/>
+                    <field name="company_id" optional="hide"/>
+                </tree>
+            </field>
+        </record>
+        <!-- action view phong ban-->
+        <record id="action_view_phong_ban" model="ir.actions.act_window">
+            <field name="name">Danh sách phòng ban</field>
+            <field name="res_model">phong.ban</field>
+            <field name="view_mode">tree</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new ...
+                </p>
+            </field>
+        </record>
+
         <menuitem id="menu_nhan_vien" name="Nhân viên" sequence="1"
                   web_icon="lib_management,static/src/img/logo.png"
                   groups="base.group_system,lib_management.group_lib_management"/>
         <menuitem id="menu_sub_nhan_vien" name="Danh sách" parent="menu_nhan_vien" action="action_view_nhan_vien"
+                  sequence="1" groups="base.group_system,lib_management.group_lib_management"/>
+
+        <menuitem id="menu_sub_phong_ban" name="Phòng ban" parent="menu_nhan_vien" action="action_view_phong_ban"
                   sequence="1" groups="base.group_system,lib_management.group_lib_management"/>
     </data>
 </odoo>

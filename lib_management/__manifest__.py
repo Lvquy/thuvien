@@ -8,7 +8,7 @@
     'author': 'Lv Quy',
     'company': 'Minh Nghĩa',
     'website': 'https://#',
-    'depends': ['base_setup','mail'],
+    'depends': ['base_setup'],
     'data': [
         # security
         'data/thu_vien_security.xml',
@@ -26,6 +26,7 @@
         'views/tac_gia_views.xml',
         'views/the_loai_views.xml',
         'views/muon_tra_views.xml',
+        'data/sequence.xml',
 
         # report
 
