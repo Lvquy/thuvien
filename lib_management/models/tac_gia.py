@@ -9,7 +9,7 @@ class TacGia(models.Model):
     _description = 'Tác giả'
 
 
-    name = fields.Char(stirng='Tên tác giả')
+    name = fields.Char(string='Tên tác giả')
     gioi_tinh = fields.Selection([('nam','Nam'),('nu','Nữ')], string='Giới tính')
     img = fields.Binary(string='Hình ảnh')
     nam_sinh = fields.Date(string='Năm sinh')

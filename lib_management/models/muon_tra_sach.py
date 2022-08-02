@@ -8,12 +8,11 @@ class MuonTra(models.Model):
     _name = 'muon.tra'
     _rec_name = 'no'
     _description = 'Mượn trả sách'
-    # _inherit = ['mail.thread', 'mail.activity.mixin']
 
     no = fields.Char(string='Mã phiếu', readonly=True, default=lambda self: 'New')
     nguoi_muon = fields.Many2one(comodel_name='doc.gia', string='Người mượn',
                                  domain=lambda self: [('company_id', 'in', [a.id for a in self.env.user.company_ids])])
-    ma_doc_gia = fields.Char(strig='Mã độc giả', related='nguoi_muon.ma_docgia')
+    ma_doc_gia = fields.Char(string='Mã độc giả', related='nguoi_muon.ma_docgia')
     ngay_muon = fields.Datetime(string='Ngày mượn', default=datetime.today())
     ngay_tra = fields.Datetime(string='Hạn trả')
     state = fields.Selection([('new', 'Mới tạo'), ('1', 'Đang mượn'), ('2', 'Đã trả')], string='Trạng thái',

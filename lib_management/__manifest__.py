@@ -12,6 +12,7 @@
     'data': [
         # security
         'data/thu_vien_security.xml',
+        'data/sequence.xml',
         'security/groups.xml',
         'security/ir.model.access.csv',
 
@@ -26,7 +27,8 @@
         'views/tac_gia_views.xml',
         'views/the_loai_views.xml',
         'views/muon_tra_views.xml',
-        'data/sequence.xml',
+        'views/res_company_views.xml',
+        'views/menu.xml',
 
         # report
 

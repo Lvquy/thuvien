@@ -38,3 +38,4 @@ access_lib_management_line_muon_tra_user,line.muon.tra.user,model_line_muon_tra,
 
 access_lib_management_phong_ban_root,phong.ban.root,model_phong_ban,base.group_system,1,1,1,1
 access_lib_management_phong_ban_user,phong.ban.user,model_phong_ban,lib_management.group_lib_management,1,1,1,1
+

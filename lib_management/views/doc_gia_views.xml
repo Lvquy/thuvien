@@ -29,7 +29,10 @@
                                 <field name="company_id"
                                        options="{'no_open': True, 'no_create': True , 'no_quick_create': True}"/>
                             </group>
-                            <group>
+                            <group string="Thẻ mượn">
+                                <field name="kieu_the"/>
+                                <field name="ngay_tao_the"/>
+                                <field name="ngay_het_han"/>
                                 <button name="taothe" string="Tạo thẻ" type="object" class="btn btn-success"/>
                             </group>
                         </group>
@@ -53,6 +56,9 @@
                     <field name="name" optional="show"/>
                     <field name="ma_docgia" optional="show"/>
                     <field name="lop_hoc" optional="show"/>
+                    <field name="kieu_the" optional="show"/>
+                    <field name="ngay_tao_the" optional="show"/>
+                    <field name="ngay_het_han" optional="show"/>
                     <field name="mobile" optional="show"/>
                     <field name="nam_sinh" optional="show"/>
                     <field name="gioi_tinh" optional="show"/>
@@ -114,16 +120,13 @@
             </field>
         </record>
 
-        <menuitem id="menu_doc_gia" name="Độc giả" sequence="1"
+        <menuitem id="menu_doc_gia" name="Độc Giả" sequence="1"
                   web_icon="lib_management,static/src/img/logo.png"
                   groups="base.group_system,lib_management.group_lib_management"/>
         <menuitem id="menu_sub_doc_gia" name="Danh sách độc giả" parent="menu_doc_gia" action="action_view_doc_gia"
                   sequence="1" groups="base.group_system,lib_management.group_lib_management"/>
 
-        <menuitem id="menu_lop_hoc" name="Lớp học" sequence="1"
-                  web_icon="lib_management,static/src/img/logo.png"
-                  groups="base.group_system,lib_management.group_lib_management"/>
-        <menuitem id="menu_sub_lop_hoc" name="Danh sách" parent="menu_lop_hoc" action="action_view_lop_hoc"
+        <menuitem id="menu_sub_lop_hoc" name="Lớp Học" parent="menu_doc_gia" action="action_view_lop_hoc"
                   sequence="1" groups="base.group_system,lib_management.group_lib_management"/>
     </data>
 </odoo>

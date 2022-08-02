@@ -41,12 +41,6 @@
                 </p>
             </field>
         </record>
-
-        <menuitem id="menu_ke_kho" name="Kệ kho" sequence="1"
-                  web_icon="lib_management,static/src/img/logo.png"
-                  groups="base.group_system,lib_management.group_lib_management"/>
-        <menuitem id="menu_sub_ke_kho" name="Danh sách" parent="menu_ke_kho" action="action_view_ke_kho"
-                  sequence="3" groups="base.group_system,lib_management.group_lib_management"/>
     </data>
 </odoo>
 

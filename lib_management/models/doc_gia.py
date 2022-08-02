@@ -22,6 +22,9 @@ class DocGia(models.Model):
         'res.company', 'Trường học', readonly=True, index=1, default=lambda self: self.env.user.company_id.id)
     mobile = fields.Char(string='Số điện thoại')
     ngay_tao_the = fields.Datetime(string='Ngày tạo thẻ', default=datetime.today())
+    kieu_the = fields.Selection([('hs','Học sinh'),('gv','Giáo viên'),('other','Khác')], string='Loại thẻ', default='hs')
+    ngay_het_han = fields.Datetime(string='Ngày hết hạn')
+
 
 
     def taothe(self):
@@ -45,14 +48,18 @@ class LopHoc(models.Model):
     company_id = fields.Many2one(
         'res.company', 'Company', index=1, default=lambda self: self.env.user.company_id.id)
 
-class LoaiThe(models.Model):
-    _name = 'the'
-    _rec_name = 'name'
-    _description = 'Thẻ mượn sách'
+# class LoaiThe(models.Model):
+#     _name = 'the'
+#     _rec_name = 'name'
+#     _description = 'Thẻ mượn sách'
+#
+#
+#     name = fields.Char(string='Loại thẻ')
+#     loai_the = fields.Selection([('hs','Học sinh'),('gv','Giáo viên'),('other','Khác')], string='Loại thẻ', default='hs')
+#     ngay_lam_the = fields.Datetime(string='Ngày làm thẻ',default=datetime.today())
+#     ngay_het_han = fields.Datetime(string='Ngày hết hạn')
+#     for_user = fields.Many2one(string='Chủ thẻ', comodel_name='doc.gia')
+#     company_id = fields.Many2one(
+#         'res.company', 'Company', index=1, default=lambda self: self.env.user.company_id.id)
 
-
-    name = fields.Char(string='Loại thẻ')
-    loai_the = fields.Selection([('hs','Học sinh'),('gv','Giáo viên'),('other','Khác')], string='Loại thẻ', default='hs')
-    ngay_lam_the = fields.Datetime(string='Ngày làm thẻ',default=datetime.today())
-    ngay_het_han = fields.Datetime(string='Ngày hết hạn')
-    for_user = fields.Many2one(string='Chủ thẻ', comodel_name='doc.gia')
+# chưa tạo domain force, security

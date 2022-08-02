@@ -10,7 +10,7 @@ class Sach(models.Model):
     _order = 'id desc'
     _description = 'Sách thư viện'
 
-    name = fields.Char(string='Tên sách', track_visibility='onchange')
+    name = fields.Char(string='Tên sách')
     img = fields.Binary(string='Hình ảnh')
     state = fields.Selection([('0', 'new'), ('1', 'confirm')], string='Trạng thái')
     company_id = fields.Many2one(

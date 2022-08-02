@@ -1,0 +1,26 @@
+<odoo>
+    <record id="res_company_view_form_inherit" model="ir.ui.view">
+        <field name="name">res.company.form.inherit</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//page/group/group/field[@name='favicon']" position="after">
+                <field name="dv_chu_quan"/>
+                <field name="hieu_truong"/>
+                <field name="dv_ql_cap1"/>
+            </xpath>
+
+            <xpath expr="//page/group/group/field[@name='parent_id']" position="replace">
+            </xpath>
+            <xpath expr="//page/group/group/field[@name='currency_id']" position="replace">
+            </xpath>
+            <xpath expr="//page/group/group/field[@name='partner_id']" position="replace">
+            </xpath>
+            <xpath expr="//page/group/group/field[@name='vat']" position="replace">
+            </xpath>
+            <xpath expr="//page/group/group/field[@name='company_registry']" position="replace">
+            </xpath>
+
+        </field>
+    </record>
+</odoo>
