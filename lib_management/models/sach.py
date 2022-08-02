@@ -47,8 +47,8 @@ class Serial(models.Model):
     _rec_name = 'name'
     _description = 'Serial Sách'
 
-    name = fields.Char(string='Mã Sách')
-    for_sach = fields.Many2one(string='Cho sách', comodel_name='sach.doc')
+    name = fields.Char(string='Serial sách duy nhất')
+    for_sach = fields.Many2one(string='Tên sách', comodel_name='sach.doc')
     company_id = fields.Many2one(
         'res.company', 'Company', index=1, default=lambda self: self.env.user.company_id.id)
 

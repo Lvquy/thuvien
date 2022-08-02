@@ -39,3 +39,11 @@ access_lib_management_line_muon_tra_user,line.muon.tra.user,model_line_muon_tra,
 access_lib_management_phong_ban_root,phong.ban.root,model_phong_ban,base.group_system,1,1,1,1
 access_lib_management_phong_ban_user,phong.ban.user,model_phong_ban,lib_management.group_lib_management,1,1,1,1
 
+access_lib_management_mua_sach_root,mua.sach.root,model_mua_sach,base.group_system,1,1,1,1
+access_lib_management_mua_sach_user,mua.sach.user,model_mua_sach,lib_management.group_lib_management,1,1,1,1
+
+access_lib_management_pur_lines_root,pur.lines.root,model_pur_lines,base.group_system,1,1,1,1
+access_lib_management_pur_lines_user,pur.lines.user,model_pur_lines,lib_management.group_lib_management,1,1,1,1
+
+access_lib_management_serial_root,serial.root,model_serial,base.group_system,1,1,1,1
+access_lib_management_serial_user,serial.user,model_serial,lib_management.group_lib_management,1,1,1,1

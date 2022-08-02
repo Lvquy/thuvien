@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="mua_sach_form" model="ir.ui.view">
+            <field name="name">mua.sach.form</field>
+            <field name="model">mua.sach</field>
+            <field name="arch" type="xml">
+                <form string="Danh sách đơn mua">
+                    <header>
+                        <field name="state" widget="statusbar" statusbar_visible="new,done"/>
+                        <button name="confirm" string="Xác nhận" type="object"
+                                attrs="{'invisible':[('state', 'in', ('done'))]}"/>
+                    </header>
+                    <sheet>
+                        <group string="Chi tiết">
+                            <group>
+                                <field name="name"/>
+                                <field name="ngay_mua"/>
+                                <field name="venders"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="lines_order" string="Chi tiết sách">
+                                <field name="product_lines"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="mua_sach_tree" model="ir.ui.view">
+            <field name="name">mua.sach.tree</field>
+            <field name="model">mua.sach</field>
+            <field name="arch" type="xml">
+                <tree string="Danh sách đơn mua " decoration-success="state=='done'">
+                    <field name="name" optional="show"/>
+                    <field name="ngay_mua" optional="show"/>
+                    <field name="state" optional="show"/>
+                    <field name="venders" optional="show"/>
+                    <field name="venders" optional="show"/>
+                    <field name="note" optional="hide"/>
+                    <field name="company_id" optional="hide"/>
+                </tree>
+            </field>
+        </record>
+<!--        line-->
+        <record id="pur_lines_tree" model="ir.ui.view">
+            <field name="name">pur.lines.tree</field>
+            <field name="model">pur.lines</field>
+            <field name="arch" type="xml">
+                <tree string="Chi tiết sách" editable="bottom">
+                    <field name="name" optional="show"/>
+                    <field name="ma_sach" optional="show"/>
+                    <field name="qty" optional="show"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- action view-->
+        <record id="action_view_mua_sach" model="ir.actions.act_window">
+            <field name="name">Danh sách đơn mua</field>
+            <field name="res_model">mua.sach</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new ...
+                </p>
+            </field>
+        </record>
+        <menuitem id="menu_mua_sach" name="Mua sách" sequence="1"
+                  web_icon="lib_management,static/src/img/logo.png"
+                  groups="base.group_system,lib_management.group_lib_management"/>
+        <menuitem id="menu_sub_mua_sach" name="Danh sách" parent="menu_mua_sach" action="action_view_mua_sach"
+                  sequence="1" groups="base.group_system,lib_management.group_lib_management"/>
+    </data>
+</odoo>
+

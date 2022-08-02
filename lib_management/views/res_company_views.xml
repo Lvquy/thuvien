@@ -16,8 +16,7 @@
             </xpath>
             <xpath expr="//page/group/group/field[@name='partner_id']" position="replace">
             </xpath>
-            <xpath expr="//page/group/group/field[@name='vat']" position="replace">
-            </xpath>
+
             <xpath expr="//page/group/group/field[@name='company_registry']" position="replace">
             </xpath>
 

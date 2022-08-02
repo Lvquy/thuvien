@@ -77,4 +77,22 @@
         <field name="domain_force">[('company_id', 'in', [a.id for a in user.company_ids])]</field>
     </record>
 
+    <record id="mua_sach_rule" model="ir.rule">
+        <field name="name">Mua sách company rule</field>
+        <field name="model_id" ref="model_mua_sach"/>
+        <field name="domain_force">[('company_id', 'in', [a.id for a in user.company_ids])]</field>
+    </record>
+
+    <record id="pur_lines_rule" model="ir.rule">
+        <field name="name">Line Mua sách company rule</field>
+        <field name="model_id" ref="model_pur_lines"/>
+        <field name="domain_force">[('company_id', 'in', [a.id for a in user.company_ids])]</field>
+    </record>
+
+    <record id="serial_rule" model="ir.rule">
+        <field name="name">serial company rule</field>
+        <field name="model_id" ref="model_serial"/>
+        <field name="domain_force">[('company_id', 'in', [a.id for a in user.company_ids])]</field>
+    </record>
+
 </data>

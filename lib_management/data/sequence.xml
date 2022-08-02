@@ -27,5 +27,14 @@
             <field name="padding">5</field>
             <field name="company_id" eval="True"/>
         </record>
+
+        <!-- Sequences for -->
+        <record id="seq_mua_sach" model="ir.sequence">
+            <field name="name">Mua sách</field>
+            <field name="code">muasach.code</field>
+            <field name="prefix">PO</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="True"/>
+        </record>
     </data>
 </odoo>

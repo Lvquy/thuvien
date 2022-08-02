@@ -29,6 +29,7 @@
         'views/muon_tra_views.xml',
         'views/res_company_views.xml',
         'views/menu.xml',
+        'views/purchase_views.xml',
 
         # report
 
