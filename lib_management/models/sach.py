@@ -38,6 +38,25 @@ class Sach(models.Model):
     total_qty = fields.Integer(string='Tổng số lượng sách')
     so_luong_huy = fields.Integer(string='Sách đã hủy')
 
+    def update_qty(self):
+        print('Update Qty...')
+        for rec in self:
+            rec.so_luong_huy = rec.env['serial'].search_count(['&',
+                                                               ('ma_sach', '=', rec.ma_sach),
+                                                               ('state', '=', '2'),
+                                                               ('company_id', 'in',[a.id for a in self.env.user.company_ids])])
+            rec.so_luong_muon = rec.env['serial'].search_count(['&',
+                                                                ('ma_sach', '=', rec.ma_sach),
+                                                                ('state', '=', '1'),
+                                                                ('company_id', 'in',[a.id for a in self.env.user.company_ids])])
+            rec.so_luong = rec.env['serial'].search_count(['&',
+                                                           ('ma_sach', '=', rec.ma_sach),
+                                                           ('state', '=', '0'),
+                                                           ('company_id', 'in', [a.id for a in self.env.user.company_ids])])
+            rec.total_qty = rec.env['serial'].search_count(['&',
+                                                            ('ma_sach', '=', rec.ma_sach),
+                                                            ('company_id', 'in', [a.id for a in self.env.user.company_ids])])
+
     @api.model
     def create(self, vals):
         global res
@@ -48,7 +67,7 @@ class Sach(models.Model):
 
     def create_serial(self):
         return {
-            'name': ('Tạo serial cho sách'),
+            'name': 'Tạo serial cho sách',
             'type': 'ir.actions.act_window',
             'res_model': 'create.serial',
             'view_mode': 'form',
@@ -73,7 +92,7 @@ class Sach(models.Model):
 
     # số lượng đang mượn
     def action_view_sach_muon(self, context=None):
-        field_ids = self.env['serial'].search(['&',('ma_sach', '=', self.ma_sach),('state','=','1')]).ids
+        field_ids = self.env['serial'].search(['&', ('ma_sach', '=', self.ma_sach), ('state', '=', '1')]).ids
         domain = [('id', 'in', field_ids)]
         view_id_tree = self.env['ir.ui.view'].search([('name', '=', "serial.tree")])
         return {
@@ -86,9 +105,10 @@ class Sach(models.Model):
             'target': 'current',
             'domain': domain,
         }
-    #trong kho
+
+    # trong kho
     def action_view_sach_onhand(self, context=None):
-        field_ids = self.env['serial'].search(['&',('ma_sach', '=', self.ma_sach),('state','=','0')]).ids
+        field_ids = self.env['serial'].search(['&', ('ma_sach', '=', self.ma_sach), ('state', '=', '0')]).ids
         domain = [('id', 'in', field_ids)]
         view_id_tree = self.env['ir.ui.view'].search([('name', '=', "serial.tree")])
         return {
@@ -101,9 +121,10 @@ class Sach(models.Model):
             'target': 'current',
             'domain': domain,
         }
+
     # sách đã hủy
     def action_view_sach_huy(self, context=None):
-        field_ids = self.env['serial'].search(['&',('ma_sach', '=', self.ma_sach),('state','=','2')]).ids
+        field_ids = self.env['serial'].search(['&', ('ma_sach', '=', self.ma_sach), ('state', '=', '2')]).ids
         domain = [('id', 'in', field_ids)]
         view_id_tree = self.env['ir.ui.view'].search([('name', '=', "serial.tree")])
         return {
@@ -136,7 +157,7 @@ class CreateSerial(models.Model):
     def create_serial(self):
         for rec in self:
             SR = rec.env['serial']
-            if rec.create_qty <=0:
+            if rec.create_qty <= 0:
                 raise UserError("Số lượng phải lớn hơn 0")
             for i in range(0, rec.create_qty):
                 SR.create({
@@ -144,6 +165,7 @@ class CreateSerial(models.Model):
                     'serial_no': str(rec.ma_sach.ma_sach) + '-' + str(rec.next_num)
                 })
                 rec.ma_sach.next_num += 1
+            rec.env['sach.doc'].search([('company_id', 'in', [a.id for a in self.env.user.company_ids])]).sudo().update_qty()
 
     def cancel(self):
         pass
@@ -162,9 +184,11 @@ class Serial(models.Model):
     ten_sach = fields.Char(string='Tên sách', related='ma_sach.name')
     tinh_trang = fields.Selection([('tot', 'Tốt'), ('hong', 'Hỏng'), ('cu', 'Cũ')], string='Tình trạng', default='tot')
     ke_kho = fields.Many2one(comodel_name='ke.kho', related='ma_sach.ke_kho')
-    state = fields.Selection([('0','Trong kho'),('1','Cho mượn'),('2','Phế phẩm')], string='Trạng thái sách', default='0')
-
-
+    state = fields.Selection([('0', 'Trong kho'), ('1', 'Cho mượn'), ('2', 'Phế phẩm')], string='Trạng thái sách',
+                             default='0')
+    note = fields.Text(string='Ghi chú')
+    nguoi_muon = fields.Many2one(comodel_name='doc.gia', string='Người đang mượn',
+                                 domain=lambda self: [('company_id', 'in', [a.id for a in self.env.user.company_ids])])
 
 
 class DanhMucSach(models.Model):

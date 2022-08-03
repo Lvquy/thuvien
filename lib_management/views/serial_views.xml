@@ -16,8 +16,11 @@
                                 <field name="ten_sach"/>
                                 <field name="ma_sach"/>
                                 <field name="tinh_trang"/>
+                                <field name="nguoi_muon"/>
                             </group>
                         </group>
+                        <span>Ghi chú:</span>
+                        <field name="note"/>
                     </sheet>
                 </form>
             </field>
@@ -32,6 +35,7 @@
                     <field name="serial_no" optional="show"/>
                     <field name="ten_sach" optional="show"/>
                     <field name="tinh_trang" optional="show"/>
+                    <field name="nguoi_muon" optional="show"/>
                     <field name="state" optional="show"/>
                     <field name="company_id" optional="hide"/>
                 </tree>

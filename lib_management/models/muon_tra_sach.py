@@ -13,9 +13,9 @@ class MuonTra(models.Model):
     nguoi_muon = fields.Many2one(comodel_name='doc.gia', string='Người mượn',
                                  domain=lambda self: [('company_id', 'in', [a.id for a in self.env.user.company_ids])])
     ma_doc_gia = fields.Char(string='Mã độc giả', related='nguoi_muon.ma_docgia')
-    ngay_muon = fields.Datetime(string='Ngày mượn', default=datetime.today())
-    han_tra = fields.Datetime(string='Hạn trả')
-    ngay_tra = fields.Datetime(string='Ngày trả')
+    ngay_muon = fields.Date(string='Ngày mượn', default=datetime.today())
+    han_tra = fields.Date(string='Hạn trả')
+    ngay_tra = fields.Date(string='Ngày trả')
     type_phat = fields.Selection([('0','Quá hạn'),('1','Hỏng/mất sách'),('2','Khác')], string='Phạt tiền',)
     tien_phat = fields.Integer(string='Tiền phạt (VNĐ)')
     state = fields.Selection([('new', 'Mới tạo'), ('1', 'Đang mượn'), ('2', 'Đã trả')], string='Trạng thái',
@@ -39,14 +39,24 @@ class MuonTra(models.Model):
 
     def confirm(self):
         for rec in self:
-            if rec.state == 'new':
+            if rec.state == 'new' and rec.danh_sach_muon:
                 rec.state = '1'
+                for l in rec.danh_sach_muon:
+                    l.serial_no.nguoi_muon = rec.nguoi_muon
+                    l.serial_no.state = '1'
+                rec.env['sach.doc'].search([('company_id', 'in', [a.id for a in self.env.user.company_ids])]).sudo().update_qty()
             else: raise UserError('Làm mới lại trình duyệt!')
 
     def return_sach(self):
         for rec in self:
             if rec.state == '1':
                 rec.state = '2'
+                rec.ngay_tra = datetime.today()
+                for l in rec.danh_sach_muon:
+                    l.serial_no.nguoi_muon = False
+                    l.serial_no.state = '0'
+                rec.env['sach.doc'].search(
+                    [('company_id', 'in', [a.id for a in self.env.user.company_ids])]).sudo().update_qty()
             else: raise UserError('Làm mới trình duyệt!')
 
 
@@ -55,7 +65,7 @@ class LineMuonTra(models.Model):
     _rec_name = 'serial_no'
     _description = 'Line Mượn trả sách'
 
-    serial_no = fields.Many2one(comodel_name='serial', string='Mã sách',
+    serial_no = fields.Many2one(comodel_name='serial', string='Mã sách', required=True,
                            domain=lambda self: [('company_id', 'in', [a.id for a in self.env.user.company_ids])])
     name = fields.Char(string='Tên sách', related='serial_no.ten_sach')
     ke_sach = fields.Many2one(string='Kệ sách', related='serial_no.ke_kho',
