@@ -33,6 +33,10 @@ class Sach(models.Model):
                                         ('company_id', 'in', [a.id for a in self.env.user.company_ids])])
     ma_sach = fields.Char(string='Mã sách', readonly=True, default=lambda self: 'New')
     next_num = fields.Integer(string='Số serial tiếp theo', default=1, readonly=True)
+    so_luong = fields.Integer(string='Số lượng trong kho')
+    so_luong_muon = fields.Integer(string='Số lượng đang cho mượn')
+    total_qty = fields.Integer(string='Tổng số lượng sách')
+    so_luong_huy = fields.Integer(string='Sách đã hủy')
 
     @api.model
     def create(self, vals):
@@ -50,6 +54,67 @@ class Sach(models.Model):
             'view_mode': 'form',
             'target': 'new',
             'context': "{'default_ma_sach': active_id, 'default_create_qty': 1}"
+        }
+
+    def action_view_sach(self, context=None):
+        field_ids = self.env['serial'].search([('ma_sach', '=', self.ma_sach)]).ids
+        domain = [('id', 'in', field_ids)]
+        view_id_tree = self.env['ir.ui.view'].search([('name', '=', "serial.tree")])
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': 'serial',
+            'view_type': 'form',
+            'view_mode': 'tree,form',
+            'views': [(view_id_tree[0].id, 'tree'), (False, 'form')],
+            'view_id ref="lib_management.tree_view"': '',
+            'target': 'current',
+            'domain': domain,
+        }
+
+    # số lượng đang mượn
+    def action_view_sach_muon(self, context=None):
+        field_ids = self.env['serial'].search(['&',('ma_sach', '=', self.ma_sach),('state','=','1')]).ids
+        domain = [('id', 'in', field_ids)]
+        view_id_tree = self.env['ir.ui.view'].search([('name', '=', "serial.tree")])
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': 'serial',
+            'view_type': 'form',
+            'view_mode': 'tree,form',
+            'views': [(view_id_tree[0].id, 'tree'), (False, 'form')],
+            'view_id ref="lib_management.tree_view"': '',
+            'target': 'current',
+            'domain': domain,
+        }
+    #trong kho
+    def action_view_sach_onhand(self, context=None):
+        field_ids = self.env['serial'].search(['&',('ma_sach', '=', self.ma_sach),('state','=','0')]).ids
+        domain = [('id', 'in', field_ids)]
+        view_id_tree = self.env['ir.ui.view'].search([('name', '=', "serial.tree")])
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': 'serial',
+            'view_type': 'form',
+            'view_mode': 'tree,form',
+            'views': [(view_id_tree[0].id, 'tree'), (False, 'form')],
+            'view_id ref="lib_management.tree_view"': '',
+            'target': 'current',
+            'domain': domain,
+        }
+    # sách đã hủy
+    def action_view_sach_huy(self, context=None):
+        field_ids = self.env['serial'].search(['&',('ma_sach', '=', self.ma_sach),('state','=','2')]).ids
+        domain = [('id', 'in', field_ids)]
+        view_id_tree = self.env['ir.ui.view'].search([('name', '=', "serial.tree")])
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': 'serial',
+            'view_type': 'form',
+            'view_mode': 'tree,form',
+            'views': [(view_id_tree[0].id, 'tree'), (False, 'form')],
+            'view_id ref="lib_management.tree_view"': '',
+            'target': 'current',
+            'domain': domain,
         }
 
 
@@ -71,6 +136,8 @@ class CreateSerial(models.Model):
     def create_serial(self):
         for rec in self:
             SR = rec.env['serial']
+            if rec.create_qty <=0:
+                raise UserError("Số lượng phải lớn hơn 0")
             for i in range(0, rec.create_qty):
                 SR.create({
                     'ma_sach': rec.ma_sach.id,
@@ -95,6 +162,9 @@ class Serial(models.Model):
     ten_sach = fields.Char(string='Tên sách', related='ma_sach.name')
     tinh_trang = fields.Selection([('tot', 'Tốt'), ('hong', 'Hỏng'), ('cu', 'Cũ')], string='Tình trạng', default='tot')
     ke_kho = fields.Many2one(comodel_name='ke.kho', related='ma_sach.ke_kho')
+    state = fields.Selection([('0','Trong kho'),('1','Cho mượn'),('2','Phế phẩm')], string='Trạng thái sách', default='0')
+
+
 
 
 class DanhMucSach(models.Model):

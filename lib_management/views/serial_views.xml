@@ -7,6 +7,7 @@
             <field name="arch" type="xml">
                 <form string="Danh sách serial">
                     <header>
+                        <field name="state" widget="statusbar" statusbar_visible="0,1,2"/>
                     </header>
                     <sheet>
                         <group string="Chi tiết">
@@ -31,6 +32,7 @@
                     <field name="serial_no" optional="show"/>
                     <field name="ten_sach" optional="show"/>
                     <field name="tinh_trang" optional="show"/>
+                    <field name="state" optional="show"/>
                     <field name="company_id" optional="hide"/>
                 </tree>
             </field>

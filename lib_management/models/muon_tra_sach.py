@@ -14,15 +14,20 @@ class MuonTra(models.Model):
                                  domain=lambda self: [('company_id', 'in', [a.id for a in self.env.user.company_ids])])
     ma_doc_gia = fields.Char(string='Mã độc giả', related='nguoi_muon.ma_docgia')
     ngay_muon = fields.Datetime(string='Ngày mượn', default=datetime.today())
-    ngay_tra = fields.Datetime(string='Hạn trả')
+    han_tra = fields.Datetime(string='Hạn trả')
+    ngay_tra = fields.Datetime(string='Ngày trả')
+    type_phat = fields.Selection([('0','Quá hạn'),('1','Hỏng/mất sách'),('2','Khác')], string='Phạt tiền',)
+    tien_phat = fields.Integer(string='Tiền phạt (VNĐ)')
     state = fields.Selection([('new', 'Mới tạo'), ('1', 'Đang mượn'), ('2', 'Đã trả')], string='Trạng thái',
                              default='new')
+    ly_do_phat = fields.Char(string='Lý do phạt')
     danh_sach_muon = fields.One2many(comodel_name='line.muon.tra', inverse_name='ref_muon_tra', string='Danh sách mượn')
     nhan_vien = fields.Many2one(comodel_name='nhan.vien', string='Nhân viên',
                                 domain=lambda self: [('company_id', 'in', [a.id for a in self.env.user.company_ids])])
     company_id = fields.Many2one(
         'res.company', 'Company', index=1, default=lambda self: self.env.user.company_id.id)
     note = fields.Text(string='Ghi chú')
+
 
     @api.model
     def create(self, vals):
@@ -31,6 +36,18 @@ class MuonTra(models.Model):
             vals['no'] = self.env['ir.sequence'].next_by_code('muontrasach.code') or 'New'
             res = super(MuonTra, self).create(vals)
         return res
+
+    def confirm(self):
+        for rec in self:
+            if rec.state == 'new':
+                rec.state = '1'
+            else: raise UserError('Làm mới lại trình duyệt!')
+
+    def return_sach(self):
+        for rec in self:
+            if rec.state == '1':
+                rec.state = '2'
+            else: raise UserError('Làm mới trình duyệt!')
 
 
 class LineMuonTra(models.Model):
