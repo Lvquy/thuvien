@@ -35,20 +35,15 @@ class PurLines(models.Model):
     _rec_name = 'ma_sach'
     _description = 'Purchase Lines'
 
-    name = fields.Many2one(comodel_name='sach.doc', string='Tên sách')
-    ma_sach = fields.Char(string='Mã sách')
-    qty = fields.Integer(string='Số lượng')
+    ma_sach = fields.Many2one(comodel_name='sach.doc', string='Mã sách')
+    name = fields.Char(string='Tên sách', related='ma_sach.name')
+    qty = fields.Integer(string='Số lượng', default=1)
     ref_mua_sach = fields.Many2one(comodel_name='mua.sach', string='Đơn mua sách')
     company_id = fields.Many2one(
         'res.company', 'Company', index=1, default=lambda self: self.env.user.company_id.id)
 
-    @api.onchange('ma_sach')
-    def onchange_sach(self):
-        for rec in self:
-            SACH = rec.env['sach.doc'].search([('ma_sach','=',rec.ma_sach)],limit=1)
-            rec.name = SACH.id
+    # @api.onchange('ma_sach')
+    # def onchange_sach(self):
+    #     for rec in self:
+    #         rec.name = rec.ma_sach.name
 
-    @api.onchange('name')
-    def onchange_name(self):
-        for rec in self:
-            rec.ma_sach = rec.name.ma_sach

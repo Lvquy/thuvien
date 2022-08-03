@@ -24,6 +24,8 @@
                                 <field name="product_lines"/>
                             </page>
                         </notebook>
+                        <span>Note:</span>
+                        <field name="note"/>
                     </sheet>
                 </form>
             </field>
@@ -50,8 +52,8 @@
             <field name="model">pur.lines</field>
             <field name="arch" type="xml">
                 <tree string="Chi tiết sách" editable="bottom">
-                    <field name="name" optional="show"/>
                     <field name="ma_sach" optional="show"/>
+                    <field name="name" optional="show"/>
                     <field name="qty" optional="show"/>
                 </tree>
             </field>

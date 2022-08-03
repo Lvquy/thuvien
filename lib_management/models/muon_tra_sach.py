@@ -35,13 +35,13 @@ class MuonTra(models.Model):
 
 class LineMuonTra(models.Model):
     _name = 'line.muon.tra'
-    _rec_name = 'name'
+    _rec_name = 'serial_no'
     _description = 'Line Mượn trả sách'
 
-    name = fields.Many2one(comodel_name='sach.doc', string='Tên sách',
+    serial_no = fields.Many2one(comodel_name='serial', string='Mã sách',
                            domain=lambda self: [('company_id', 'in', [a.id for a in self.env.user.company_ids])])
-    ma_sach = fields.Char(string='Mã sách')
-    ke_sach = fields.Many2one(string='Kệ sách', related='name.ke_kho',
+    name = fields.Char(string='Tên sách', related='serial_no.ten_sach')
+    ke_sach = fields.Many2one(string='Kệ sách', related='serial_no.ke_kho',
                               domain=lambda self: [('company_id', 'in', [a.id for a in self.env.user.company_ids])])
     ref_muon_tra = fields.Many2one(comodel_name='muon.tra', string='Mượn trả sách',
                                    domain=lambda self: [('company_id', 'in', [a.id for a in self.env.user.company_ids])])

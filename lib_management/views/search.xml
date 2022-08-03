@@ -7,12 +7,20 @@
         <field name="priority" eval="15"/>
         <field name="arch" type="xml">
             <search string="Search Danh sách Sách ">
+                <field name="ma_sach"/>
                 <field name="name"/>
-                <field name="state"/>
-                <filter string="Done" name="done" domain="[('state','=','1')]"/>
-                <filter string="Draft" name="draft" domain="[('state','=','0')]"/>
+                <field name="company_id"/>
+                <field name="tac_gia"/>
+                <field name="the_loai_sach"/>
+                <field name="nha_xb"/>
+                <field name="ke_kho"/>
+                <field name="ngon_ngu"/>
+                <field name="nam_xb"/>
+                <field name="danh_muc_sach"/>
                 <group expand="0" string="Group By">
-                    <filter string="Trạng thái" name="state" domain="[]" context="{'group_by': 'state'}"/>
+                    <filter string="Tủ sách" name="danh_muc_sach" domain="[]" context="{'group_by': 'danh_muc_sach'}"/>
+                    <filter string="Tác giả" name="tac_gia" domain="[]" context="{'group_by': 'tac_gia'}"/>
+                    <filter string="Nhà Xuất Bản" name="nha_xb" domain="[]" context="{'group_by': 'nha_xb'}"/>
                 </group>
             </search>
         </field>

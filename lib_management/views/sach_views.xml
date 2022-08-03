@@ -7,7 +7,7 @@
             <field name="arch" type="xml">
                 <form string="Danh sách Sách ">
                     <header>
-                        <field name="state" widget="statusbar" statusbar_visible="0,1"/>
+                        <button name="create_serial" type="object" string="Bổ sung serial cho sách" class="btn btn-primary"/>
                     </header>
                     <sheet>
                         <field name="img" widget='image' class="oe_avatar"/>
@@ -20,7 +20,6 @@
                             <group string="">
                                 <field name="ma_sach"/>
                                 <field name="tac_gia" options="{'no_open': True, 'no_create': True , 'no_quick_create': True}"/>
-                                <field name="tinh_trang"/>
                                 <field name="danh_muc_sach" options="{'no_open': True, 'no_create': True , 'no_quick_create': True}"/>
                             </group>
                             <group string="">
@@ -32,6 +31,7 @@
                             <group string="">
                                 <field name="so_trang"/>
                                 <field name="nam_xb"/>
+                                <field name="next_num"/>
                             </group>
                         </group>
                         <notebook>
@@ -49,15 +49,16 @@
             <field name="model">sach.doc</field>
             <field name="arch" type="xml">
                 <tree string="Danh sách Sách">
+                    <field name="ma_sach" optional="show"/>
                     <field name="name" optional="show"/>
                     <field name="company_id" optional="hide"/>
-                    <field name="state" optional="show"/>
                     <field name="tac_gia" optional="show"/>
                     <field name="the_loai_sach" optional="show"/>
                     <field name="nha_xb" optional="show"/>
                     <field name="ke_kho" optional="show"/>
                     <field name="ngon_ngu" optional="show"/>
                     <field name="note" optional="hide"/>
+                    <field name="next_num" optional="hide"/>
                 </tree>
             </field>
         </record>
@@ -79,6 +80,8 @@
                   groups="base.group_system,lib_management.group_lib_management"/>
         <menuitem id="menu_sub_sach_doc" name="Danh sách Sách " parent="menu_sach_doc" action="action_view_sach_doc"
                   sequence="1" groups="base.group_system,lib_management.group_lib_management"/>
+        <menuitem id="menu_sub_serial" name="Serial sách" parent="menu_sach_doc" action="action_view_serial"
+                  sequence="2" groups="base.group_system,lib_management.group_lib_management"/>
     </data>
 </odoo>
 

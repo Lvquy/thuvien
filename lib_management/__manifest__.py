@@ -8,7 +8,7 @@
     'author': 'Lv Quy',
     'company': 'Minh Nghĩa',
     'website': 'https://#',
-    'depends': ['base_setup'],
+    'depends': ['base_setup','prt_report_attachment_preview','rowno_in_tree','web_responsive'],
     'data': [
         # security
         'data/thu_vien_security.xml',
@@ -18,6 +18,7 @@
 
         # views
         'views/search.xml',
+        'views/serial_views.xml',
         'views/sach_views.xml',
         'views/doc_gia_views.xml',
         'views/ke_kho_views.xml',
@@ -28,9 +29,12 @@
         'views/the_loai_views.xml',
         'views/muon_tra_views.xml',
         'views/res_company_views.xml',
-        'views/menu.xml',
+        'views/danh_muc_sach_views.xml',
         'views/purchase_views.xml',
 
+
+        #menu
+        'views/menu.xml',
         # report
 
     ],

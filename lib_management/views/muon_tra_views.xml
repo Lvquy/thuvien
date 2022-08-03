@@ -76,7 +76,7 @@
                     <sheet>
                         <group>
                             <group string="Chi tiết">
-                                <field name="ma_sach"/>
+                                <field name="serial_no"/>
                                 <field name="name"/>
                                 <field name="ke_sach"/>
                             </group>
@@ -92,7 +92,7 @@
             <field name="model">line.muon.tra</field>
             <field name="arch" type="xml">
                 <tree string="Danh sách mượn trả" editable="bottom">
-                    <field name="ma_sach" optional="show"/>
+                    <field name="serial_no" optional="show"/>
                     <field name="name" optional="show"/>
                     <field name="ke_sach" optional="show"/>
                     <field name="company_id" optional="hide"/>
@@ -104,7 +104,7 @@
         <menuitem id="menu_muon_tra" name="Quản lý Mượn trả sách" sequence="1"
                   web_icon="lib_management,static/src/img/logo.png"
                   groups="base.group_system,lib_management.group_lib_management"/>
-        <menuitem id="menu_sub_muon_tra" name="Danh sách độc giả" parent="menu_muon_tra" action="action_view_muon_tra"
+        <menuitem id="menu_sub_muon_tra" name="Danh sách" parent="menu_muon_tra" action="action_view_muon_tra"
                   sequence="1" groups="base.group_system,lib_management.group_lib_management"/>
 
     </data>

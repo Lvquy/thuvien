@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="danh_muc_form" model="ir.ui.view">
+            <field name="name">danh.muc.form</field>
+            <field name="model">danh.muc</field>
+            <field name="arch" type="xml">
+                <form string="Danh mục sách">
+                    <header>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group string="Thông tin">
+                                <field name="name"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="danh_muc_tree" model="ir.ui.view">
+            <field name="name">danh.muc.tree</field>
+            <field name="model">danh.muc</field>
+            <field name="arch" type="xml">
+                <tree string="Danh sách danh mục sach" editable="bottom">
+                    <field name="name" optional="show"/>
+                    <field name="company_id" optional="hide"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- action view-->
+        <record id="action_view_danh_muc" model="ir.actions.act_window">
+            <field name="name">Danh sách danh mục</field>
+            <field name="res_model">danh.muc</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new ...
+                </p>
+            </field>
+        </record>
+    </data>
+</odoo>
+

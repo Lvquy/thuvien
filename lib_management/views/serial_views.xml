@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="serial_form" model="ir.ui.view">
+            <field name="name">serial.form</field>
+            <field name="model">serial</field>
+            <field name="arch" type="xml">
+                <form string="Danh sách serial">
+                    <header>
+                    </header>
+                    <sheet>
+                        <group string="Chi tiết">
+                            <group>
+                                <field name="serial_no"/>
+                                <field name="ten_sach"/>
+                                <field name="ma_sach"/>
+                                <field name="tinh_trang"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="serial_tree" model="ir.ui.view">
+            <field name="name">serial.tree</field>
+            <field name="model">serial</field>
+            <field name="arch" type="xml">
+                <tree string="Danh sách serial">
+                    <field name="ma_sach" optional="show"/>
+                    <field name="serial_no" optional="show"/>
+                    <field name="ten_sach" optional="show"/>
+                    <field name="tinh_trang" optional="show"/>
+                    <field name="company_id" optional="hide"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- action view-->
+        <record id="action_view_serial" model="ir.actions.act_window">
+            <field name="name">Danh sách serial</field>
+            <field name="res_model">serial</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new ...
+                </p>
+            </field>
+        </record>
+
+<!--        create serial-->
+        <record id="create_serial_form" model="ir.ui.view">
+            <field name="name">create.serial.form</field>
+            <field name="model">create.serial</field>
+            <field name="arch" type="xml">
+                <form string="Tạo serial">
+                    <sheet>
+                        <group >
+                            <group>
+                                <field name="ten_sach"/>
+                                <field name="ma_sach"/>
+                                <field name="next_num"/>
+                                <field name="create_qty"/>
+
+                            </group>
+                        </group>
+                        <footer>
+                            <button name="create_serial" type="object" string="Tạo serial sách"
+                                    confirm="Xác nhận tạo serial!" class="btn btn-primary"/>
+                            <button name="cancel" string="Hủy" type="object"/>
+                        </footer>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!-- action view-->
+        <record id="action_view_serial" model="ir.actions.act_window">
+            <field name="name">Danh sách serial</field>
+            <field name="res_model">serial</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new ...
+                </p>
+            </field>
+        </record>
+
+    </data>
+</odoo>
+

@@ -47,3 +47,6 @@ access_lib_management_pur_lines_user,pur.lines.user,model_pur_lines,lib_manageme
 
 access_lib_management_serial_root,serial.root,model_serial,base.group_system,1,1,1,1
 access_lib_management_serial_user,serial.user,model_serial,lib_management.group_lib_management,1,1,1,1
+
+access_lib_management_create_serial_root,create.serial.root,model_create_serial,base.group_system,1,1,1,1
+access_lib_management_create_serial_user,create.serial.user,model_create_serial,lib_management.group_lib_management,1,1,1,1
