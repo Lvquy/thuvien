@@ -6,7 +6,7 @@
         <field name="model">sach.doc</field>
         <field name="priority" eval="15"/>
         <field name="arch" type="xml">
-            <search string="Search Danh sách Sách ">
+            <search string="Search Danh sách Sách">
                 <field name="ma_sach"/>
                 <field name="name"/>
                 <field name="company_id"/>
@@ -26,4 +26,3 @@
         </field>
     </record>
 </odoo>
-

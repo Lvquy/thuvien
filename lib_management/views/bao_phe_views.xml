@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="bao_phe_form" model="ir.ui.view">
+            <field name="name">bao.phe.form</field>
+            <field name="model">bao.phe</field>
+            <field name="arch" type="xml">
+                <form string="Báo phế">
+                    <header>
+                        <button name="confirm" string="Xác nhận" type="object" class="btn btn-primary" attrs="{'invisible':[('state', 'in', ('1'))]}"/>
+                        <field name="state" widget="statusbar" statusbar_visible="0,1"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group string="Chi tiết">
+                                <field name="ngay_bao_phe" attrs="{'readonly':[('state', 'in', ('1'))]}"/>
+                            </group>
+                        </group>
+
+                        <notebook>
+                            <page name="thongtin" string="Danh sách báo phế">
+                                <field name="danh_sach_phe" attrs="{'readonly':[('state', 'in', ('1'))]}"/>
+                            </page>
+                        </notebook>
+                        <span>Lý do báo phế:</span>
+                        <field name="ly_do"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="bao_phe_tree" model="ir.ui.view">
+            <field name="name">bao.phe.tree</field>
+            <field name="model">bao.phe</field>
+            <field name="arch" type="xml">
+                <tree string="Danh sách báo phế" decoration-success="state=='1'">
+                    <field name="name" optional="show"/>
+                    <field name="ngay_bao_phe" optional="show"/>
+                    <field name="danh_sach_phe" optional="show"/>
+                    <field name="state" optional="show"/>
+                    <field name="ly_do" optional="hide"/>
+                    <field name="company_id" optional="hide"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- action view-->
+        <record id="action_view_bao_phe" model="ir.actions.act_window">
+            <field name="name">Báo phế</field>
+            <field name="res_model">bao.phe</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new ...
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_bao_phe" name="Báo phế sách" sequence="11"
+                  web_icon="lib_management,static/src/img/logo.png"
+                  groups="base.group_system,lib_management.group_lib_management"/>
+        <menuitem id="menu_sub_bao_phe" name="Danh sách báo phế" parent="menu_bao_phe" action="action_view_bao_phe"
+                  sequence="1" groups="base.group_system,lib_management.group_lib_management"/>
+    </data>
+</odoo>
+

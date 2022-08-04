@@ -37,6 +37,7 @@ class Sach(models.Model):
     so_luong_muon = fields.Integer(string='Số lượng đang cho mượn')
     total_qty = fields.Integer(string='Tổng số lượng sách')
     so_luong_huy = fields.Integer(string='Sách đã hủy')
+    gia_sach = fields.Integer(string='Giá sách')
 
     def update_qty(self):
         print('Update Qty...')
@@ -190,6 +191,7 @@ class Serial(models.Model):
     nguoi_muon = fields.Many2one(comodel_name='doc.gia', string='Người đang mượn',
                                  domain=lambda self: [('company_id', 'in', [a.id for a in self.env.user.company_ids])])
     ngay_tao = fields.Date(string='Ngày tạo', default=datetime.today())
+    gia_sach = fields.Integer(string='Giá sách', related='ma_sach.gia_sach')
 
 
 class DanhMucSach(models.Model):

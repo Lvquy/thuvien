@@ -5,7 +5,7 @@
             <field name="name">sach.doc.form</field>
             <field name="model">sach.doc</field>
             <field name="arch" type="xml">
-                <form string="Danh sách Sách ">
+                <form string="Danh sách Sách">
                     <header>
                         <button name="create_serial" type="object" string="Bổ sung serial cho sách" class="btn btn-primary"/>
                         <button name="update_qty" type="object" string="F5 Refesh" class="btn btn-primary"/>
@@ -48,6 +48,7 @@
                                 <field name="ngon_ngu" options="{'no_open': True, 'no_create': True , 'no_quick_create': True}"/>
                             </group>
                             <group string="">
+                                <field name="gia_sach"/>
                                 <field name="so_trang"/>
                                 <field name="nam_xb"/>
                                 <field name="next_num"/>
@@ -74,6 +75,7 @@
                     <field name="tac_gia" optional="show"/>
                     <field name="the_loai_sach" optional="show"/>
                     <field name="nha_xb" optional="show"/>
+                    <field name="gia_sach" optional="show"/>
                     <field name="ke_kho" optional="show"/>
                     <field name="total_qty" sum="Tổng" optional="show"/>
                     <field name="so_luong" sum="Tổng" optional="show"/>

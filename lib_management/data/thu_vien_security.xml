@@ -101,4 +101,16 @@
         <field name="domain_force">[('company_id', 'in', [a.id for a in user.company_ids])]</field>
     </record>
 
+    <record id="bao_phe_rule" model="ir.rule">
+        <field name="name">Báo phế company rule</field>
+        <field name="model_id" ref="model_bao_phe"/>
+        <field name="domain_force">[('company_id', 'in', [a.id for a in user.company_ids])]</field>
+    </record>
+
+    <record id="bao_cao_rule" model="ir.rule">
+        <field name="name">Báo cáo company rule</field>
+        <field name="model_id" ref="model_bao_cao"/>
+        <field name="domain_force">[('company_id', 'in', [a.id for a in user.company_ids])]</field>
+    </record>
+
 </data>

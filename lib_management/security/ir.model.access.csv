@@ -50,3 +50,9 @@ access_lib_management_serial_user,serial.user,model_serial,lib_management.group_
 
 access_lib_management_create_serial_root,create.serial.root,model_create_serial,base.group_system,1,1,1,1
 access_lib_management_create_serial_user,create.serial.user,model_create_serial,lib_management.group_lib_management,1,1,1,1
+
+access_lib_management_bao_phe_root,bao.phe.root,model_bao_phe,base.group_system,1,1,1,1
+access_lib_management_bao_phe_user,bao.phe.user,model_bao_phe,lib_management.group_lib_management,1,1,1,1
+
+access_lib_management_bao_cao_root,bao.cao.root,model_bao_cao,base.group_system,1,1,1,1
+access_lib_management_bao_cao_user,bao.cao.user,model_bao_cao,lib_management.group_lib_management,1,1,1,1
