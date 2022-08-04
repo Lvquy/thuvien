@@ -63,8 +63,8 @@
                     <field name="ngay_muon" optional="show"/>
                     <field name="han_tra" optional="show"/>
                     <field name="ngay_tra" optional="show"/>
-                    <field name="type_phat" optional="show"/>
-                    <field name="tien_phat" optional="show"/>
+                    <field name="type_phat" optional="show" decoration-danger="type_phat in ('0','1','2')"/>
+                    <field name="tien_phat" optional="show" sum = "Tổng"/>
                     <field name="note" optional="hide"/>
                     <field name="state" optional="show"/>
                     <field name="nhan_vien" optional="show"/>

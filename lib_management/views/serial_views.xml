@@ -15,6 +15,7 @@
                                 <field name="serial_no"/>
                                 <field name="ten_sach"/>
                                 <field name="ma_sach"/>
+                                <field name="ngay_tao"/>
                                 <field name="tinh_trang"/>
                                 <field name="nguoi_muon"/>
                             </group>
@@ -34,6 +35,7 @@
                     <field name="ma_sach" optional="show"/>
                     <field name="serial_no" optional="show"/>
                     <field name="ten_sach" optional="show"/>
+                    <field name="ngay_tao" optional="show"/>
                     <field name="tinh_trang" optional="show"/>
                     <field name="nguoi_muon" optional="show"/>
                     <field name="state" optional="show"/>

@@ -9,6 +9,20 @@
                     <header>
                     </header>
                     <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_view_muon_sach" type="object"
+                                    class="oe_stat_button" icon="fa-cubes">
+                                <field name="count_muon_sach" widget="statinfo" string="Số lần đã mượn sách"/>
+                            </button>
+                            <button name="action_view_dang_muon_sach" type="object"
+                                    class="oe_stat_button" icon="fa-cubes">
+                                <field name="count_dang_muon" widget="statinfo" string="Sách đang mượn"/>
+                            </button>
+                            <button name="action_view_error" type="object"
+                                    class="oe_stat_button text-danger" icon="fa-cubes">
+                                <field name="count_error" widget="statinfo" string="Số lần trả sách lỗi"/>
+                            </button>
+                        </div>
                         <field name="img" widget='image' class="oe_avatar"/>
                         <div class="oe_title">
                             <h1>

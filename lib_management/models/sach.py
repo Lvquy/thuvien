@@ -189,6 +189,7 @@ class Serial(models.Model):
     note = fields.Text(string='Ghi chú')
     nguoi_muon = fields.Many2one(comodel_name='doc.gia', string='Người đang mượn',
                                  domain=lambda self: [('company_id', 'in', [a.id for a in self.env.user.company_ids])])
+    ngay_tao = fields.Date(string='Ngày tạo', default=datetime.today())
 
 
 class DanhMucSach(models.Model):

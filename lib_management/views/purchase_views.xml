@@ -9,19 +9,22 @@
                     <header>
                         <field name="state" widget="statusbar" statusbar_visible="new,done"/>
                         <button name="confirm" string="Xác nhận" type="object"
-                                attrs="{'invisible':[('state', 'in', ('done'))]}"/>
+                                attrs="{'invisible':[('state', 'in', ('done'))]}" class="btn btn-primary"/>
+                        <button name="create_serial" string="Tạo Serial cho sách mới" type="object"
+                                attrs="{'invisible':[('state', 'in', ('done'))]}" class="btn btn-success"/>
                     </header>
                     <sheet>
                         <group string="Chi tiết">
                             <group>
                                 <field name="name"/>
-                                <field name="ngay_mua"/>
-                                <field name="venders"/>
+                                <field name="ngay_mua" attrs="{'readonly':[('state', 'in', ('done'))]}"/>
+                                <field name="venders" attrs="{'readonly':[('state', 'in', ('done'))]}"/>
+                                <field name="auto_create_serial" attrs="{'readonly':[('state', 'in', ('done'))]}"/>
                             </group>
                         </group>
                         <notebook>
                             <page name="lines_order" string="Chi tiết sách">
-                                <field name="product_lines"/>
+                                <field name="product_lines" attrs="{'readonly':[('state', 'in', ('done'))]}"/>
                             </page>
                         </notebook>
                         <span>Note:</span>
@@ -54,6 +57,7 @@
                 <tree string="Chi tiết sách" editable="bottom">
                     <field name="ma_sach" optional="show"/>
                     <field name="name" optional="show"/>
+                    <field name="next_num" optional="show"/>
                     <field name="qty" optional="show"/>
                 </tree>
             </field>
