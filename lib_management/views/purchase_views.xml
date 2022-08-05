@@ -19,6 +19,7 @@
                                 <field name="name"/>
                                 <field name="ngay_mua" attrs="{'readonly':[('state', 'in', ('done'))]}"/>
                                 <field name="venders" attrs="{'readonly':[('state', 'in', ('done'))]}"/>
+                                <field name="total_qty" attrs="{'readonly':[('state', 'in', ('done'))]}"/>
                                 <field name="auto_create_serial" attrs="{'readonly':[('state', 'in', ('done'))]}"/>
                             </group>
                         </group>
@@ -41,8 +42,8 @@
                 <tree string="Danh sách đơn mua " decoration-success="state=='done'">
                     <field name="name" optional="show"/>
                     <field name="ngay_mua" optional="show"/>
+                    <field name="total_qty" optional="show"/>
                     <field name="state" optional="show"/>
-                    <field name="venders" optional="show"/>
                     <field name="venders" optional="show"/>
                     <field name="note" optional="hide"/>
                     <field name="company_id" optional="hide"/>
@@ -63,11 +64,22 @@
             </field>
         </record>
 
+        <record model="ir.ui.view" id="view_mua_sach_graph">
+            <field name="name">mua.sach.graph</field>
+            <field name="model">mua.sach</field>
+            <field name="arch" type="xml">
+                <graph string="Mua sách" sample="1">
+                    <field name="ngay_mua"/>
+                    <field name="total_qty" type="measure"/>
+                </graph>
+            </field>
+        </record>
+
         <!-- action view-->
         <record id="action_view_mua_sach" model="ir.actions.act_window">
             <field name="name">Danh sách đơn mua</field>
             <field name="res_model">mua.sach</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">tree,form,graph</field>
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">
                     Create a new ...

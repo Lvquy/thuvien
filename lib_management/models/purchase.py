@@ -17,7 +17,14 @@ class Purchase(models.Model):
     company_id = fields.Many2one(
         'res.company', 'Company', index=1, default=lambda self: self.env.user.company_id.id)
     auto_create_serial = fields.Boolean(string='Tự động tạo serial cho sách', default = True)
+    total_qty = fields.Integer(string='Tổng số lượng sách')
 
+    @api.onchange('product_lines')
+    def onchange_total_qty(self):
+        for rec in self:
+            rec.total_qty = 0
+            for line in rec.product_lines:
+                rec.total_qty += line.qty
 
 
     def create_serial(self):

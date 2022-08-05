@@ -32,6 +32,7 @@
         'views/danh_muc_sach_views.xml',
         'views/purchase_views.xml',
         'views/bao_phe_views.xml',
+        'views/bao_cao_views.xml',
 
 
         #menu

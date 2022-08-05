@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="bao_cao_form" model="ir.ui.view">
+            <field name="name">bao.cao.form</field>
+            <field name="model">bao.cao</field>
+            <field name="arch" type="xml">
+                <form string="Báo cáo" create="false" delete="false" edit="false">
+                    <header>
+                        <button name="update_bao_cao" string="Update" type="object"/>
+                    </header>
+                    <sheet>
+                        <h2>Báo cáo thống kê</h2>
+                        <group>
+                            <group>
+                                <field name="total_sach"/>
+                                <field name="total_serial"/>
+                                <field name="total_sach_muon"/>
+                                <field name="total_sach_trong_kho"/>
+                                <field name="total_sach_phe"/>
+                                <field name="total_doc_gia"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="bao_cao_tree" model="ir.ui.view">
+            <field name="name">bao.cao.tree</field>
+            <field name="model">bao.cao</field>
+            <field name="arch" type="xml">
+                <tree string="Báo cáo">
+                    <field name="total_sach" optional="show"/>
+                    <field name="total_serial" optional="show"/>
+                    <field name="total_sach_muon" optional="show"/>
+                    <field name="total_sach_trong_kho" optional="show"/>
+                    <field name="total_sach_phe" optional="show"/>
+                    <field name="total_doc_gia" optional="show"/>
+                    <field name="name" optional="show"/>
+                    <field name="company_id" optional="hide"/>
+                </tree>
+            </field>
+        </record>
+<!--        <record model="ir.ui.view" id="view_bao_cao_graph">-->
+<!--            <field name="name">bao.cao.graph</field>-->
+<!--            <field name="model">bao.cao</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <graph string="Báo cáo" sample="1">-->
+<!--                    <field name="total_doc_gia"/>-->
+<!--                    <field name="total_sach" type="measure"/>-->
+<!--                </graph>-->
+<!--            </field>-->
+<!--        </record>-->
+
+        <!-- action view-->
+        <record id="action_view_bao_cao" model="ir.actions.act_window">
+            <field name="name">Báo cáo</field>
+            <field name="res_model">bao.cao</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new ...
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_bao_cao" name="Thống kê" sequence="11"
+                  web_icon="lib_management,static/src/img/logo.png"
+                  groups="base.group_system,lib_management.group_lib_management"/>
+        <menuitem id="menu_sub_bao_cao" name="Báo cáo thống kê" parent="menu_bao_cao" action="action_view_bao_cao"
+                  sequence="1" groups="base.group_system,lib_management.group_lib_management"/>
+    </data>
+</odoo>
+

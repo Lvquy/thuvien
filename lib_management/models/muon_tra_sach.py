@@ -27,6 +27,14 @@ class MuonTra(models.Model):
     company_id = fields.Many2one(
         'res.company', 'Company', index=1, default=lambda self: self.env.user.company_id.id)
     note = fields.Text(string='Ghi chú')
+    total_qty = fields.Integer(string='Tổng số sách mượn')
+
+    @api.onchange('danh_sach_muon')
+    def onchange_qty(self):
+        for rec in self:
+            rec.total_qty = 0
+            for line in rec.danh_sach_muon:
+                rec.total_qty += 1
 
     @api.model
     def create(self, vals):

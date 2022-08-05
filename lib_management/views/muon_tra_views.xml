@@ -28,6 +28,7 @@
                                        attrs="{'readonly':[('state', 'in', ('1','2'))]}"
                                 />
                                 <field name="ma_doc_gia"/>
+                                <field name="total_qty"/>
                                 <field name="ngay_muon" attrs="{'readonly':[('state', 'in', ('1','2'))]}"/>
                                 <field name="han_tra" attrs="{'readonly':[('state', 'in', ('1','2'))]}"/>
                                 <field name="nhan_vien"
@@ -65,6 +66,7 @@
                     <field name="ngay_tra" optional="show"/>
                     <field name="type_phat" optional="show" decoration-danger="type_phat in ('0','1','2')"/>
                     <field name="tien_phat" optional="show" sum = "Tổng"/>
+                    <field name="total_qty" optional="show" sum = "Tổng"/>
                     <field name="note" optional="hide"/>
                     <field name="state" optional="show"/>
                     <field name="nhan_vien" optional="show"/>
@@ -72,12 +74,22 @@
                 </tree>
             </field>
         </record>
+        <record model="ir.ui.view" id="view_muon_tra_pivot">
+            <field name="name">muon.tra.pivot</field>
+            <field name="model">muon.tra</field>
+            <field name="arch" type="xml">
+                <pivot string="Mượn trả sách" sample="1">
+                    <field name="ngay_muon" type="row"/>
+                    <field name="total_qty" type="measure"/>
+                </pivot>
+            </field>
+        </record>
 
         <!-- action view-->
         <record id="action_view_muon_tra" model="ir.actions.act_window">
             <field name="name">Danh sách mượn trả sách</field>
             <field name="res_model">muon.tra</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">tree,form,pivot</field>
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">
                     Create a new ...
