@@ -82,11 +82,69 @@
             </field>
         </record>
 
+        <!-- doc gia Kanban View  -->
+        <record model="ir.ui.view" id="view_doc_gia_kanban">
+            <field name="name">doc.gia.kanban</field>
+            <field name="model">doc.gia</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile" sample="1">
+                    <field name="name"/>
+                    <field name="id"/>
+                    <field name="ma_docgia"/>
+                    <field name="gioi_tinh"/>
+                    <field name="img"/>
+                    <field name="nam_sinh"/>
+                    <field name="dia_chi"/>
+                    <field name="lop_hoc"/>
+                    <field name="mobile"/>
+                    <field name="ngay_tao_the"/>
+                    <field name="kieu_the"/>
+                    <field name="ngay_het_han"/>
+                    <field name="count_muon_sach"/>
+                    <field name="count_error"/>
+                    <field name="count_dang_muon"/>
+                    <progressbar field="kieu_the"
+                                 colors='{"planned": "success", "today": "warning", "overdue": "danger"}'/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban">
+                                <t>
+                                    <div class="o_kanban_image_fill_left o_kanban_image_full"
+                                         t-attf-style="background-image: url(#{kanban_image('doc.gia', 'img', record.id.raw_value)})"
+                                         role="img"/>
+                                </t>
+                                <div class="oe_kanban_details d-flex flex-column">
+                                    <strong class="o_kanban_record_title oe_partner_heading">
+                                        <strong><field name="name"/></strong>
+                                    </strong>
+                                    <div class="o_kanban_tags_section oe_kanban_partner_categories"/>
+                                    <ul>
+                                        <li><strong><field name="ma_docgia"/></strong></li>
+                                        <li>SĐT:<field name="mobile"/></li>
+                                        <li>Số lần đã mượn:<field name="count_muon_sach"/></li>
+                                        <li>Sách đang mượn:<field name="count_dang_muon"/></li>
+                                    </ul>
+                                    <div class="oe_kanban_bottom_right">
+                                        <field name="lop_hoc" widget="label_selection"/>
+                                        <span> - </span>
+                                        <field name="kieu_the" widget="label_selection"/>
+                                    </div>
+                                    <div class="o_row">
+                                        <span class="oe_kanban_partner_links"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
         <!-- action view-->
         <record id="action_view_doc_gia" model="ir.actions.act_window">
             <field name="name">Danh sách độc giả</field>
             <field name="res_model">doc.gia</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">kanban,tree,form</field>
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">
                     Create a new ...

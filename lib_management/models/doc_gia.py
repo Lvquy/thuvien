@@ -21,9 +21,9 @@ class DocGia(models.Model):
     company_id = fields.Many2one(
         'res.company', 'Trường học', readonly=True, index=1, default=lambda self: self.env.user.company_id.id)
     mobile = fields.Char(string='Số điện thoại')
-    ngay_tao_the = fields.Datetime(string='Ngày tạo thẻ', default=datetime.today())
+    ngay_tao_the = fields.Date(string='Ngày tạo thẻ', default=datetime.today())
     kieu_the = fields.Selection([('hs','Học sinh'),('gv','Giáo viên'),('other','Khác')], string='Loại thẻ', default='hs')
-    ngay_het_han = fields.Datetime(string='Ngày hết hạn')
+    ngay_het_han = fields.Date(string='Ngày hết hạn')
     count_muon_sach = fields.Integer(string='Số lần mượn sách')
     count_error = fields.Integer(string='Số lần quá hạn/hỏng sách',
                                  help='Là số lần độc giả trả sách quá hạn hoặc làm hỏng sách, mất sách...')
