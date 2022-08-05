@@ -8,6 +8,9 @@
                 <form string="Danh sách serial">
                     <header>
                         <field name="state" widget="statusbar" statusbar_visible="0,1,2"/>
+                        <button name="bao_phe_sach" string="Báo phế sách này"
+                                type="object" attrs="{'invisible':[('state', 'in', ('2'))]}"
+                                class="btn btn-primary"/>
                     </header>
                     <sheet>
                         <group string="Chi tiết">
@@ -38,7 +41,7 @@
                     <field name="ten_sach" optional="show"/>
                     <field name="ngay_tao" optional="show"/>
                     <field name="gia_sach" optional="show"/>
-                    <field name="tinh_trang" optional="show"/>
+                    <field name="tinh_trang" optional="show" decoration-danger="state=='2'"/>
                     <field name="nguoi_muon" optional="show"/>
                     <field name="state" optional="show" decoration-danger="state=='2'"/>
                     <field name="company_id" optional="hide"/>

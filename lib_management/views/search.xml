@@ -1,26 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-<!--search-->
+<!--search sach.doc -->
     <record id="view_search_sach_doc" model="ir.ui.view">
         <field name="name">sach.doc.search</field>
         <field name="model">sach.doc</field>
         <field name="priority" eval="15"/>
         <field name="arch" type="xml">
             <search string="Search Danh sách Sách">
-                <field name="ma_sach"/>
                 <field name="name"/>
-                <field name="company_id"/>
+                <field name="ma_sach"/>
                 <field name="tac_gia"/>
                 <field name="the_loai_sach"/>
                 <field name="nha_xb"/>
                 <field name="ke_kho"/>
                 <field name="ngon_ngu"/>
+                <field name="so_trang"/>
                 <field name="nam_xb"/>
                 <field name="danh_muc_sach"/>
+                <field name="ma_sach"/>
+                <field name="gia_sach"/>
+                <field name="company_id"/>
+
                 <group expand="0" string="Group By">
-                    <filter string="Tủ sách" name="danh_muc_sach" domain="[]" context="{'group_by': 'danh_muc_sach'}"/>
                     <filter string="Tác giả" name="tac_gia" domain="[]" context="{'group_by': 'tac_gia'}"/>
+                    <filter string="Thể loại sách" name="the_loai_sach" domain="[]" context="{'group_by': 'the_loai_sach'}"/>
                     <filter string="Nhà Xuất Bản" name="nha_xb" domain="[]" context="{'group_by': 'nha_xb'}"/>
+                    <filter string="Kệ kho" name="ke_kho" domain="[]" context="{'group_by': 'ke_kho'}"/>
+                    <filter string="Năm xuất bản" name="nam_xb" domain="[]" context="{'group_by': 'nam_xb'}"/>
+                    <filter string="Tủ sách" name="danh_muc_sach" domain="[]" context="{'group_by': 'danh_muc_sach'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+<!--    serial-->
+    <record id="view_search_serial" model="ir.ui.view">
+        <field name="name">serial.search</field>
+        <field name="model">serial</field>
+        <field name="priority" eval="15"/>
+        <field name="arch" type="xml">
+            <search string="Search serial">
+                <field name="serial_no"/>
+                <field name="ma_sach"/>
+                <field name="ten_sach"/>
+                <field name="tinh_trang"/>
+                <field name="ke_kho"/>
+                <field name="state"/>
+                <field name="nguoi_muon"/>
+                <field name="ngay_tao"/>
+                <field name="gia_sach"/>
+                <filter string="Tình trạng tốt" name="tinh_trang_tot" domain="[('tinh_trang','=','tot')]"/>
+                <filter string="Tình trạng cũ" name="tinh_trang_cu" domain="[('tinh_trang','=','cu')]"/>
+                <filter string="Tình trạng hỏng" name="tinh_trang_hong" domain="[('tinh_trang','=','hong')]"/>
+                <filter string="Đang trong kho" name="state_0" domain="[('state','=','0')]"/>
+                <filter string="Đang cho mượn" name="state_1" domain="[('state','=','1')]"/>
+                <filter string="Phế phẩm" name="state_2" domain="[('state','=','2')]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Mã sách" name="ma_sach" domain="[]" context="{'group_by': 'ma_sach'}"/>
+                    <filter string="Tình trạng" name="tinh_trang" domain="[]" context="{'group_by': 'tinh_trang'}"/>
+                    <filter string="Trạng thái" name="state" domain="[]" context="{'group_by': 'state'}"/>
+                    <filter string="Người mượn" name="nguoi_muon" domain="[]" context="{'group_by': 'nguoi_muon'}"/>
+                    <filter string="Ngày tạo" name="ngay_tao" domain="[]" context="{'group_by': 'ngay_tao'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+<!--    doc gia-->
+    <record id="view_search_doc_gia" model="ir.ui.view">
+        <field name="name">doc.gia.search</field>
+        <field name="model">doc.gia</field>
+        <field name="priority" eval="15"/>
+        <field name="arch" type="xml">
+            <search string="Search Độc giả">
+                <field name="name"/>
+                <field name="ma_docgia"/>
+                <field name="mobile"/>
+                <field name="gioi_tinh"/>
+                <field name="nam_sinh"/>
+                <field name="lop_hoc"/>
+                <field name="kieu_the"/>
+                <field name="dia_chi"/>
+                <field name="count_dang_muon"/>
+                <field name="count_muon_sach"/>
+                <field name="count_error"/>
+
+                <filter string="Độc giả đang mượn sách" name="count_dang_muon" domain="[('count_dang_muon','>',0)]"/>
+                <filter string="Độc giả chưa mượn sách" name="count_dang_muon" domain="[('count_dang_muon','=',0)]"/>
+                <filter string="Độc giả đã mượn sách" name="count_muon_sach" domain="[('count_muon_sach','>=',0)]"/>
+                <filter string="Độc giả trả sách lỗi" name="count_error" domain="[('count_error','>',0)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Giới tính" name="gioi_tinh" domain="[]" context="{'group_by': 'gioi_tinh'}"/>
+                    <filter string="Lớp học" name="lop_hoc" domain="[]" context="{'group_by': 'lop_hoc'}"/>
+                    <filter string="Kiểu thẻ" name="kieu_the" domain="[]" context="{'group_by': 'kieu_the'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!--    doc gia-->
+    <record id="view_search_muon_tra" model="ir.ui.view">
+        <field name="name">muon.tra.search</field>
+        <field name="model">muon.tra</field>
+        <field name="priority" eval="15"/>
+        <field name="arch" type="xml">
+            <search string="Search mượn trả sách">
+                <field name="no"/>
+                <field name="nguoi_muon"/>
+                <field name="ma_doc_gia"/>
+                <field name="ngay_muon"/>
+                <field name="han_tra"/>
+                <field name="ngay_tra"/>
+                <field name="type_phat"/>
+                <field name="state"/>
+                <field name="nhan_vien"/>
+                <filter string="Bản nháp" name="state" domain="[('state','=','new')]"/>
+                <filter string="Đang mượn" name="state_1" domain="[('state','=','1')]"/>
+                <filter string="Đã trả" name="state_2" domain="[('state','=','2')]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Độc giả" name="nguoi_muon" domain="[]" context="{'group_by': 'nguoi_muon'}"/>
+                    <filter string="Ngày mượn" name="ngay_muon" domain="[]" context="{'group_by': 'ngay_muon'}"/>
+                    <filter string="Trạng thái" name="state" domain="[]" context="{'group_by': 'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!--    purchase -->
+    <record id="view_search_mua_sach" model="ir.ui.view">
+        <field name="name">mua.sach.search</field>
+        <field name="model">mua.sach</field>
+        <field name="priority" eval="15"/>
+        <field name="arch" type="xml">
+            <search string="Search mua sách">
+                <field name="name"/>
+                <field name="ngay_mua"/>
+                <field name="state"/>
+                <field name="venders"/>
+                <field name="auto_create_serial"/>
+                <filter string="Bản nháp" name="state" domain="[('state','=','new')]"/>
+                <filter string="Đã xác nhận mua" name="state_1" domain="[('state','=','done')]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Trạng thái" name="state" domain="[]" context="{'group_by': 'state'}"/>
+                    <filter string="Thời gian mua" name="ngay_mua" domain="[]" context="{'group_by': 'ngay_mua'}"/>
                 </group>
             </search>
         </field>

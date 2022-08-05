@@ -56,3 +56,7 @@ access_lib_management_bao_phe_user,bao.phe.user,model_bao_phe,lib_management.gro
 
 access_lib_management_bao_cao_root,bao.cao.root,model_bao_cao,base.group_system,1,1,1,1
 access_lib_management_bao_cao_user,bao.cao.user,model_bao_cao,lib_management.group_lib_management,1,1,1,1
+
+access_lib_management_create_baophe_root,create.baophe.root,model_create_baophe,base.group_system,1,1,1,1
+access_lib_management_create_baophe_user,create.baophe.user,model_create_baophe,lib_management.group_lib_management,1,1,1,1
+

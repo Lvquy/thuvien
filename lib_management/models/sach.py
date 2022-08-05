@@ -86,7 +86,6 @@ class Sach(models.Model):
             'view_type': 'form',
             'view_mode': 'tree,form',
             'views': [(view_id_tree[0].id, 'tree'), (False, 'form')],
-            'view_id ref="lib_management.tree_view"': '',
             'target': 'current',
             'domain': domain,
         }
@@ -102,7 +101,6 @@ class Sach(models.Model):
             'view_type': 'form',
             'view_mode': 'tree,form',
             'views': [(view_id_tree[0].id, 'tree'), (False, 'form')],
-            'view_id ref="lib_management.tree_view"': '',
             'target': 'current',
             'domain': domain,
         }
@@ -118,7 +116,6 @@ class Sach(models.Model):
             'view_type': 'form',
             'view_mode': 'tree,form',
             'views': [(view_id_tree[0].id, 'tree'), (False, 'form')],
-            'view_id ref="lib_management.tree_view"': '',
             'target': 'current',
             'domain': domain,
         }
@@ -134,7 +131,6 @@ class Sach(models.Model):
             'view_type': 'form',
             'view_mode': 'tree,form',
             'views': [(view_id_tree[0].id, 'tree'), (False, 'form')],
-            'view_id ref="lib_management.tree_view"': '',
             'target': 'current',
             'domain': domain,
         }
@@ -193,6 +189,36 @@ class Serial(models.Model):
     ngay_tao = fields.Date(string='Ngày tạo', default=datetime.today())
     gia_sach = fields.Integer(string='Giá sách', related='ma_sach.gia_sach')
 
+    def bao_phe_sach(self):
+        return {
+            'name': 'Báo phế sách',
+            'type': 'ir.actions.act_window',
+            'res_model': 'create.baophe',
+            'view_mode': 'form',
+            'target': 'new',
+            'context': "{'default_serial_sach': active_id}"
+        }
+class CreateBaoPhe(models.Model):
+    _name = 'create.baophe'
+    _description = 'Tạo báo phế sách'
+    _rec_name = 'name'
+
+    serial_sach = fields.Many2one(comodel_name='serial', string='Serial sách cần báo phế',
+                                  domain=lambda self: [('company_id', 'in', [a.id for a in self.env.user.company_ids])])
+    ly_do = fields.Text(string='Lý do báo phế')
+    name = fields.Char(string='Tên sách', related='serial_sach.ten_sach')
+    company_id = fields.Many2one(
+        'res.company', 'Company', index=1, default=lambda self: self.env.user.company_id.id)
+
+    def create_baophe_sach(self):
+        for rec in self:
+            BaoPhe = rec.env['bao.phe']
+            BaoPhe.create({
+                'ly_do':rec.ly_do,
+                'danh_sach_phe': rec.serial_sach,
+                'state':'1'
+            })
+            rec.serial_sach.state = '2'
 
 class DanhMucSach(models.Model):
     _name = 'danh.muc'

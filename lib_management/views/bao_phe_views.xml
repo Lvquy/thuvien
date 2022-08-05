@@ -61,6 +61,27 @@
             </field>
         </record>
 
+<!--        create bao phe-->
+
+        <record id="create_baophe_form" model="ir.ui.view">
+            <field name="name">create.baophe.form</field>
+            <field name="model">create.baophe</field>
+            <field name="arch" type="xml">
+                <form string="Báo phế">
+                    <sheet>
+                        <group>
+                            <field name="serial_sach"/>
+                            <field name="name"/>
+                            <field name="ly_do"/>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="create_baophe_sach" string="Xác nhận" type="object" confirm="Xác nhận!" class="btn btn-primary"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
         <menuitem id="menu_bao_phe" name="Báo phế sách" sequence="11"
                   web_icon="lib_management,static/src/img/logo.png"
                   groups="base.group_system,lib_management.group_lib_management"/>

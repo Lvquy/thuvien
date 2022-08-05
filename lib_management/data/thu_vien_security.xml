@@ -113,4 +113,10 @@
         <field name="domain_force">[('company_id', 'in', [a.id for a in user.company_ids])]</field>
     </record>
 
+    <record id="create_baophe_rule" model="ir.rule">
+        <field name="name">Báo phế company rule</field>
+        <field name="model_id" ref="model_create_baophe"/>
+        <field name="domain_force">[('company_id', 'in', [a.id for a in user.company_ids])]</field>
+    </record>
+
 </data>
