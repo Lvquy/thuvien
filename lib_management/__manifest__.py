@@ -33,6 +33,7 @@
         'views/purchase_views.xml',
         'views/bao_phe_views.xml',
         'views/bao_cao_views.xml',
+        'views/res_users.xml',
 
 
         #menu
