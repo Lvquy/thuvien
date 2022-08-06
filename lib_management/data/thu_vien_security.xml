@@ -119,4 +119,5 @@
         <field name="domain_force">[('company_id', 'in', [a.id for a in user.company_ids])]</field>
     </record>
 
+
 </data>

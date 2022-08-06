@@ -38,6 +38,10 @@
         #menu
         'views/menu.xml',
         # report
+        'report/the_doc_gia.xml',
+        'report/gay_sach.xml',
+        'report/menu_report.xml',
+
 
     ],
     'assets': {

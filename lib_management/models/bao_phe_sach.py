@@ -25,6 +25,7 @@ class BaoPhe(models.Model):
                 rec.state = '1'
                 for sach in rec.danh_sach_phe:
                     sach.state = '2'
+                    sach.tinh_trang = 'hong'
             else:
                 raise UserError('Làm mới trình duyệt!')
 

@@ -9,11 +9,9 @@
                     <header>
                         <field name="state" widget="statusbar" statusbar_visible="new,1,2"/>
                         <button name="confirm" string="Xác nhận mượn" type="object" class="btn btn-primary"
-                                attrs="{'invisible':[('state', 'in', ('1','2'))]}"
-                        />
-                        <button name="return_sach" string="Xác nhận trả" type="object" class="btn btn-success"
-                                attrs="{'invisible':[('state', 'in', ('new','2'))]}"
-                        />
+                                attrs="{'invisible':[('state', 'in', ('1','2'))]}"/>
+                        <button name="return_sach" string="Trả toàn bộ" type="object" class="btn btn-success"
+                                attrs="{'invisible':[('state', 'in', ('new','2','3'))]}"/>
                     </header>
                     <sheet>
                         <div class="oe_title">
@@ -25,26 +23,26 @@
                             <group string="Thông tin">
                                 <field name="nguoi_muon"
                                        options="{'no_create': True , 'no_quick_create': True}"
-                                       attrs="{'readonly':[('state', 'in', ('1','2'))]}"
+                                       attrs="{'readonly':[('state', '!=', ('new'))]}"
                                 />
                                 <field name="ma_doc_gia"/>
                                 <field name="total_qty"/>
-                                <field name="ngay_muon" attrs="{'readonly':[('state', 'in', ('1','2'))]}"/>
-                                <field name="han_tra" attrs="{'readonly':[('state', 'in', ('1','2'))]}"/>
+                                <field name="ngay_muon" attrs="{'readonly':[('state', '!=', ('new'))]}"/>
+                                <field name="han_tra" attrs="{'readonly':[('state', '!=', ('new'))]}"/>
                                 <field name="nhan_vien"
                                        options="{'no_create': True , 'no_quick_create': True}"
-                                       attrs="{'readonly':[('state', 'in', ('1','2'))]}"/>
+                                       attrs="{'readonly':[('state', '!=', ('new'))]}"/>
                             </group>
                             <group string="Trả sách">
-                                <field name="ngay_tra" attrs="{'readonly':[('state', 'in', ('2'))]}"/>
+                                <field name="ngay_tra" attrs="{'readonly':[('state', '=', ('2'))]}"/>
                                 <field name="type_phat" attrs="{'readonly':[('state', 'in', ('2'))]}"/>
                                 <field name="tien_phat" attrs="{'readonly':[('state','in',('2'))],'invisible':[('type_phat', '=', False)]}"/>
                                 <field name="ly_do_phat" attrs="{'readonly':[('state','in',('2'))],'invisible':[('type_phat', 'in', ('0','1',False))]}"/>
                             </group>
                         </group>
                         <notebook>
-                            <page name="danhsach" string="Danh sách mượn">
-                                <field name="danh_sach_muon"/>
+                            <page name="muonsach" string="Danh sách mượn">
+                                <field name="danh_sach_muon" attrs="{'readonly':[('state', '!=', ('new'))]}"/>
                             </page>
                         </notebook>
                         <span>Note:</span>
@@ -58,7 +56,7 @@
             <field name="name">muon.tra.tree</field>
             <field name="model">muon.tra</field>
             <field name="arch" type="xml">
-                <tree string="Danh sách mượn trả sách"  decoration-primary="state=='1'" decoration-success="state=='2'">
+                <tree string="Danh sách mượn trả sách"  decoration-primary="state=='1'" decoration-info="state=='2'">
                     <field name="no" optional="show"/>
                     <field name="nguoi_muon" optional="show"/>
                     <field name="ngay_muon" optional="show"/>
@@ -74,22 +72,22 @@
                 </tree>
             </field>
         </record>
-        <record model="ir.ui.view" id="view_muon_tra_pivot">
-            <field name="name">muon.tra.pivot</field>
-            <field name="model">muon.tra</field>
-            <field name="arch" type="xml">
-                <pivot string="Mượn trả sách" sample="1">
-                    <field name="ngay_muon" type="row"/>
-                    <field name="total_qty" type="measure"/>
-                </pivot>
-            </field>
-        </record>
+<!--        <record model="ir.ui.view" id="view_muon_tra_pivot">-->
+<!--            <field name="name">muon.tra.pivot</field>-->
+<!--            <field name="model">muon.tra</field>-->
+<!--            <field name="arch" type="xml">-->
+<!--                <pivot string="Mượn trả sách" sample="1">-->
+<!--                    <field name="ngay_muon" type="row"/>-->
+<!--                    <field name="total_qty" type="measure"/>-->
+<!--                </pivot>-->
+<!--            </field>-->
+<!--        </record>-->
 
         <!-- action view-->
         <record id="action_view_muon_tra" model="ir.actions.act_window">
             <field name="name">Danh sách mượn trả sách</field>
             <field name="res_model">muon.tra</field>
-            <field name="view_mode">tree,form,pivot</field>
+            <field name="view_mode">tree,form</field>
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">
                     Create a new ...
@@ -109,6 +107,7 @@
                                 <field name="serial_no" domain="[('state','=','0')]"/>
                                 <field name="name"/>
                                 <field name="ke_sach"/>
+                                <field name="state"/>
                             </group>
                         </group>
 
@@ -125,11 +124,14 @@
                     <field name="serial_no" optional="show" domain="[('state','=','0')]"/>
                     <field name="name" optional="show"/>
                     <field name="ke_sach" optional="show"/>
+                    <field name="state" optional="show"/>
                     <field name="company_id" optional="hide"/>
+                    <field name="is_datra" optional="show"/>
+                    <button name="tra_1phan" type="object" string="Trả sách" class="btn btn-primary"
+                            attrs="{'invisible':[('is_datra', '=', True)]}"/>
                 </tree>
             </field>
         </record>
-
 
         <menuitem id="menu_muon_tra" name="Quản lý Mượn trả sách" sequence="1"
                   web_icon="lib_management,static/src/img/logo.png"
