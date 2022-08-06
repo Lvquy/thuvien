@@ -47,7 +47,6 @@
                                 <field name="kieu_the"/>
                                 <field name="ngay_tao_the"/>
                                 <field name="ngay_het_han"/>
-                                <button name="taothe" string="Tạo thẻ" type="object" class="btn btn-success"/>
                             </group>
                         </group>
 

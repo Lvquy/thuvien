@@ -10,8 +10,6 @@
                         <field name="state" widget="statusbar" statusbar_visible="new,done"/>
                         <button name="confirm" string="Xác nhận" type="object"
                                 attrs="{'invisible':[('state', 'in', ('done'))]}" class="btn btn-primary"/>
-                        <button name="create_serial" string="Tạo Serial cho sách mới" type="object"
-                                attrs="{'invisible':[('state', 'in', ('done'))]}" class="btn btn-success"/>
                     </header>
                     <sheet>
                         <group string="Chi tiết">

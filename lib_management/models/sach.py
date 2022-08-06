@@ -79,7 +79,7 @@ class Sach(models.Model):
     def action_view_sach(self, context=None):
         field_ids = self.env['serial'].search([('ma_sach', '=', self.ma_sach)]).ids
         domain = [('id', 'in', field_ids)]
-        view_id_tree = self.env['ir.ui.view'].search([('name', '=', "serial.tree")])
+        view_id_tree = self.env['ir.ui.view'].sudo().search([('name', '=', "serial.tree")])
         return {
             'type': 'ir.actions.act_window',
             'res_model': 'serial',
@@ -88,13 +88,14 @@ class Sach(models.Model):
             'views': [(view_id_tree[0].id, 'tree'), (False, 'form')],
             'target': 'current',
             'domain': domain,
+            'name':'Serial Sách'
         }
 
     # số lượng đang mượn
     def action_view_sach_muon(self, context=None):
         field_ids = self.env['serial'].search(['&', ('ma_sach', '=', self.ma_sach), ('state', '=', '1')]).ids
         domain = [('id', 'in', field_ids)]
-        view_id_tree = self.env['ir.ui.view'].search([('name', '=', "serial.tree")])
+        view_id_tree = self.env['ir.ui.view'].sudo().search([('name', '=', "serial.tree")])
         return {
             'type': 'ir.actions.act_window',
             'res_model': 'serial',
@@ -103,13 +104,14 @@ class Sach(models.Model):
             'views': [(view_id_tree[0].id, 'tree'), (False, 'form')],
             'target': 'current',
             'domain': domain,
+            'name': 'Sách đang cho mượn'
         }
 
     # trong kho
     def action_view_sach_onhand(self, context=None):
         field_ids = self.env['serial'].search(['&', ('ma_sach', '=', self.ma_sach), ('state', '=', '0')]).ids
         domain = [('id', 'in', field_ids)]
-        view_id_tree = self.env['ir.ui.view'].search([('name', '=', "serial.tree")])
+        view_id_tree = self.env['ir.ui.view'].sudo().search([('name', '=', "serial.tree")])
         return {
             'type': 'ir.actions.act_window',
             'res_model': 'serial',
@@ -118,13 +120,14 @@ class Sach(models.Model):
             'views': [(view_id_tree[0].id, 'tree'), (False, 'form')],
             'target': 'current',
             'domain': domain,
+            'name': 'Sách đang trong thư viện'
         }
 
     # sách đã hủy
     def action_view_sach_huy(self, context=None):
         field_ids = self.env['serial'].search(['&', ('ma_sach', '=', self.ma_sach), ('state', '=', '2')]).ids
         domain = [('id', 'in', field_ids)]
-        view_id_tree = self.env['ir.ui.view'].search([('name', '=', "serial.tree")])
+        view_id_tree = self.env['ir.ui.view'].sudo().search([('name', '=', "serial.tree")])
         return {
             'type': 'ir.actions.act_window',
             'res_model': 'serial',
@@ -133,6 +136,7 @@ class Sach(models.Model):
             'views': [(view_id_tree[0].id, 'tree'), (False, 'form')],
             'target': 'current',
             'domain': domain,
+            'name': 'Sách đã báo phế'
         }
 
 
@@ -175,11 +179,12 @@ class Serial(models.Model):
 
     serial_no = fields.Char(string='Serial sách duy nhất', default=lambda self: 'New', readonly=True)
     ma_sach = fields.Many2one(string='Mã sách', comodel_name='sach.doc',
+                              required=True, readonly=True,
                               domain=lambda self: [('company_id', 'in', [a.id for a in self.env.user.company_ids])])
     company_id = fields.Many2one(
         'res.company', 'Company', index=1, default=lambda self: self.env.user.company_id.id)
     ten_sach = fields.Char(string='Tên sách', related='ma_sach.name')
-    tinh_trang = fields.Selection([('tot', 'Tốt'), ('hong', 'Hỏng'), ('cu', 'Cũ')], string='Tình trạng', default='tot')
+    tinh_trang = fields.Selection([('tot', 'Tốt'), ('cu', 'Cũ'),('hong', 'Hỏng')], string='Tình trạng', default='tot')
     ke_kho = fields.Many2one(comodel_name='ke.kho', related='ma_sach.ke_kho')
     state = fields.Selection([('0', 'Trong kho'), ('1', 'Cho mượn'), ('2', 'Phế phẩm')], string='Trạng thái sách',
                              default='0')
@@ -216,7 +221,8 @@ class CreateBaoPhe(models.Model):
             BaoPhe.create({
                 'ly_do':rec.ly_do,
                 'danh_sach_phe': rec.serial_sach,
-                'state':'1'
+                'state':'1',
+                'tinh_trang':'hong'
             })
             rec.serial_sach.state = '2'
 

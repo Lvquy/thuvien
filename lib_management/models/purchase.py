@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from datetime import datetime
 from odoo import api, fields, models
+from odoo.exceptions import UserError
 
 
 class Purchase(models.Model):
@@ -40,10 +41,13 @@ class Purchase(models.Model):
 
     def confirm(self):
         for rec in self:
-            if rec.state == 'new':
+            if rec.state == 'new' and rec.product_lines:
                 if rec.auto_create_serial is True:
                     rec.create_serial()
                 rec.state = 'done'
+                for line in rec.product_lines:
+                    line.ma_sach.update_qty()
+            else: raise UserError("Làm mới trình duyệt hoặc chọn sách cần mua")
 
     @api.model
     def create(self, vals):

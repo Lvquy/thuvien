@@ -85,7 +85,7 @@
                 <field name="count_error"/>
 
                 <filter string="Độc giả đang mượn sách" name="count_dang_muon" domain="[('count_dang_muon','>',0)]"/>
-                <filter string="Độc giả chưa mượn sách" name="count_dang_muon" domain="[('count_dang_muon','=',0)]"/>
+                <filter string="Độc giả chưa mượn sách" name="count_dang_muon" domain="[('count_muon_sach','=',0)]"/>
                 <filter string="Độc giả đã mượn sách" name="count_muon_sach" domain="[('count_muon_sach','>=',0)]"/>
                 <filter string="Độc giả trả sách lỗi" name="count_error" domain="[('count_error','>',0)]"/>
                 <group expand="0" string="Group By">
