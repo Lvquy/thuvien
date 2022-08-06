@@ -1,0 +1,13 @@
+<odoo>
+    <record id="res_user_view_form_inherit" model="ir.ui.view">
+        <field name="name">res.users.form.inherit</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form_simple_modif"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//page[@name='preferences_page']" position="replace">
+
+            </xpath>
+        </field>
+    </record>
+</odoo>
