@@ -18,7 +18,7 @@ class Purchase(models.Model):
     company_id = fields.Many2one(
         'res.company', 'Company', index=1, default=lambda self: self.env.user.company_id.id)
     auto_create_serial = fields.Boolean(string='Tự động tạo serial cho sách', default = True)
-    total_qty = fields.Integer(string='Tổng số lượng sách')
+    total_qty = fields.Integer(string='Tổng số lượng sách', readonly=True)
 
     @api.onchange('product_lines')
     def onchange_total_qty(self):
@@ -26,7 +26,6 @@ class Purchase(models.Model):
             rec.total_qty = 0
             for line in rec.product_lines:
                 rec.total_qty += line.qty
-
 
     def create_serial(self):
         for rec in self:
@@ -47,6 +46,9 @@ class Purchase(models.Model):
                 rec.state = 'done'
                 for line in rec.product_lines:
                     line.ma_sach.update_qty()
+                BaoCao = self.env['bao.cao'].search(
+                    [('company_id', 'in', [a.id for a in self.env.user.company_ids])]).sudo()
+                BaoCao.update_bao_cao()
             else: raise UserError("Làm mới trình duyệt hoặc chọn sách cần mua")
 
     @api.model
@@ -56,7 +58,6 @@ class Purchase(models.Model):
             vals['name'] = self.env['ir.sequence'].next_by_code('muasach.code') or 'New'
             res = super(Purchase, self).create(vals)
         return res
-
 
 class PurLines(models.Model):
     _name = 'pur.lines'

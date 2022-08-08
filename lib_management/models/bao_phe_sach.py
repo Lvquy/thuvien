@@ -26,6 +26,9 @@ class BaoPhe(models.Model):
                 for sach in rec.danh_sach_phe:
                     sach.state = '2'
                     sach.tinh_trang = 'hong'
+                BaoCao = self.env['bao.cao'].search(
+                    [('company_id', 'in', [a.id for a in self.env.user.company_ids])]).sudo()
+                BaoCao.update_bao_cao()
             else:
                 raise UserError('Làm mới trình duyệt!')
 

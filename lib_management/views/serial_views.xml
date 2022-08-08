@@ -5,7 +5,7 @@
             <field name="name">serial.form</field>
             <field name="model">serial</field>
             <field name="arch" type="xml">
-                <form string="Danh sách serial">
+                <form string="Danh sách serial" create="false">
                     <header>
                         <field name="state" widget="statusbar" statusbar_visible="0,1,2"/>
                         <button name="bao_phe_sach" string="Báo phế sách này"
@@ -35,7 +35,7 @@
             <field name="name">serial.tree</field>
             <field name="model">serial</field>
             <field name="arch" type="xml">
-                <tree string="Danh sách serial">
+                <tree string="Danh sách serial" create="false">
                     <field name="ma_sach" optional="show"/>
                     <field name="serial_no" optional="show"/>
                     <field name="ten_sach" optional="show"/>

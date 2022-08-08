@@ -60,7 +60,7 @@
             </field>
         </record>
 
-        <menuitem id="menu_tac_gia" name="Tác giả" sequence="1"
+        <menuitem id="menu_tac_gia" name="Tác giả" sequence="5"
                   web_icon="lib_management,static/src/img/logo.png"
                   groups="base.group_system,lib_management.group_lib_management"/>
         <menuitem id="menu_sub_tac_gia" name="Danh sách tác giả" parent="menu_tac_gia" action="action_view_tac_gia"

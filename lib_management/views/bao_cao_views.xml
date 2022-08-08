@@ -8,21 +8,24 @@
                 <form string="Báo cáo" create="false" delete="false" edit="false">
                     <header>
                         <button name="update_bao_cao" string="Cập nhật" type="object" class="btn btn-success"/>
+                        <button name="khoi_tao" string="Khởi tạo" type="object" class="btn btn-success"
+                                attrs="{'invisible':[('is_khoi_tao', '=', True)]}"/>
                     </header>
                     <sheet>
                         <h2>Báo cáo thống kê</h2>
                         <group>
                             <group class="text-success font-weight-bold">
-                                <field name="date_update" />
-                                <field name="total_sach" />
-                                <field name="total_serial" />
-                                <field name="total_sach_muon" />
-                                <field name="total_sach_trong_kho" />
-                                <field name="total_sach_phe" />
-                                <field name="total_doc_gia" />
+                                <field name="is_khoi_tao" invisible="1"/>
+                                <field name="date_update"/>
+                                <field name="total_sach"/>
+                                <field name="total_serial"/>
+                                <field name="total_sach_muon"/>
+                                <field name="total_sach_trong_kho"/>
+                                <field name="total_sach_phe"/>
+                                <field name="total_doc_gia"/>
                                 <field name="total_giao_vien"/>
-                                <field name="total_hoc_sinh" />
-                                <field name="total_doc_gia_khac" />
+                                <field name="total_hoc_sinh"/>
+                                <field name="total_doc_gia_khac"/>
                             </group>
                         </group>
                     </sheet>
@@ -55,7 +58,7 @@
             <field name="name">bao.cao.kanban</field>
             <field name="model">bao.cao</field>
             <field name="arch" type="xml">
-                <kanban class="o_kanban_mobile" sample="1" create="false" colors="blue:id>0;">
+                <kanban class="o_kanban_mobile" sample="1" create="false">
                     <field name="date_update"/>
                     <field name="total_sach"/>
                     <field name="total_serial"/>
@@ -190,7 +193,7 @@
             </field>
         </record>
 
-        <menuitem id="menu_bao_cao" name="Thống kê" sequence="11"
+        <menuitem id="menu_bao_cao" name="Thống kê" sequence="99"
                   web_icon="lib_management,static/src/img/logo.png"
                   groups="base.group_system,lib_management.group_lib_management"/>
         <menuitem id="menu_sub_bao_cao" name="Báo cáo thống kê" parent="menu_bao_cao" action="action_view_bao_cao"

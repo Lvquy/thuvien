@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <menuitem id="menu_settings" name="Cài đặt" sequence="10"
+        <menuitem id="menu_settings" name="Cài đặt" sequence="100"
                   web_icon="lib_management,static/src/img/logo.png"
                   groups="base.group_system,lib_management.group_lib_management"/>
         <menuitem id="menu_sub_lang" name="Ngôn ngữ" parent="menu_settings" action="action_view_lang"
