@@ -23,8 +23,10 @@ class BaoCao(models.Model):
     total_doc_gia_khac = fields.Integer(string='Tổng độc giả khác')
     company_id = fields.Many2one(
         'res.company', 'Company', index=1, default=lambda self: self.env.user.company_id.id, readonly=True)
+    is_khoi_tao = fields.Boolean(string='Đã khởi tạo Cty', default=False, readonly=True)
 
     def update_bao_cao(self):
+        print('Update Bao Cao....')
         for rec in self:
             rec.date_update = datetime.today()
             domain =  [('company_id', 'in', [a.id for a in self.env.user.company_ids])]
@@ -55,3 +57,58 @@ class BaoCao(models.Model):
         if count > 1:
             raise UserError('Đã tạo báo cáo rồi!')
         return res
+
+    def khoi_tao(self):
+        for rec in self:
+            rec.is_khoi_tao = True
+            ir_seq = rec.env['ir.sequence'].sudo()
+            ir_seq.create({
+                'name':'Mua sách - %s'%(rec.company_id.name),
+                'implementation': 'standard',
+                'code':'muasach.code',
+                'active':True,
+                'company_id':rec.company_id.id,
+                'prefix':'PO',
+                'padding':5,
+                'number_increment':1
+            })
+            ir_seq.create({
+                'name': 'Mã phiếu báo phế - %s'%(rec.company_id.name),
+                'implementation': 'standard',
+                'code': 'baophe.code',
+                'active': True,
+                'company_id': rec.company_id.id,
+                'prefix': 'BP',
+                'padding': 5,
+                'number_increment': 1
+            })
+            ir_seq.create({
+                'name': 'Mã phiếu mượn sách - %s'%(rec.company_id.name),
+                'implementation': 'standard',
+                'code': 'muontrasach.code',
+                'active': True,
+                'company_id': rec.company_id.id,
+                'prefix': 'MT',
+                'padding': 5,
+                'number_increment': 1
+            })
+            ir_seq.create({
+                'name': 'Mã sách - %s'%(rec.company_id.name),
+                'implementation': 'standard',
+                'code': 'masach.code',
+                'active': True,
+                'company_id': rec.company_id.id,
+                'prefix': 'MS',
+                'padding': 5,
+                'number_increment': 1
+            })
+            ir_seq.create({
+                'name': 'Mã độc giả - %s'%(rec.company_id.name),
+                'implementation': 'standard',
+                'code': 'docgia.code',
+                'active': True,
+                'company_id': rec.company_id.id,
+                'prefix': 'DG',
+                'padding': 5,
+                'number_increment': 1
+            })

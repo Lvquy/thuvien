@@ -14,7 +14,7 @@ class MuonTra(models.Model):
                                  domain=lambda self: [('company_id', 'in', [a.id for a in self.env.user.company_ids])])
     ma_doc_gia = fields.Char(string='Mã độc giả', related='nguoi_muon.ma_docgia')
     ngay_muon = fields.Date(string='Ngày mượn', default=datetime.today())
-    han_tra = fields.Date(string='Hạn trả')
+    han_tra = fields.Date(string='Hạn trả', required=True)
     ngay_tra = fields.Date(string='Ngày trả')
     type_phat = fields.Selection([('0', 'Quá hạn'), ('1', 'Hỏng/mất sách'), ('2', 'Khác')], string='Phạt tiền', )
     tien_phat = fields.Integer(string='Tiền phạt (VNĐ)')
@@ -23,7 +23,7 @@ class MuonTra(models.Model):
                              default='new')
     ly_do_phat = fields.Char(string='Lý do phạt')
     danh_sach_muon = fields.One2many(comodel_name='line.muon.tra', inverse_name='ref_muon_tra', string='Danh sách mượn')
-    nhan_vien = fields.Many2one(comodel_name='nhan.vien', string='Nhân viên',
+    nhan_vien = fields.Many2one(comodel_name='nhan.vien', string='Nhân viên', required=True,
                                 domain=lambda self: [('company_id', 'in', [a.id for a in self.env.user.company_ids])])
     company_id = fields.Many2one(
         'res.company', 'Company', index=1, default=lambda self: self.env.user.company_id.id)
@@ -63,6 +63,9 @@ class MuonTra(models.Model):
                     line.serial_no.state = '1'
                 rec.env['sach.doc'].search(
                     [('company_id', 'in', [a.id for a in self.env.user.company_ids])]).sudo().update_qty()
+                BaoCao = self.env['bao.cao'].search(
+                    [('company_id', 'in', [a.id for a in self.env.user.company_ids])]).sudo()
+                BaoCao.update_bao_cao()
             else:
                 raise UserError('Làm mới trình duyệt hoặc chọn sách cần mượn!')
 
@@ -81,6 +84,9 @@ class MuonTra(models.Model):
                     line.is_datra = True
                 rec.env['sach.doc'].search(
                     [('company_id', 'in', [a.id for a in self.env.user.company_ids])]).sudo().update_qty()
+                BaoCao = self.env['bao.cao'].search(
+                    [('company_id', 'in', [a.id for a in self.env.user.company_ids])]).sudo()
+                BaoCao.update_bao_cao()
             else:
                 raise UserError('Làm mới trình duyệt!')
 
@@ -123,4 +129,7 @@ class LineMuonTra(models.Model):
                         rec.ref_muon_tra.nguoi_muon.count_error += 1
                 else:
                     rec.ref_muon_tra.state = '3'
+                BaoCao = self.env['bao.cao'].search(
+                    [('company_id', 'in', [a.id for a in self.env.user.company_ids])]).sudo()
+                BaoCao.update_bao_cao()
             else: raise UserError("Phải xác nhận cho mượn trước!")

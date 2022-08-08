@@ -64,6 +64,15 @@ class Sach(models.Model):
         if vals.get('ma_sach', 'New' == 'New'):
             vals['ma_sach'] = self.env['ir.sequence'].next_by_code('masach.code') or 'New'
             res = super(Sach, self).create(vals)
+        BaoCao = self.env['bao.cao'].search([('company_id', 'in', [a.id for a in self.env.user.company_ids])]).sudo()
+        BaoCao.update_bao_cao()
+        return res
+
+
+    def unlink(self):
+        res = super(Sach, self).unlink()
+        BaoCao = self.env['bao.cao'].search([('company_id', 'in', [a.id for a in self.env.user.company_ids])]).sudo()
+        BaoCao.update_bao_cao()
         return res
 
     def create_serial(self):
@@ -167,6 +176,9 @@ class CreateSerial(models.Model):
                 })
                 rec.ma_sach.next_num += 1
             rec.env['sach.doc'].search([('company_id', 'in', [a.id for a in self.env.user.company_ids])]).sudo().update_qty()
+            BaoCao = self.env['bao.cao'].search(
+                [('company_id', 'in', [a.id for a in self.env.user.company_ids])]).sudo()
+            BaoCao.update_bao_cao()
 
     def cancel(self):
         pass
@@ -203,6 +215,9 @@ class Serial(models.Model):
             'target': 'new',
             'context': "{'default_serial_sach': active_id}"
         }
+
+
+
 class CreateBaoPhe(models.Model):
     _name = 'create.baophe'
     _description = 'Tạo báo phế sách'
@@ -217,14 +232,18 @@ class CreateBaoPhe(models.Model):
 
     def create_baophe_sach(self):
         for rec in self:
+            rec.serial_sach.tinh_trang = 'hong'
             BaoPhe = rec.env['bao.phe']
             BaoPhe.create({
                 'ly_do':rec.ly_do,
                 'danh_sach_phe': rec.serial_sach,
                 'state':'1',
-                'tinh_trang':'hong'
+
             })
             rec.serial_sach.state = '2'
+            BaoCao = self.env['bao.cao'].search(
+                [('company_id', 'in', [a.id for a in self.env.user.company_ids])]).sudo()
+            BaoCao.update_bao_cao()
 
 class DanhMucSach(models.Model):
     _name = 'danh.muc'
