@@ -102,8 +102,6 @@
                     <field name="count_muon_sach"/>
                     <field name="count_error"/>
                     <field name="count_dang_muon"/>
-                    <progressbar field="kieu_the"
-                                 colors='{"planned": "success", "today": "warning", "overdue": "danger"}'/>
                     <templates>
                         <t t-name="kanban-box">
                             <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban">
@@ -126,7 +124,7 @@
                                     <div class="oe_kanban_bottom_right">
                                         <field name="lop_hoc" widget="label_selection"/>
                                         <span> - </span>
-                                        <field name="kieu_the" widget="label_selection"/>
+                                        <field name="kieu_the"  widget="label_selection"/>
                                     </div>
                                     <div class="o_row">
                                         <span class="oe_kanban_partner_links"/>

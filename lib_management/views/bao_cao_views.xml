@@ -7,18 +7,22 @@
             <field name="arch" type="xml">
                 <form string="Báo cáo" create="false" delete="false" edit="false">
                     <header>
-                        <button name="update_bao_cao" string="Update" type="object"/>
+                        <button name="update_bao_cao" string="Cập nhật" type="object" class="btn btn-success"/>
                     </header>
                     <sheet>
                         <h2>Báo cáo thống kê</h2>
                         <group>
-                            <group>
-                                <field name="total_sach"/>
-                                <field name="total_serial"/>
-                                <field name="total_sach_muon"/>
-                                <field name="total_sach_trong_kho"/>
-                                <field name="total_sach_phe"/>
-                                <field name="total_doc_gia"/>
+                            <group class="text-success font-weight-bold">
+                                <field name="date_update" />
+                                <field name="total_sach" />
+                                <field name="total_serial" />
+                                <field name="total_sach_muon" />
+                                <field name="total_sach_trong_kho" />
+                                <field name="total_sach_phe" />
+                                <field name="total_doc_gia" />
+                                <field name="total_giao_vien"/>
+                                <field name="total_hoc_sinh" />
+                                <field name="total_doc_gia_khac" />
                             </group>
                         </group>
                     </sheet>
@@ -31,33 +35,154 @@
             <field name="model">bao.cao</field>
             <field name="arch" type="xml">
                 <tree string="Báo cáo">
+                    <field name="date_update" optional="show"/>
                     <field name="total_sach" optional="show"/>
                     <field name="total_serial" optional="show"/>
                     <field name="total_sach_muon" optional="show"/>
                     <field name="total_sach_trong_kho" optional="show"/>
                     <field name="total_sach_phe" optional="show"/>
                     <field name="total_doc_gia" optional="show"/>
-                    <field name="name" optional="show"/>
+                    <field name="total_giao_vien" optional="show"/>
+                    <field name="total_hoc_sinh" optional="show"/>
+                    <field name="total_doc_gia_khac" optional="show"/>
                     <field name="company_id" optional="hide"/>
                 </tree>
             </field>
         </record>
-<!--        <record model="ir.ui.view" id="view_bao_cao_graph">-->
-<!--            <field name="name">bao.cao.graph</field>-->
-<!--            <field name="model">bao.cao</field>-->
-<!--            <field name="arch" type="xml">-->
-<!--                <graph string="Báo cáo" sample="1">-->
-<!--                    <field name="total_doc_gia"/>-->
-<!--                    <field name="total_sach" type="measure"/>-->
-<!--                </graph>-->
-<!--            </field>-->
-<!--        </record>-->
+
+        <!-- bao cao Kanban View  -->
+        <record model="ir.ui.view" id="view_bao_cao_kanban">
+            <field name="name">bao.cao.kanban</field>
+            <field name="model">bao.cao</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile" sample="1" create="false" colors="blue:id>0;">
+                    <field name="date_update"/>
+                    <field name="total_sach"/>
+                    <field name="total_serial"/>
+                    <field name="total_sach_muon"/>
+                    <field name="total_sach_trong_kho"/>
+                    <field name="total_sach_phe"/>
+                    <field name="total_doc_gia"/>
+                    <field name="total_giao_vien"/>
+                    <field name="total_hoc_sinh"/>
+                    <field name="total_doc_gia_khac"/>
+                    <field name="id"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban">
+                                <div class="text-center oe_kanban_details d-flex flex-column">
+                                    <strong class="o_kanban_record_title oe_partner_heading">
+                                        <h2>
+                                            TỔNG ĐẦU SÁCH
+                                        </h2>
+                                    </strong>
+                                    <div class="o_kanban_tags_section oe_kanban_partner_categories"/>
+                                    <h2>
+                                        <field name="total_sach"/>
+                                    </h2>
+                                </div>
+                            </div>
+
+                            <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban">
+                                <div class="text-center oe_kanban_details d-flex flex-column">
+                                    <strong class="o_kanban_record_title oe_partner_heading">
+                                        <h2>TỔNG SERIAL SÁCH</h2>
+                                    </strong>
+                                    <div class="text-success o_kanban_tags_section oe_kanban_partner_categories"/>
+                                    <h2>
+                                        <field name="total_serial"/>
+                                    </h2>
+                                </div>
+                            </div>
+                            <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban">
+                                <div class="text-center oe_kanban_details d-flex flex-column">
+                                    <strong class="o_kanban_record_title oe_partner_heading">
+                                        <h2>SÁCH ĐANG CHO MƯỢN</h2>
+                                    </strong>
+                                    <div class="text-success o_kanban_tags_section oe_kanban_partner_categories"/>
+                                    <h2>
+                                        <field name="total_sach_muon"/>
+                                    </h2>
+                                </div>
+                            </div>
+                            <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban">
+                                <div class="text-center oe_kanban_details d-flex flex-column">
+                                    <strong class="o_kanban_record_title oe_partner_heading">
+                                        <h2>SÁCH ĐANG TRONG KHO</h2>
+                                    </strong>
+                                    <div class="text-success o_kanban_tags_section oe_kanban_partner_categories"/>
+                                    <h2>
+                                        <field name="total_sach_trong_kho"/>
+                                    </h2>
+                                </div>
+                            </div>
+                            <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban">
+                                <div class="text-center oe_kanban_details d-flex flex-column">
+                                    <strong class="o_kanban_record_title oe_partner_heading">
+                                        <h2>SÁCH ĐÃ BÁO PHẾ</h2>
+                                    </strong>
+                                    <div class="text-success o_kanban_tags_section oe_kanban_partner_categories"/>
+                                    <h2>
+                                        <field name="total_sach_phe"/>
+                                    </h2>
+                                </div>
+                            </div>
+                            <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban">
+                                <div class="text-center oe_kanban_details d-flex flex-column">
+                                    <strong class="o_kanban_record_title oe_partner_heading">
+                                        <h2>TỔNG SỐ ĐỘC GIẢ</h2>
+                                    </strong>
+                                    <div class="text-success o_kanban_tags_section oe_kanban_partner_categories"/>
+                                    <h2>
+                                        <field name="total_doc_gia"/>
+                                    </h2>
+                                </div>
+                            </div>
+                            <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban">
+                                <div class="text-center oe_kanban_details d-flex flex-column">
+                                    <strong class="o_kanban_record_title oe_partner_heading">
+                                        <h2>TỔNG SỐ GIÁO VIÊN</h2>
+                                    </strong>
+                                    <div class="text-success o_kanban_tags_section oe_kanban_partner_categories"/>
+                                    <h2>
+                                        <field name="total_giao_vien"/>
+                                    </h2>
+                                </div>
+                            </div>
+                            <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban">
+                                <div class="text-center oe_kanban_details d-flex flex-column">
+                                    <strong class="o_kanban_record_title oe_partner_heading">
+                                        <h2>TỔNG SỐ HỌC SINH</h2>
+                                    </strong>
+                                    <div class="text-success o_kanban_tags_section oe_kanban_partner_categories"/>
+                                    <h2>
+                                        <field name="total_hoc_sinh"/>
+                                    </h2>
+                                </div>
+                            </div>
+                            <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban">
+                                <div class="text-center oe_kanban_details d-flex flex-column">
+                                    <strong class="o_kanban_record_title oe_partner_heading">
+                                        <h2>TỔNG SỐ ĐỘC GIẢ KHÁC</h2>
+                                    </strong>
+                                    <div class="text-success o_kanban_tags_section oe_kanban_partner_categories"/>
+                                    <h2>
+                                        <field name="total_doc_gia_khac"/>
+                                    </h2>
+                                </div>
+                            </div>
+                        </t>
+
+                    </templates>
+                </kanban>
+            </field>
+        </record>
 
         <!-- action view-->
         <record id="action_view_bao_cao" model="ir.actions.act_window">
             <field name="name">Báo cáo</field>
             <field name="res_model">bao.cao</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">kanban,tree,form</field>
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">
                     Create a new ...

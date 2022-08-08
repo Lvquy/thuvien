@@ -9,7 +9,7 @@
                     <header>
                         <field name="state" widget="statusbar" statusbar_visible="new,1,2"/>
                         <button name="confirm" string="Xác nhận mượn" type="object" class="btn btn-primary"
-                                attrs="{'invisible':[('state', 'in', ('1','2'))]}"/>
+                                attrs="{'invisible':[('state', 'in', ('1','2','3'))]}"/>
                         <button name="return_sach" string="Trả toàn bộ" type="object" class="btn btn-success"
                                 attrs="{'invisible':[('state', 'in', ('new','2','3'))]}"/>
                     </header>
