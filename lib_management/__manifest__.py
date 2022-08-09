@@ -13,7 +13,6 @@
         # security
         'data/thu_vien_security.xml',
         'data/sequence.xml',
-        'data/template.xml',
         'security/groups.xml',
         'security/ir.model.access.csv',
 
@@ -43,6 +42,7 @@
         'report/the_doc_gia.xml',
         'report/gay_sach.xml',
         'report/menu_report.xml',
+        'report/template.xml',
 
 
     ],

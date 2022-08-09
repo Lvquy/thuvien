@@ -6,11 +6,10 @@
             <field name="model">danh.muc</field>
             <field name="arch" type="xml">
                 <form string="Danh mục sách">
-                    <header>
-                    </header>
                     <sheet>
                         <group>
                             <group string="Thông tin">
+                                <field name="ma_ts"/>
                                 <field name="name"/>
                             </group>
                         </group>
@@ -24,6 +23,7 @@
             <field name="model">danh.muc</field>
             <field name="arch" type="xml">
                 <tree string="Danh sách danh mục sach" editable="bottom">
+                    <field name="ma_ts" optional="show"/>
                     <field name="name" optional="show"/>
                     <field name="company_id" optional="hide"/>
                 </tree>
