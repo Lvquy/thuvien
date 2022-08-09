@@ -183,7 +183,6 @@ class CreateSerial(models.Model):
     def cancel(self):
         pass
 
-
 class Serial(models.Model):
     _name = 'serial'
     _rec_name = 'serial_no'
@@ -215,8 +214,6 @@ class Serial(models.Model):
             'target': 'new',
             'context': "{'default_serial_sach': active_id}"
         }
-
-
 
 class CreateBaoPhe(models.Model):
     _name = 'create.baophe'
@@ -251,5 +248,6 @@ class DanhMucSach(models.Model):
     _description = 'Danh mục sách'
 
     name = fields.Char(string='Tên tủ sách')
+    ma_ts = fields.Char(string='Mã tủ sách', required=True)
     company_id = fields.Many2one(
         'res.company', 'Company', index=1, default=lambda self: self.env.user.company_id.id)

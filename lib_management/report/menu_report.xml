@@ -5,8 +5,8 @@
             <field name="name">In thẻ độc giả</field>
             <field name="model">doc.gia</field>
             <field name="report_type">qweb-pdf</field>
-            <field name="report_name">lib_management.report_thedocgia</field>
-            <field name="report_file">lib_management.report_thedocgia</field>
+            <field name="report_name">lib_management.report_the_docgia_document</field>
+            <field name="report_file">lib_management.report_the_docgia_document</field>
             <field name="print_report_name"> '%s' % (object.ma_docgia)</field>
             <field name="binding_model_id" ref="model_doc_gia"/>
             <field name="binding_type">report</field>

@@ -1,18 +1,108 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="report_the_docgia_document">
-        <t t-call="web.external_layout">
-            <h1 class="text-center text-success mb-3">THẺ THƯ VIỆN</h1>
-        </t>
-    </template>
-
-    <template id="report_thedocgia">
-        <t t-call="web.html_container">
+        <t t-call="web.basic_layout">
             <t t-foreach="docs" t-as="doc">
-                <t t-call="lib_management.report_the_docgia_document"/>
+                <t>
+                    <div class="page">
+                        <div class="col-md-6">
+                            <table style="width:243pt; height:153pt; border: 1pt solid black; border-collapse:separate; border-radius:8pt; margin:5pt">
+                                <td style="width:33%;" valign="center">
+                                    <table style="width:77pt; height:150pt">
+                                        <tr style="height:30%">
+                                            <td align="center" valign="center">
+                                                <img t-if="doc.company_id.logo"
+                                                     t-att-src="image_data_uri(doc.company_id.logo)"
+                                                     style="max-height:25pt;max-width:80%"
+                                                     alt="Company Logo"/>
+                                            </td>
+                                        </tr>
+                                        <tr style="height:70%;">
+                                            <td align="center" valign="center">
+                                                <img t-att-src="image_data_uri(doc.img)"
+                                                     style="max-height:85pt;max-width:90%"
+                                                     alt="Doc gia Image"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                <!--  right-->
+                                <td style="width:67%" valign="top">
+                                    <table style="width:155pt; height:85pt">
+                                        <tr>
+                                            <th>
+                                                <div style="font-size:7pt; margin-bottom:0pt;font-family: 'Times New Roman', Times, serif;"
+                                                     align="center">
+                                                    <t t-esc="doc.company_id.dv_chu_quan"/>
+                                                    <br/>
+                                                    <t t-esc="doc.company_id.name"/>
+                                                    <br/>
+                                                    <span>---------*---------</span>
+                                                    <h6 style="color:blue;font-size:12pt;margin-bottom:1pt;font-family: 'Times New Roman', Times, serif;">
+                                                        THẺ THƯ VIỆN
+                                                    </h6>
+                                                    <div t-if="doc.ma_docgia" t-field="doc.ma_docgia"
+                                                         t-options="{'widget': 'barcode', 'width': 400, 'height': 30, 'img_style': 'max-height:50pt;max-width:100%;', 'img_align': 'center'}"/>
+                                                    <t t-esc="doc.ma_docgia"/>
+                                                </div>
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div align="left" style="font-size:6pt;margin-bottom:1pt;">
+                                                    <span>Họ Tên:</span>
+                                                    <t t-esc="doc.name"/>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div align="left" style="font-size:6pt;margin-bottom:1pt;">
+                                                    <span>Lớp:</span>
+                                                    <t t-esc="doc.lop_hoc.name"/>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div align="left" style="font-size:6pt;margin-bottom:1pt;">
+                                                    <span>Ngày làm thẻ:</span>
+                                                    <t t-esc="doc.ngay_tao_the"/>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <div align="left" style="font-size:6pt;margin-bottom:1pt;">
+                                                    <span>Ngày hết hạn:</span>
+                                                    <t t-esc="doc.ngay_het_han"/>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    <div align="right" >
+                                        <table style="margin-right:6pt">
+                                            <tr>
+                                                <td>
+                                                    <div align="center"
+                                                         style="font-size:6pt;margin-bottom:4pt;">
+                                                        <span>Ngày.....tháng....Năm 202....</span>
+                                                        <br/>
+                                                        <span>Hiệu trưởng</span>
+                                                        <br/>
+                                                        <br/>
+                                                        <t t-esc="doc.company_id.hieu_truong"/>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </td>
+                            </table>
+                        </div>
+                    </div>
+                </t>
             </t>
         </t>
     </template>
-
 </odoo>
-
