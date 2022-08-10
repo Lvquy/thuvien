@@ -44,6 +44,7 @@
         'report/gay_sach.xml',
         'report/menu_report.xml',
         'report/template.xml',
+        'report/thong_tin_sach.xml',
 
 
     ],

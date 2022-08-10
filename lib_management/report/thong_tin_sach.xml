@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_thong_tin_sach">
+        <t t-call="web.basic_layout">
+            <t t-foreach="docs" t-as="doc">
+                <table width="100%">
+                    <tr>
+                        <td class="text-center" width="35%">
+                            <t t-esc="doc.company_id.dv_chu_quan"/>
+                            <br/>
+                            <t t-esc="doc.company_id.name"/>
+                        </td>
+                        <td class="text-right">
+                            <img t-if="doc.company_id.logo"
+                                 t-att-src="image_data_uri(doc.company_id.logo)"
+                                 style="max-height:40pt;max-width:80%;margin-top:5pt"
+                                 alt="Company Logo"/>
+                        </td>
+                    </tr>
+                </table>
+
+                <br/>
+                <h2 class="text-center">THÔNG TIN TÀI LIỆU</h2>
+                <div class="page">
+                    <div class="oe_structure"/>
+                    <div class="row mt32 mb32">
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th class="align-middle">#</th>
+                                    <th class="align-middle">Mã sách - Serial</th>
+                                    <th class="align-middle">Tên sách</th>
+                                    <th class="align-middle">Tác giả</th>
+                                    <th class="align-middle">Nhà XB</th>
+                                    <th class="align-middle">Số trang</th>
+                                    <th class="align-middle">Giá bìa</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="stt" t-value="1"/>
+                                <t t-foreach="doc.serial_list" t-as="line">
+                                    <tr >
+                                        <td class="align-middle">
+                                            <t t-esc="stt"/>
+                                            <t t-set="stt" t-value="stt+1"/>
+                                        </td>
+                                        <td class="align-middle">
+                                            <t t-esc="line.serial_no"/>
+                                        </td>
+                                        <td class="align-middle">
+                                            <t t-esc="line.ten_sach"/>
+                                        </td>
+                                        <td class="align-middle">
+                                            <t t-esc="doc.tac_gia.name"/>
+                                        </td>
+                                        <td class="align-middle">
+                                            <t t-esc="doc.nha_xb.name"/>
+                                        </td>
+                                        <td class="align-middle">
+                                            <t t-esc="doc.so_trang"/>
+                                        </td>
+                                        <td class="align-middle">
+                                            <t t-esc="doc.gia_sach"/>
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <p style="page-break-before:always;"></p>
+            </t>
+        </t>
+    </template>
+</odoo>
