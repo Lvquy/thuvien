@@ -58,6 +58,9 @@
                             <page name="page_name" string="Tóm tắt nội dung sách">
                                 <field name="note"/>
                             </page>
+                            <page name="serial_list" string="Serial Sách">
+                                <field name="serial_list"/>
+                            </page>
                         </notebook>
                     </sheet>
                 </form>

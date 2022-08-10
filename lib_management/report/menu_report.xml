@@ -14,12 +14,12 @@
 
         <record id="action_report_gay_sach" model="ir.actions.report">
             <field name="name">In gáy sách</field>
-            <field name="model">serial</field>
+            <field name="model">sach.doc</field>
             <field name="report_type">qweb-pdf</field>
             <field name="report_name">lib_management.report_gaysach</field>
             <field name="report_file">lib_management.report_gaysach</field>
-            <field name="print_report_name"> '%s' % (object.serial_no)</field>
-            <field name="binding_model_id" ref="model_serial"/>
+            <field name="print_report_name"> '%s' % (object.ma_sach)</field>
+            <field name="binding_model_id" ref="model_sach_doc"/>
             <field name="binding_type">report</field>
         </record>
 

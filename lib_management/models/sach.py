@@ -38,6 +38,15 @@ class Sach(models.Model):
     total_qty = fields.Integer(string='Tổng số lượng sách')
     so_luong_huy = fields.Integer(string='Sách đã hủy')
     gia_sach = fields.Integer(string='Giá sách')
+    serial_list =  fields.Many2many(string='Serial sách', comodel_name='serial', compute='compute_serial',
+                                    domain=lambda self: [
+                                        ('company_id', 'in', [a.id for a in self.env.user.company_ids])])
+
+    def compute_serial(self):
+        for rec in self:
+            domain =  ['&',('ma_sach','=',rec.id),('company_id', 'in', [a.id for a in self.env.user.company_ids])]
+            SR = rec.env['serial'].search(domain)
+            rec.serial_list = SR
 
     def update_qty(self):
         print('Update Qty...')
