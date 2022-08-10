@@ -8,7 +8,7 @@
                 <form string="Danh sách Sách">
                     <header>
                         <button name="create_serial" type="object" string="Bổ sung serial cho sách" class="btn btn-primary"/>
-                        <button name="update_qty" type="object" string="F5 Refesh" class="btn btn-primary"/>
+                        <button name="onchange_serial_list" type="object" string="F5 Refesh" class="btn btn-primary"/>
                     </header>
                     <sheet>
                         <div class="oe_button_box" name="button_box">

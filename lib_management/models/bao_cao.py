@@ -112,3 +112,6 @@ class BaoCao(models.Model):
                 'padding': 5,
                 'number_increment': 1
             })
+
+    def unlink(self):
+        raise UserError("Bạn không được xóa báo cáo")

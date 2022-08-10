@@ -84,6 +84,24 @@ class DocGia(models.Model):
         if vals.get('ma_docgia', 'New' == 'New'):
             vals['ma_docgia'] = self.env['ir.sequence'].next_by_code('docgia.code') or 'New'
             res = super(DocGia, self).create(vals)
+            BaoCao = self.env['bao.cao'].search(
+                [('company_id', 'in', [a.id for a in self.env.user.company_ids])]).sudo()
+            BaoCao.update_bao_cao()
+        return res
+
+    def unlink(self):
+        res = super(DocGia, self).unlink()
+        BaoCao = self.env['bao.cao'].search(
+            [('company_id', 'in', [a.id for a in self.env.user.company_ids])]).sudo()
+        BaoCao.update_bao_cao()
+        return res
+
+    def write(self, vals):
+        res = super(DocGia, self).write(vals)
+        if vals.get('kieu_the'):
+            BaoCao = self.env['bao.cao'].search(
+                [('company_id', 'in', [a.id for a in self.env.user.company_ids])]).sudo()
+            BaoCao.update_bao_cao()
         return res
 
 

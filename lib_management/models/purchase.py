@@ -44,8 +44,6 @@ class Purchase(models.Model):
                 if rec.auto_create_serial is True:
                     rec.create_serial()
                 rec.state = 'done'
-                for line in rec.product_lines:
-                    line.ma_sach.update_qty()
                 BaoCao = self.env['bao.cao'].search(
                     [('company_id', 'in', [a.id for a in self.env.user.company_ids])]).sudo()
                 BaoCao.update_bao_cao()

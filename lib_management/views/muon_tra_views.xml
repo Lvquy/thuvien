@@ -13,6 +13,17 @@
                         <button name="return_sach" string="Trả toàn bộ" type="object" class="btn btn-success"
                                 attrs="{'invisible':[('state', 'in', ('new','2','3'))]}"/>
                     </header>
+                    <div class="alert alert-danger text-center o_form_header" role="alert"
+                         attrs="{'invisible':[('is_qua_han', '=', False)]}">
+                        <a class="close" data-dismiss="alert" href="#">x</a>
+                        <div>
+                            <strong>Đã tới ngày trả sách cho đơn này</strong>
+                        </div>
+                        <div>
+                            <field name="han_tra" readonly="1"/>
+                        </div>
+                    </div>
+                    <br/>
                     <sheet>
                         <div class="oe_title">
                             <h1>
@@ -25,6 +36,7 @@
                                        options="{'no_create': True , 'no_quick_create': True}"
                                        attrs="{'readonly':[('state', '!=', ('new'))]}"
                                 />
+                                <field name="is_qua_han" invisible="1"/>
                                 <field name="ma_doc_gia"/>
                                 <field name="total_qty"/>
                                 <field name="ngay_muon" attrs="{'readonly':[('state', '!=', ('new'))]}"/>
@@ -36,8 +48,10 @@
                             <group string="Trả sách">
                                 <field name="ngay_tra" attrs="{'readonly':[('state', '=', ('2'))]}"/>
                                 <field name="type_phat" attrs="{'readonly':[('state', 'in', ('2'))]}"/>
-                                <field name="tien_phat" attrs="{'readonly':[('state','in',('2'))],'invisible':[('type_phat', '=', False)]}"/>
-                                <field name="ly_do_phat" attrs="{'readonly':[('state','in',('2'))],'invisible':[('type_phat', 'in', ('0','1',False))]}"/>
+                                <field name="tien_phat"
+                                       attrs="{'readonly':[('state','in',('2'))],'invisible':[('type_phat', '=', False)]}"/>
+                                <field name="ly_do_phat"
+                                       attrs="{'readonly':[('state','in',('2'))],'invisible':[('type_phat', 'in', ('0','1',False))]}"/>
                             </group>
                         </group>
                         <notebook>
@@ -56,18 +70,19 @@
             <field name="name">muon.tra.tree</field>
             <field name="model">muon.tra</field>
             <field name="arch" type="xml">
-                <tree string="Danh sách mượn trả sách"  decoration-primary="state=='1'" decoration-info="state=='2'">
+                <tree string="Danh sách mượn trả sách" decoration-primary="state=='1'" decoration-info="state=='2'">
                     <field name="no" optional="show"/>
                     <field name="nguoi_muon" optional="show"/>
                     <field name="ngay_muon" optional="show"/>
-                    <field name="han_tra" optional="show"/>
+                    <field name="han_tra" optional="show" decoration-danger="is_qua_han == True"/>
                     <field name="ngay_tra" optional="show"/>
                     <field name="type_phat" optional="show" decoration-danger="type_phat in ('0','1','2')"/>
-                    <field name="tien_phat" optional="show" sum = "Tổng"/>
-                    <field name="total_qty" optional="show" sum = "Tổng"/>
+                    <field name="tien_phat" optional="show" sum="Tổng"/>
+                    <field name="total_qty" optional="show" sum="Tổng"/>
                     <field name="note" optional="hide"/>
                     <field name="state" optional="show"/>
                     <field name="nhan_vien" optional="show"/>
+                    <field name="is_qua_han" optional="hide" />
                     <field name="company_id" optional="hide"/>
                 </tree>
             </field>
@@ -94,7 +109,7 @@
                     <sheet>
                         <group>
                             <group string="Chi tiết">
-                                <field name="serial_no" domain="[('state','=','0')]" />
+                                <field name="serial_no" domain="[('state','=','0')]"/>
                                 <field name="name"/>
                                 <field name="ke_sach"/>
                                 <field name="state"/>
@@ -111,7 +126,8 @@
             <field name="model">line.muon.tra</field>
             <field name="arch" type="xml">
                 <tree string="Danh sách mượn trả" editable="bottom">
-                    <field name="serial_no" optional="show" domain="[('state','=','0')]" options="{'no_create': True , 'no_quick_create': True}"/>
+                    <field name="serial_no" optional="show" domain="[('state','=','0')]"
+                           options="{'no_create': True , 'no_quick_create': True}"/>
                     <field name="name" optional="show"/>
                     <field name="ke_sach" optional="show"/>
                     <field name="state" optional="show"/>

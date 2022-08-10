@@ -115,6 +115,9 @@
                 <filter string="Bản nháp" name="state" domain="[('state','=','new')]"/>
                 <filter string="Đang mượn" name="state_1" domain="[('state','=','1')]"/>
                 <filter string="Đã trả" name="state_2" domain="[('state','=','2')]"/>
+                <filter string="Quá hạn trả" name="han_tra_err"
+                        domain="[('han_tra', '&lt;=', datetime.datetime.combine(context_today(), datetime.time(0,0,0))),
+                               ('han_tra', '&lt;=', datetime.datetime.combine(context_today(), datetime.time(23,59,59)))]"/>
                 <group expand="0" string="Group By">
                     <filter string="Độc giả" name="nguoi_muon" domain="[]" context="{'group_by': 'nguoi_muon'}"/>
                     <filter string="Ngày mượn" name="ngay_muon" domain="[]" context="{'group_by': 'ngay_muon'}"/>

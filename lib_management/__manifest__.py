@@ -12,7 +12,8 @@
     'data': [
         # security
         'data/thu_vien_security.xml',
-        'data/sequence.xml',
+        # 'data/sequence.xml',
+        'data/cron_job.xml',
         'security/groups.xml',
         'security/ir.model.access.csv',
 
