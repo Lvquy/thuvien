@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 {
-    'name': 'Sach',
+    'name': 'Thư Viện Minh Nghĩa',
     'version': '1',
     'category': 'lib management',
     'live_test_url': '#',

@@ -1,18 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <template id="report_gaysach_document">
-        <t t-call="web.external_layout">
-            <h1 class="text-center text-success mb-3">GÁY SÁCH</h1>
-        </t>
-    </template>
-
     <template id="report_gaysach">
-        <t t-call="web.html_container">
+        <t t-call="web.basic_layout">
             <t t-foreach="docs" t-as="doc">
-                <t t-call="lib_management.report_gaysach_document"/>
+                <div class="page">
+                    <div class="row">
+                        <table class="table">
+                            <t t-foreach="doc.serial_list" t-as="sr">
+                                <tr>
+                                    <t t-foreach="2" t-as="num">
+                                        <td>
+                                            <t t-esc="sr.ma_sach.danh_muc_sach.ma_ts"/>
+                                        </td>
+                                        <td>
+                                            <t t-esc="sr.serial_no"/>
+                                        </td>
+                                    </t>
+                                </tr>
+                            </t>
+                        </table>
+                    </div>
+                </div>
             </t>
         </t>
     </template>
-
 </odoo>
-
