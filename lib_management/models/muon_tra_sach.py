@@ -29,6 +29,18 @@ class MuonTra(models.Model):
         'res.company', 'Company', index=1, default=lambda self: self.env.user.company_id.id)
     note = fields.Text(string='Ghi chú')
     total_qty = fields.Integer(string='Tổng số sách mượn', readonly=True, compute='onchange_qty')
+    is_qua_han = fields.Boolean(string='Đã quá hạn trả', default=False, readonly=True, compute='_compute_is_qua_han')
+
+    @api.depends('han_tra')
+    def _compute_is_qua_han(self):
+        for rec in self:
+            print('Update is_qua_han')
+            is_qua_han = False
+            if rec.han_tra:
+                today = datetime.today()
+                if today.day >= rec.han_tra.day and today.month >= rec.han_tra.month and today.year >= rec.han_tra.year:
+                    is_qua_han = True
+            rec.is_qua_han = is_qua_han
 
     @api.onchange('danh_sach_muon')
     def onchange_qty(self):
@@ -50,7 +62,7 @@ class MuonTra(models.Model):
             res = 0
             for line in rec.danh_sach_muon:
                 if line.is_datra == False:
-                    res +=1
+                    res += 1
         return res
 
     def confirm(self):
@@ -61,8 +73,6 @@ class MuonTra(models.Model):
                 for line in rec.danh_sach_muon:
                     line.serial_no.nguoi_muon = rec.nguoi_muon
                     line.serial_no.state = '1'
-                rec.env['sach.doc'].search(
-                    [('company_id', 'in', [a.id for a in self.env.user.company_ids])]).sudo().update_qty()
                 BaoCao = self.env['bao.cao'].search(
                     [('company_id', 'in', [a.id for a in self.env.user.company_ids])]).sudo()
                 BaoCao.update_bao_cao()
@@ -82,8 +92,6 @@ class MuonTra(models.Model):
                     line.serial_no.nguoi_muon = False
                     line.serial_no.state = '0'
                     line.is_datra = True
-                rec.env['sach.doc'].search(
-                    [('company_id', 'in', [a.id for a in self.env.user.company_ids])]).sudo().update_qty()
                 BaoCao = self.env['bao.cao'].search(
                     [('company_id', 'in', [a.id for a in self.env.user.company_ids])]).sudo()
                 BaoCao.update_bao_cao()
@@ -93,6 +101,7 @@ class MuonTra(models.Model):
     def check_return_done(self):
         for rec in self:
             return rec.update_count_dang_muon() == 0
+
 
 class LineMuonTra(models.Model):
     _name = 'line.muon.tra'
@@ -116,14 +125,13 @@ class LineMuonTra(models.Model):
 
     def tra_1phan(self):
         for rec in self:
-            if rec.ref_muon_tra.state in ('1','3'):
+            if rec.ref_muon_tra.state in ('1', '3'):
                 rec.serial_no.state = '0'
-                rec.serial_no.ma_sach.update_qty()
                 rec.is_datra = True
                 rec.ref_muon_tra.nguoi_muon.count_dang_muon -= 1
                 if rec.ref_muon_tra.check_return_done() == True:
                     rec.ref_muon_tra.state = '2'
-                    rec.ref_muon_tra.nguoi_muon.count_muon_sach +=1
+                    rec.ref_muon_tra.nguoi_muon.count_muon_sach += 1
                     rec.ref_muon_tra.ngay_tra = datetime.today()
                     if rec.ref_muon_tra.type_phat in ('0', '1', '2'):
                         rec.ref_muon_tra.nguoi_muon.count_error += 1
@@ -132,4 +140,5 @@ class LineMuonTra(models.Model):
                 BaoCao = self.env['bao.cao'].search(
                     [('company_id', 'in', [a.id for a in self.env.user.company_ids])]).sudo()
                 BaoCao.update_bao_cao()
-            else: raise UserError("Phải xác nhận cho mượn trước!")
+            else:
+                raise UserError("Phải xác nhận cho mượn trước!")

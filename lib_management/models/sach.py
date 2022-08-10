@@ -33,39 +33,37 @@ class Sach(models.Model):
                                         ('company_id', 'in', [a.id for a in self.env.user.company_ids])])
     ma_sach = fields.Char(string='Mã sách', readonly=True, default=lambda self: 'New')
     next_num = fields.Integer(string='Số serial tiếp theo', default=1, readonly=True)
-    so_luong = fields.Integer(string='Số lượng trong kho')
-    so_luong_muon = fields.Integer(string='Số lượng đang cho mượn')
-    total_qty = fields.Integer(string='Tổng số lượng sách')
-    so_luong_huy = fields.Integer(string='Sách đã hủy')
+    so_luong = fields.Integer(string='Số lượng trong kho',compute='onchange_serial_list')
+    so_luong_muon = fields.Integer(string='Số lượng đang cho mượn',compute='onchange_serial_list')
+    total_qty = fields.Integer(string='Tổng số lượng sách', compute='onchange_serial_list')
+    so_luong_huy = fields.Integer(string='Sách đã hủy',compute='onchange_serial_list')
     gia_sach = fields.Integer(string='Giá sách')
     serial_list =  fields.Many2many(string='Serial sách', comodel_name='serial', compute='compute_serial',
                                     domain=lambda self: [
                                         ('company_id', 'in', [a.id for a in self.env.user.company_ids])])
+
+    def onchange_serial_list(self):
+        for rec in self:
+            rec.total_qty = 0
+            rec.so_luong = 0
+            rec.so_luong_muon = 0
+            rec.so_luong_huy = 0
+            print('update qty...')
+            for i in rec.serial_list:
+                rec.total_qty +=1
+                if i.state == '0':
+                    rec.so_luong +=1
+                if i.state == '1':
+                    rec.so_luong_muon +=1
+                if i.state == '2':
+                    rec.so_luong_huy +=1
+
 
     def compute_serial(self):
         for rec in self:
             domain =  ['&',('ma_sach','=',rec.id),('company_id', 'in', [a.id for a in self.env.user.company_ids])]
             SR = rec.env['serial'].search(domain)
             rec.serial_list = SR
-
-    def update_qty(self):
-        print('Update Qty...')
-        for rec in self:
-            rec.so_luong_huy = rec.env['serial'].search_count(['&',
-                                                               ('ma_sach', '=', rec.ma_sach),
-                                                               ('state', '=', '2'),
-                                                               ('company_id', 'in',[a.id for a in self.env.user.company_ids])])
-            rec.so_luong_muon = rec.env['serial'].search_count(['&',
-                                                                ('ma_sach', '=', rec.ma_sach),
-                                                                ('state', '=', '1'),
-                                                                ('company_id', 'in',[a.id for a in self.env.user.company_ids])])
-            rec.so_luong = rec.env['serial'].search_count(['&',
-                                                           ('ma_sach', '=', rec.ma_sach),
-                                                           ('state', '=', '0'),
-                                                           ('company_id', 'in', [a.id for a in self.env.user.company_ids])])
-            rec.total_qty = rec.env['serial'].search_count(['&',
-                                                            ('ma_sach', '=', rec.ma_sach),
-                                                            ('company_id', 'in', [a.id for a in self.env.user.company_ids])])
 
     @api.model
     def create(self, vals):
@@ -184,7 +182,6 @@ class CreateSerial(models.Model):
                     'serial_no': str(rec.ma_sach.ma_sach) + '-' + str(rec.next_num)
                 })
                 rec.ma_sach.next_num += 1
-            rec.env['sach.doc'].search([('company_id', 'in', [a.id for a in self.env.user.company_ids])]).sudo().update_qty()
             BaoCao = self.env['bao.cao'].search(
                 [('company_id', 'in', [a.id for a in self.env.user.company_ids])]).sudo()
             BaoCao.update_bao_cao()
@@ -223,6 +220,13 @@ class Serial(models.Model):
             'target': 'new',
             'context': "{'default_serial_sach': active_id}"
         }
+
+    def unlink(self):
+        res = super(Serial, self).unlink()
+        BaoCao = self.env['bao.cao'].search(
+            [('company_id', 'in', [a.id for a in self.env.user.company_ids])]).sudo()
+        BaoCao.update_bao_cao()
+        return res
 
 class CreateBaoPhe(models.Model):
     _name = 'create.baophe'

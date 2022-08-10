@@ -13,7 +13,7 @@
                                             <td align="center" valign="center">
                                                 <img t-if="doc.company_id.logo"
                                                      t-att-src="image_data_uri(doc.company_id.logo)"
-                                                     style="max-height:25pt;max-width:80%"
+                                                     style="max-height:25pt;max-width:80%;margin-top:5pt"
                                                      alt="Company Logo"/>
                                             </td>
                                         </tr>
