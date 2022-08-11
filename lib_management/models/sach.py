@@ -194,7 +194,7 @@ class Serial(models.Model):
     _name = 'serial'
     _rec_name = 'serial_no'
     _description = 'Serial Sách'
-    _order = "id desc"
+    _order = "id,ma_sach,serial_no asc"
 
     serial_no = fields.Char(string='Serial sách duy nhất', default=lambda self: 'New', readonly=True)
     ma_sach = fields.Many2one(string='Mã sách', comodel_name='sach.doc',
