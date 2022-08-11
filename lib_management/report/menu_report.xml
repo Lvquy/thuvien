@@ -34,5 +34,16 @@
             <field name="binding_type">report</field>
         </record>
 
+        <record id="action_report_phieu_muon_sach" model="ir.actions.report">
+            <field name="name">In phiếu mượn sách</field>
+            <field name="model">muon.tra</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">lib_management.report_phieu_muon_aciton</field>
+            <field name="report_file">lib_management.report_phieu_muon_aciton</field>
+            <field name="print_report_name"> '%s' % (object.no)</field>
+            <field name="binding_model_id" ref="model_muon_tra"/>
+            <field name="binding_type">report</field>
+        </record>
+
     </data>
 </odoo>

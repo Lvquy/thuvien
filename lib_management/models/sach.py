@@ -9,6 +9,7 @@ class Sach(models.Model):
     _rec_name = 'ma_sach'
     _order = 'id desc'
     _description = 'Sách thư viện'
+    _order = "id desc"
 
     name = fields.Char(string='Tên sách')
     img = fields.Binary(string='Hình ảnh')
@@ -193,6 +194,7 @@ class Serial(models.Model):
     _name = 'serial'
     _rec_name = 'serial_no'
     _description = 'Serial Sách'
+    _order = "id desc"
 
     serial_no = fields.Char(string='Serial sách duy nhất', default=lambda self: 'New', readonly=True)
     ma_sach = fields.Many2one(string='Mã sách', comodel_name='sach.doc',

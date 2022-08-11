@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_phieu_muon">
+        <t t-call="web.basic_layout">
+            <t t-foreach="docs" t-as="doc">
+                <div class="text-center">
+                    <t t-esc="doc.company_id.dv_chu_quan"/>
+                    <br/>
+                    <t t-esc="doc.company_id.name"/>
+                </div>
+                <p class="text-center font-weight-bold">Phiếu mượn sách #
+                    <span t-esc="doc.no"/>
+                </p>
+                <t>
+                    <div>
+                        <span>Người mượn:</span>
+                        <span t-field="doc.nguoi_muon.name"/>
+                    </div>
+
+                    <div>
+                        <span>Mã độc giả:</span>
+                        <span t-field="doc.ma_doc_gia"/>
+                    </div>
+
+                    <div>
+                        <span>Ngày mượn:</span>
+                        <span t-field="doc.ngay_muon"/>
+                    </div>
+
+                    <div>
+                        <span>Hạn trả:</span>
+                        <span t-field="doc.han_tra"/>
+                    </div>
+
+                    <div>
+                        <span>Nhân viên:</span>
+                        <span t-field="doc.nhan_vien.name"/>
+                    </div>
+                </t>
+                <table class="table table-striped">
+                    <thead>
+                        <tr class="text-center ">
+                            <th scope="col">#</th>
+                            <th scope="col">Serial</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-set="stt" t-value="1"/>
+                        <t t-foreach="doc.danh_sach_muon" t-as="line">
+                            <tr class="text-center ">
+                                <th scope="row" class="align-middle">
+                                    <t t-esc="stt"/>
+                                    <t t-set="stt" t-value="stt+1"/>
+                                </th>
+                                <td class="align-middle">
+                                    <t t-esc="line.serial_no.serial_no"/>
+                                </td>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+                <p style="page-break-before:always;"></p>
+            </t>
+        </t>
+    </template>
+
+    <template id="report_phieu_muon_aciton">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="doc">
+                <t t-call="lib_management.report_phieu_muon"/>
+            </t>
+        </t>
+    </template>
+</odoo>

@@ -8,6 +8,7 @@ class BaoPhe(models.Model):
     _name = 'bao.phe'
     _rec_name = 'name'
     _description = 'Báo phế sách'
+    _order = "id desc"
 
     name = fields.Char(string='Mã phiếu', default=lambda self: 'New', readonly=True)
     company_id = fields.Many2one(

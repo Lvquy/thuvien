@@ -8,6 +8,7 @@ class KeKho(models.Model):
     _name = 'ke.kho'
     _rec_name = 'name'
     _description = 'Kệ kho để sách'
+    _order = "id desc"
 
 
     name = fields.Char(string='Tên kệ')

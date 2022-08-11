@@ -8,6 +8,7 @@ class NhanVien(models.Model):
     _name = 'nhan.vien'
     _rec_name = 'name'
     _description = 'Nhân viên thư viện'
+    _order = "id desc"
 
     name = fields.Char(string='Tên nhân viên')
     img = fields.Binary(string='Hình ảnh')

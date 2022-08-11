@@ -8,6 +8,7 @@ class TheLoai(models.Model):
     _name = 'the.loai'
     _rec_name = 'name'
     _description = 'Thể loại'
+    _order = "id desc"
 
     name = fields.Char(string='Thể loại')
     company_id = fields.Many2one(

@@ -8,6 +8,7 @@ class Purchase(models.Model):
     _name = 'mua.sach'
     _rec_name = 'name'
     _description = 'Mua sách'
+    _order = "id desc"
 
     name = fields.Char(string='Mã phiếu', readonly=True, default=lambda self: 'New')
     ngay_mua = fields.Date(string='Ngày mua', default=datetime.today())
