@@ -11,9 +11,9 @@
                   sequence="2" groups="base.group_system,lib_management.group_lib_management"/>
         <menuitem id="menu_sub_the_loai" name="Thể loại sách" parent="menu_settings" action="action_view_the_loai"
                   sequence="3" groups="base.group_system,lib_management.group_lib_management"/>
-        <menuitem id="menu_sub_nhan_vien" name="Nhân viên" parent="menu_settings" action="action_view_nhan_vien"
-                  sequence="4" groups="base.group_system,lib_management.group_lib_management"/>
         <menuitem id="menu_sub_phong_ban" name="Phòng ban" parent="menu_settings" action="action_view_phong_ban"
+                  sequence="4" groups="base.group_system,lib_management.group_lib_management"/>
+        <menuitem id="menu_sub_nhan_vien" name="Nhân viên" parent="menu_settings" action="action_view_nhan_vien"
                   sequence="5" groups="base.group_system,lib_management.group_lib_management"/>
         <menuitem id="menu_sub_danh_muc" name="Tủ sách" parent="menu_settings" action="action_view_danh_muc"
                   sequence="6" groups="base.group_system,lib_management.group_lib_management"/>

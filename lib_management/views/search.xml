@@ -56,7 +56,7 @@
                 <filter string="Đang cho mượn" name="state_1" domain="[('state','=','1')]"/>
                 <filter string="Phế phẩm" name="state_2" domain="[('state','=','2')]"/>
                 <group expand="0" string="Group By">
-                    <filter string="Mã sách" name="ma_sach" domain="[]" context="{'group_by': 'ma_sach'}"/>
+                    <filter string="Mã sách" name="ma_sach_gr" domain="[]" context="{'group_by': 'ma_sach'}"/>
                     <filter string="Tình trạng" name="tinh_trang" domain="[]" context="{'group_by': 'tinh_trang'}"/>
                     <filter string="Trạng thái" name="state" domain="[]" context="{'group_by': 'state'}"/>
                     <filter string="Người mượn" name="nguoi_muon" domain="[]" context="{'group_by': 'nguoi_muon'}"/>
