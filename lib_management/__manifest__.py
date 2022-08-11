@@ -35,6 +35,7 @@
         'views/bao_phe_views.xml',
         'views/bao_cao_views.xml',
         'views/res_users.xml',
+        'views/document.xml',
 
 
         #menu

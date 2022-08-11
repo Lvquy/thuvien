@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="document_form" model="ir.ui.view">
+            <field name="name">document.form</field>
+            <field name="model">document</field>
+            <field name="arch" type="xml">
+                <form string="Document">
+                    <header>
+                        <button name="confirm" type="object" string="Xác nhận" attrs="{'invisible':[('state', 'in', '1')]}"
+                        groups="base.group_system"/>
+                        <button name="unconfirm" type="object" string="Hủy Xác nhận" attrs="{'invisible':[('state', 'in', '0')]}"
+                        groups="base.group_system"/>
+                        <field name="state" widget="statusbar" statusbar_visible="0,1" />
+                    </header>
+                    <sheet>
+                        <group>
+                            <group string="Thông tin">
+                                <field name="name" attrs="{'readonly':[('state', 'in', ('1'))]}"/>
+                                <field name="create_date" attrs="{'readonly':[('state', 'in', ('1'))]}"/>
+                                <field name="author"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Chi tiết">
+                                <field name="body" attrs="{'readonly':[('state', 'in', ('1'))]}"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="document_tree" model="ir.ui.view">
+            <field name="name">document.tree</field>
+            <field name="model">document</field>
+            <field name="arch" type="xml">
+                <tree string="Document">
+                    <field name="name" optional="show"/>
+                    <field name="author" optional="show"/>
+                    <field name="create_date" optional="show"/>
+                    <field name="state" optional="hide"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- action view-->
+        <record id="action_view_document" model="ir.actions.act_window">
+            <field name="name">Tài liệu hướng dẫn sử dụng</field>
+            <field name="res_model">document</field>
+            <field name="view_mode">tree,form</field>
+            <field name="help" type="html">
+                <p class="o_view_nocontent_smiling_face">
+                    Create a new ...
+                </p>
+            </field>
+        </record>
+    </data>
+</odoo>
+
