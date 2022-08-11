@@ -11,17 +11,21 @@
                                     <table style="width:77pt; height:150pt">
                                         <tr style="height:30%">
                                             <td align="center" valign="center">
-                                                <img t-if="doc.company_id.logo"
+                                                <t t-if="doc.company_id.logo">
+                                                    <img t-if="doc.company_id.logo"
                                                      t-att-src="image_data_uri(doc.company_id.logo)"
                                                      style="max-height:25pt;max-width:80%;margin-top:5pt"
                                                      alt="Company Logo"/>
+                                                </t>
                                             </td>
                                         </tr>
                                         <tr style="height:70%;">
                                             <td align="center" valign="center">
-                                                <img t-att-src="image_data_uri(doc.img)"
+                                                <t t-if="doc.img">
+                                                    <img t-att-src="image_data_uri(doc.img)"
                                                      style="max-height:85pt;max-width:90%"
                                                      alt="Doc gia Image"/>
+                                                </t>
                                             </td>
                                         </tr>
                                     </table>
