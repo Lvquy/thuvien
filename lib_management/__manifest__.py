@@ -36,6 +36,7 @@
         'views/bao_cao_views.xml',
         'views/res_users.xml',
         'views/document.xml',
+        'views/checkin.xml',
 
 
         #menu

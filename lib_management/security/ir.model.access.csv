@@ -62,3 +62,6 @@ access_lib_management_create_baophe_user,create.baophe.user,model_create_baophe,
 
 access_lib_management_document_root,document.root,model_document,base.group_system,1,1,1,1
 access_lib_management_document_user,document.user,model_document,lib_management.group_lib_management,1,0,0,0
+
+access_lib_management_check_in_root,check.in.root,model_check_in,base.group_system,1,1,1,1
+access_lib_management_check_in_user,check.in.user,model_check_in,lib_management.group_lib_management,1,1,1,1

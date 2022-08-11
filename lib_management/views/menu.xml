@@ -17,8 +17,10 @@
                   sequence="5" groups="base.group_system,lib_management.group_lib_management"/>
         <menuitem id="menu_sub_danh_muc" name="Tủ sách" parent="menu_settings" action="action_view_danh_muc"
                   sequence="6" groups="base.group_system,lib_management.group_lib_management"/>
-        <menuitem id="menu_sub_document" name="Tài liệu hướng dẫn" parent="menu_settings" action="action_view_document"
+        <menuitem id="menu_sub_lop_hoc" name="Lớp Học" parent="menu_settings" action="action_view_lop_hoc"
                   sequence="7" groups="base.group_system,lib_management.group_lib_management"/>
+        <menuitem id="menu_sub_document" name="Tài liệu hướng dẫn" parent="menu_settings" action="action_view_document"
+                  sequence="8" groups="base.group_system,lib_management.group_lib_management"/>
 
 
     </data>

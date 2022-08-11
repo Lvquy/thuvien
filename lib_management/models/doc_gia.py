@@ -6,7 +6,7 @@ from odoo.exceptions import UserError
 
 class DocGia(models.Model):
     _name = 'doc.gia'
-    _rec_name = 'name'
+    _rec_name = 'ma_docgia'
     _description = 'Độc giả'
     _order = "id desc"
 
@@ -30,6 +30,18 @@ class DocGia(models.Model):
     count_error = fields.Integer(string='Số lần quá hạn/hỏng sách',
                                  help='Là số lần độc giả trả sách quá hạn hoặc làm hỏng sách, mất sách...')
     count_dang_muon = fields.Integer(string='Sách đang mượn')
+    count_checkin = fields.Integer(string='Số lần điểm danh', readonly=True, compute='_compute_checkin')
+    diem_danh = fields.One2many(comodel_name='check.in', inverse_name='ma_docgia', string='Điểm danh')
+
+    def none(self):
+        # nothing action
+        pass
+
+    def _compute_checkin(self):
+        for rec in self:
+            rec.count_checkin = 0
+            for line in rec.diem_danh:
+                rec.count_checkin +=1
 
     # tong so lan da muon
     def action_view_muon_sach(self, context=None):
@@ -112,5 +124,16 @@ class LopHoc(models.Model):
     _description = 'Lớp học'
 
     name = fields.Char(string='Tên lớp')
+    company_id = fields.Many2one(
+        'res.company', 'Company', index=1, default=lambda self: self.env.user.company_id.id)
+
+class Checkin(models.Model):
+    _name = 'check.in'
+    _rec_name = 'ma_docgia'
+    _description = 'Điểm danh độc giả'
+    _order = 'id desc'
+
+    date_checkin = fields.Datetime(string='Ngày vào thư viện', default=datetime.today())
+    ma_docgia = fields.Many2one(comodel_name='doc.gia', string='Mã độc giả', domain =lambda self:[('company_id', 'in', [a.id for a in self.env.user.company_ids])])
     company_id = fields.Many2one(
         'res.company', 'Company', index=1, default=lambda self: self.env.user.company_id.id)

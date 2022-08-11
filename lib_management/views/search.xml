@@ -72,8 +72,8 @@
         <field name="priority" eval="15"/>
         <field name="arch" type="xml">
             <search string="Search Độc giả">
-                <field name="name"/>
                 <field name="ma_docgia"/>
+                <field name="name"/>
                 <field name="mobile"/>
                 <field name="gioi_tinh"/>
                 <field name="nam_sinh"/>

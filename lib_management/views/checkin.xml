@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="check_in_form" model="ir.ui.view">
+            <field name="name">check.in.form</field>
+            <field name="model">check.in</field>
+            <field name="arch" type="xml">
+                <form string="Điểm danh">
+                    <sheet>
+                        <group>
+                            <group string="Thông tin">
+                                <field name="date_checkin"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="checkin_tree" model="ir.ui.view">
+            <field name="name">check.in.tree</field>
+            <field name="model">check.in</field>
+            <field name="arch" type="xml">
+                <tree string="Điểm danh" editable="bottom">
+                    <field name="date_checkin" optional="show"/>
+                    <field name="ma_docgia" optional="hide"/>
+                    <field name="company_id" optional="hide"/>
+                </tree>
+            </field>
+        </record>
+    </data>
+</odoo>
+

@@ -10,6 +10,10 @@
                     </header>
                     <sheet>
                         <div class="oe_button_box" name="button_box">
+                            <button name="none" type="object"
+                                    class="oe_stat_button" icon="fa-cubes">
+                                <field name="count_checkin" widget="statinfo" string="Số lần điểm danh"/>
+                            </button>
                             <button name="action_view_muon_sach" type="object"
                                     class="oe_stat_button" icon="fa-cubes">
                                 <field name="count_muon_sach" widget="statinfo" string="Số lần đã mượn sách"/>
@@ -54,8 +58,10 @@
                             <page name="thongtin" string="Thông tin thêm">
                                 <field name="note"/>
                             </page>
+                            <page name="diem_danh_page" string="Điểm danh">
+                                <field name="diem_danh"/>
+                            </page>
                         </notebook>
-
                     </sheet>
                 </form>
             </field>
@@ -73,8 +79,9 @@
                     <field name="ngay_tao_the" optional="show"/>
                     <field name="ngay_het_han" optional="show"/>
                     <field name="mobile" optional="show"/>
-                    <field name="nam_sinh" optional="show"/>
-                    <field name="gioi_tinh" optional="show"/>
+                    <field name="count_checkin" optional="show"/>
+                    <field name="nam_sinh" optional="hide"/>
+                    <field name="gioi_tinh" optional="hide"/>
                     <field name="dia_chi" optional="hide"/>
                     <field name="company_id" optional="hide"/>
                 </tree>
@@ -102,6 +109,7 @@
                     <field name="count_muon_sach"/>
                     <field name="count_error"/>
                     <field name="count_dang_muon"/>
+                    <field name="count_checkin"/>
                     <templates>
                         <t t-name="kanban-box">
                             <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban">
@@ -112,22 +120,37 @@
                                 </t>
                                 <div class="oe_kanban_details d-flex flex-column">
                                     <strong class="o_kanban_record_title oe_partner_heading">
-                                        <strong><field name="name"/></strong>
+                                        <strong>
+                                            <field name="name"/>
+                                        </strong>
                                     </strong>
                                     <div class="o_kanban_tags_section oe_kanban_partner_categories"/>
                                     <ul>
-                                        <li><strong><field name="ma_docgia"/></strong></li>
-                                        <li>SĐT:<field name="mobile"/></li>
-                                        <li>Số lần đã mượn:<field name="count_muon_sach"/></li>
-                                        <li>Sách đang mượn:<field name="count_dang_muon"/></li>
+                                        <li>
+                                            <strong>
+                                                <field name="ma_docgia"/>
+                                            </strong>
+                                        </li>
+                                        <li>SĐT:
+                                            <field name="mobile"/>
+                                        </li>
+                                        <li>Số lần đã mượn:
+                                            <field name="count_muon_sach"/>
+                                        </li>
+                                        <li>Sách đang mượn:
+                                            <field name="count_dang_muon"/>
+                                        </li>
                                     </ul>
                                     <div class="oe_kanban_bottom_right">
-                                        <field name="lop_hoc" widget="label_selection"/>
-                                        <span> - </span>
-                                        <field name="kieu_the"  widget="label_selection"/>
-                                    </div>
-                                    <div class="o_row">
-                                        <span class="oe_kanban_partner_links"/>
+                                        <t t-if="record.lop_hoc.value != false">
+                                            <field name="lop_hoc" widget="label_selection"/>
+                                            <span>-</span>
+                                        </t>
+                                        <t t-if="record.kieu_the.value != false">
+                                            <field name="kieu_the" widget="label_selection"/>
+                                            <span>-</span>
+                                        </t>
+                                        <field name="count_checkin" widget="label_selection"/>
                                     </div>
                                 </div>
                             </div>
@@ -195,8 +218,6 @@
         <menuitem id="menu_sub_doc_gia" name="Danh sách độc giả" parent="menu_doc_gia" action="action_view_doc_gia"
                   sequence="1" groups="base.group_system,lib_management.group_lib_management"/>
 
-        <menuitem id="menu_sub_lop_hoc" name="Lớp Học" parent="menu_doc_gia" action="action_view_lop_hoc"
-                  sequence="1" groups="base.group_system,lib_management.group_lib_management"/>
     </data>
 </odoo>
 
