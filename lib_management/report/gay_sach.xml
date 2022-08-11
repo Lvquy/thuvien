@@ -8,19 +8,23 @@
                         <t t-foreach="doc.total_qty -1" t-as="i">
                             <t t-if="count &lt; doc.total_qty -1">
                                 <tr class="text-center font-weight-bold">
-                                    <td class="text-uppercase">
+                                    <td class="text-uppercase align-middle" >
                                         <span t-esc="doc.serial_list[count].ma_sach.danh_muc_sach.ma_ts"/>
                                     </td>
-                                    <td>
+                                    <td class="align-middle" >
+                                        <div t-esc="doc.serial_list[count].serial_no"
+                                                         t-options="{'widget': 'barcode', 'width': 380, 'height': 40, 'img_style': 'max-height:50pt;max-width:100%;', 'img_align': 'center'}"/>
                                         <span t-esc="doc.serial_list[count].serial_no"/>
                                     </td>
                                     <t t-if="count &lt; doc.total_qty">
                                         <t t-set="count" t-value="count+1"/>
                                     </t>
-                                    <td class="text-uppercase">
+                                    <td class="text-uppercase align-middle">
                                         <span t-esc="doc.serial_list[count].ma_sach.danh_muc_sach.ma_ts"/>
                                     </td>
-                                    <td>
+                                    <td class="align-middle" >
+                                        <div t-esc="doc.serial_list[count].serial_no"
+                                                         t-options="{'widget': 'barcode', 'width': 380, 'height': 40, 'img_style': 'max-height:50pt;max-width:100%;', 'img_align': 'center'}"/>
                                         <span t-esc="doc.serial_list[count].serial_no"/>
                                     </td>
                                     <t t-if="count &lt; doc.total_qty">
