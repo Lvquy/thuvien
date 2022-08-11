@@ -7,6 +7,7 @@ class TacGia(models.Model):
     _name = 'tac.gia'
     _rec_name = 'name'
     _description = 'Tác giả'
+    _order = "id desc"
 
 
     name = fields.Char(string='Tên tác giả')

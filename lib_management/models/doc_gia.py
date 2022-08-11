@@ -8,6 +8,7 @@ class DocGia(models.Model):
     _name = 'doc.gia'
     _rec_name = 'name'
     _description = 'Độc giả'
+    _order = "id desc"
 
     name = fields.Char(string='Tên độc giả')
     ma_docgia = fields.Char(string='Mã độc giả', readonly=True, default=lambda self: 'New')

@@ -8,6 +8,7 @@ class NgonNgu(models.Model):
     _name = 'lang'
     _rec_name = 'name'
     _description = 'Ngôn ngữ sách'
+    _order = "id desc"
 
 
     name = fields.Char(string='Ngôn ngữ sách')

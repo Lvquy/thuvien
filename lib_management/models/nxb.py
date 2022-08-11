@@ -8,6 +8,7 @@ class NXB(models.Model):
     _name = 'nxb'
     _rec_name = 'name'
     _description = 'Nhà xuất bản'
+    _order = "id desc"
 
 
     name = fields.Char(string='Tên nhà xuất bản')

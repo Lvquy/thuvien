@@ -14,7 +14,7 @@
                                 attrs="{'invisible':[('state', 'in', ('new','2','3'))]}"/>
                     </header>
                     <div class="alert alert-danger text-center o_form_header" role="alert"
-                         attrs="{'invisible':[('is_qua_han', '=', False)]}">
+                         attrs="{'invisible':['|',('state','=','2'),('is_qua_han', '=', False)]}">
                         <a class="close" data-dismiss="alert" href="#">x</a>
                         <div>
                             <strong>Đã tới ngày trả sách cho đơn này</strong>
@@ -74,7 +74,7 @@
                     <field name="no" optional="show"/>
                     <field name="nguoi_muon" optional="show"/>
                     <field name="ngay_muon" optional="show"/>
-                    <field name="han_tra" optional="show" decoration-danger="is_qua_han == True"/>
+                    <field name="han_tra" optional="show" decoration-danger="is_qua_han == True and state not in '2' "/>
                     <field name="ngay_tra" optional="show"/>
                     <field name="type_phat" optional="show" decoration-danger="type_phat in ('0','1','2')"/>
                     <field name="tien_phat" optional="show" sum="Tổng"/>

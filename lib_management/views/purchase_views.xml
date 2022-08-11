@@ -40,7 +40,7 @@
                 <tree string="Danh sách đơn mua " decoration-success="state=='done'">
                     <field name="name" optional="show"/>
                     <field name="ngay_mua" optional="show"/>
-                    <field name="total_qty" optional="show"/>
+                    <field name="total_qty" sum="Tổng" optional="show"/>
                     <field name="state" optional="show"/>
                     <field name="venders" optional="show"/>
                     <field name="note" optional="hide"/>

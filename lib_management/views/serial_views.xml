@@ -40,7 +40,7 @@
                     <field name="serial_no" optional="show"/>
                     <field name="ten_sach" optional="show"/>
                     <field name="ngay_tao" optional="show"/>
-                    <field name="gia_sach" optional="show"/>
+                    <field name="gia_sach" sum="Tổng" optional="show"/>
                     <field name="tinh_trang" optional="show" decoration-danger="tinh_trang=='hong'"/>
                     <field name="nguoi_muon" optional="show"/>
                     <field name="state" optional="show" decoration-danger="state=='2'"/>

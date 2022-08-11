@@ -8,6 +8,7 @@ class MuonTra(models.Model):
     _name = 'muon.tra'
     _rec_name = 'no'
     _description = 'Mượn trả sách'
+    _order = "id desc"
 
     no = fields.Char(string='Mã phiếu', readonly=True, default=lambda self: 'New')
     nguoi_muon = fields.Many2one(comodel_name='doc.gia', string='Người mượn', required=True,
@@ -127,6 +128,7 @@ class LineMuonTra(models.Model):
         for rec in self:
             if rec.ref_muon_tra.state in ('1', '3'):
                 rec.serial_no.state = '0'
+                rec.serial_no.nguoi_muon = False
                 rec.is_datra = True
                 rec.ref_muon_tra.nguoi_muon.count_dang_muon -= 1
                 if rec.ref_muon_tra.check_return_done() == True:
