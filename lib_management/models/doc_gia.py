@@ -33,15 +33,21 @@ class DocGia(models.Model):
     count_checkin = fields.Integer(string='Số lần điểm danh', readonly=True, compute='_compute_checkin')
     diem_danh = fields.One2many(comodel_name='check.in', inverse_name='ma_docgia', string='Điểm danh')
 
-    def none(self):
-        # nothing action
-        pass
-
     def _compute_checkin(self):
         for rec in self:
             rec.count_checkin = 0
             for line in rec.diem_danh:
-                rec.count_checkin +=1
+                if line.state == '1':
+                    rec.count_checkin +=1
+
+    def checkin_docgia(self):
+        for rec in self:
+            rec.write({
+                'diem_danh':[(0, 0, {
+                    'date_checkin' :datetime.today(),
+                    'ma_docgia': rec.id
+                })]
+            })
 
     # tong so lan da muon
     def action_view_muon_sach(self, context=None):
@@ -137,3 +143,8 @@ class Checkin(models.Model):
     ma_docgia = fields.Many2one(comodel_name='doc.gia', string='Mã độc giả', domain =lambda self:[('company_id', 'in', [a.id for a in self.env.user.company_ids])])
     company_id = fields.Many2one(
         'res.company', 'Company', index=1, default=lambda self: self.env.user.company_id.id)
+    state = fields.Selection([('0','Chưa xác nhận'),('1','Đã xác nhận')], string='Trạng thái', default='0')
+
+    def confirm(self):
+        for rec in self:
+            rec.state = '1'

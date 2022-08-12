@@ -91,11 +91,82 @@
             </field>
         </record>
 
+        <!-- sach Kanban View  -->
+        <record model="ir.ui.view" id="view_sach_doc_kanban">
+            <field name="name">sach.doc.kanban</field>
+            <field name="model">sach.doc</field>
+            <field name="arch" type="xml">
+                <kanban class="o_kanban_mobile" sample="1">
+                    <field name="name"/>
+                    <field name="img"/>
+                    <field name="id"/>
+                    <field name="tac_gia"/>
+                    <field name="the_loai_sach"/>
+                    <field name="nha_xb"/>
+                    <field name="ke_kho"/>
+                    <field name="ngon_ngu"/>
+                    <field name="so_trang"/>
+                    <field name="nam_xb"/>
+                    <field name="danh_muc_sach"/>
+                    <field name="ma_sach"/>
+                    <field name="so_luong"/>
+                    <field name="so_luong_muon"/>
+                    <field name="total_qty"/>
+                    <field name="gia_sach"/>
+
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_res_partner_kanban">
+                                <t>
+                                    <div class="o_kanban_image_fill_left o_kanban_image_full"
+                                         t-attf-style="background-image: url(#{kanban_image('sach.doc', 'img', record.id.raw_value)})"
+                                         role="img"/>
+                                </t>
+                                <div class="oe_kanban_details d-flex flex-column">
+                                    <strong class="o_kanban_record_title oe_partner_heading">
+                                        <strong>
+                                            <field name="name"/>
+                                        </strong>
+                                    </strong>
+                                    <div class="o_kanban_tags_section oe_kanban_partner_categories"/>
+                                    <ul>
+                                        <li>
+                                            <strong>
+                                                <field name="ma_sach"/>
+                                            </strong>
+                                        </li>
+                                        <li>Tác giả:
+                                            <field name="tac_gia"/>
+                                        </li>
+                                        <li>Tổng số lượng:
+                                            <field name="total_qty"/>
+                                        </li>
+                                        <li>Đang cho mượn:
+                                            <field name="so_luong_muon"/>
+                                        </li>
+                                    </ul>
+                                    <div class="oe_kanban_bottom_right">
+                                        <t t-if="record.danh_muc_sach.value != false">
+                                            <field name="danh_muc_sach" widget="label_selection"/>
+                                            <span>-</span>
+                                        </t>
+                                        <t t-if="record.ke_kho.value != false">
+                                            <field name="ke_kho" widget="label_selection"/>
+                                        </t>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
         <!-- action view-->
         <record id="action_view_sach_doc" model="ir.actions.act_window">
             <field name="name">Danh sách Sách</field>
             <field name="res_model">sach.doc</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">kanban,tree,form</field>
             <field name="help" type="html">
                 <p class="o_view_nocontent_smiling_face">
                     Create a new ...

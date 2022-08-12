@@ -11,9 +11,9 @@ class MuonTra(models.Model):
     _order = "id desc"
 
     no = fields.Char(string='Mã phiếu', readonly=True, default=lambda self: 'New')
-    nguoi_muon = fields.Many2one(comodel_name='doc.gia', string='Người mượn', required=True,
+    nguoi_muon = fields.Many2one(comodel_name='doc.gia', string='Mã độc giả', required=True,
                                  domain=lambda self: [('company_id', 'in', [a.id for a in self.env.user.company_ids])])
-    ma_doc_gia = fields.Char(string='Mã độc giả', related='nguoi_muon.ma_docgia')
+    ma_doc_gia = fields.Char(string='Người mượn', related='nguoi_muon.name')
     ngay_muon = fields.Date(string='Ngày mượn', default=datetime.today())
     han_tra = fields.Date(string='Hạn trả', required=True)
     ngay_tra = fields.Date(string='Ngày trả')

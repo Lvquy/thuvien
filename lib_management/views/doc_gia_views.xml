@@ -10,9 +10,9 @@
                     </header>
                     <sheet>
                         <div class="oe_button_box" name="button_box">
-                            <button name="none" type="object"
+                            <button name="checkin_docgia" type="object"
                                     class="oe_stat_button" icon="fa-cubes">
-                                <field name="count_checkin" widget="statinfo" string="Số lần điểm danh"/>
+                                <field name="count_checkin" widget="statinfo" string="Điểm danh"/>
                             </button>
                             <button name="action_view_muon_sach" type="object"
                                     class="oe_stat_button" icon="fa-cubes">
@@ -55,11 +55,11 @@
                         </group>
 
                         <notebook>
-                            <page name="thongtin" string="Thông tin thêm">
-                                <field name="note"/>
-                            </page>
                             <page name="diem_danh_page" string="Điểm danh">
                                 <field name="diem_danh"/>
+                            </page>
+                            <page name="thongtin" string="Thông tin thêm">
+                                <field name="note"/>
                             </page>
                         </notebook>
                     </sheet>

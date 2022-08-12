@@ -10,6 +10,8 @@
                         <group>
                             <group string="Thông tin">
                                 <field name="date_checkin"/>
+                                <field name="state"/>
+                                <button name="confirm" string="Xác nhận điểm danh" type="object"/>
                             </group>
                         </group>
                     </sheet>
@@ -23,6 +25,9 @@
             <field name="arch" type="xml">
                 <tree string="Điểm danh" editable="bottom">
                     <field name="date_checkin" optional="show"/>
+                    <field name="state" optional="show"/>
+                    <button name="confirm" string="Xác nhận điểm danh" type="object" class="btn btn-success"
+                            attrs="{'invisible':[('state', '=', '1')]}"/>
                     <field name="ma_docgia" optional="hide"/>
                     <field name="company_id" optional="hide"/>
                 </tree>
