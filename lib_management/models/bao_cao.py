@@ -68,8 +68,8 @@ class BaoCao(models.Model):
                 'code':'muasach.code',
                 'active':True,
                 'company_id':rec.company_id.id,
-                'prefix':'PO',
-                'padding':5,
+                'prefix':'PO%(y)s-',
+                'padding':6,
                 'number_increment':1
             })
             ir_seq.create({
@@ -78,7 +78,7 @@ class BaoCao(models.Model):
                 'code': 'baophe.code',
                 'active': True,
                 'company_id': rec.company_id.id,
-                'prefix': 'BP',
+                'prefix': 'OUT%(y)s-',
                 'padding': 5,
                 'number_increment': 1
             })
@@ -88,8 +88,8 @@ class BaoCao(models.Model):
                 'code': 'muontrasach.code',
                 'active': True,
                 'company_id': rec.company_id.id,
-                'prefix': 'MT',
-                'padding': 5,
+                'prefix': 'MT%(y)s-',
+                'padding': 6,
                 'number_increment': 1
             })
             ir_seq.create({
@@ -98,8 +98,8 @@ class BaoCao(models.Model):
                 'code': 'masach.code',
                 'active': True,
                 'company_id': rec.company_id.id,
-                'prefix': 'MS',
-                'padding': 5,
+                'prefix': 'BK%(y)s-',
+                'padding': 6,
                 'number_increment': 1
             })
             ir_seq.create({
@@ -108,7 +108,7 @@ class BaoCao(models.Model):
                 'code': 'docgia.code',
                 'active': True,
                 'company_id': rec.company_id.id,
-                'prefix': 'DG',
+                'prefix': 'RD%(y)s-',
                 'padding': 5,
                 'number_increment': 1
             })

@@ -8,7 +8,7 @@
     'author': 'Lv Quy',
     'company': 'Minh Nghĩa',
     'website': 'https://#',
-    'depends': ['base_setup','prt_report_attachment_preview','rowno_in_tree','web_responsive'],
+    'depends': ['base_setup', 'prt_report_attachment_preview', 'rowno_in_tree', 'web_responsive'],
     'data': [
         # security
         'data/thu_vien_security.xml',
@@ -37,9 +37,11 @@
         'views/res_users.xml',
         'views/document.xml',
         'views/checkin.xml',
+        'views/template_inherit.xml',
 
 
-        #menu
+
+        # menu
         'views/menu.xml',
         # report
         'report/the_doc_gia.xml',
@@ -48,7 +50,6 @@
         'report/template.xml',
         'report/thong_tin_sach.xml',
         'report/phieu_muon_sach.xml',
-
 
     ],
     'assets': {
@@ -60,4 +61,3 @@
     'images': ['static/description/banner.png'],
     'license': 'AGPL-3',
 }
-

@@ -1,4 +1,6 @@
 # -*- coding: utf-8 -*-
+import random
+
 from odoo import api, fields, models
 from datetime import datetime
 from odoo.exceptions import UserError
@@ -32,6 +34,7 @@ class DocGia(models.Model):
     count_dang_muon = fields.Integer(string='Sách đang mượn')
     count_checkin = fields.Integer(string='Số lần điểm danh', readonly=True, compute='_compute_checkin')
     diem_danh = fields.One2many(comodel_name='check.in', inverse_name='ma_docgia', string='Điểm danh')
+
 
     def _compute_checkin(self):
         for rec in self:

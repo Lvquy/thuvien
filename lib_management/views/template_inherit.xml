@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="hide_powered_by_odoo" inherit_id="web.login_layout">
+        <xpath expr="//div[hasclass('py-5')]" position="replace">
+            <div t-attf-class="card border-0 mx-auto bg-100 {{login_card_classes}} o_database_list"
+                 style="max-width: 300px;">
+                <div class="card-body">
+                    <div t-attf-class="text-center pb-3 border-bottom {{'mb-3' if form_small else 'mb-4'}}">
+                        <img t-attf-src="/web/binary/company_logo{{ '?dbname='+db if db else '' }}" alt="Logo"
+                             style="max-height:120px; max-width: 100%; width:auto"/>
+                    </div>
+                    <t t-out="0"/>
+                    <div class="text-center small mt-4 pt-3 border-top" t-if="not disable_footer">
+                        <p class="text-success">Phần mềm quản lý thư viện Minh Nghĩa</p>
+                        <a href="http://thuvienminhnghia.edu.vn/" class="btn btn-success" target="_blank">Trang chủ</a>
+                    </div>
+                </div>
+            </div>
+            <div class="container mt-2">
+                <div class="row">
+                    <div class="col-3"></div>
+                    <div class="col-6">
+                        <i class="fa fa-clock-o" aria-hidden="true">Giờ mở cửa</i>
+                        <h2 class="text-center text-primary">Giờ mở cửa</h2>
+                        <ul class="text-left text-success">
+                            <li>Sáng từ: 7h30-11h30</li>
+                            <li>Chiều từ: 13h30-17h00</li>
+                            <li>Từ thứ 2-6 hàng tuần</li>
+                        </ul>
+                    </div>
+                    <div class="col-3"></div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+</odoo>
