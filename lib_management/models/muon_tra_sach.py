@@ -30,7 +30,7 @@ class MuonTra(models.Model):
         'res.company', 'Company', index=1, default=lambda self: self.env.user.company_id.id)
     note = fields.Text(string='Ghi chú')
     total_qty = fields.Integer(string='Tổng số sách mượn', readonly=True, compute='onchange_qty')
-    is_qua_han = fields.Boolean(string='Đã quá hạn trả', default=False, readonly=True, compute='_compute_is_qua_han')
+    is_qua_han = fields.Boolean(string='Đã quá hạn trả', store=True, default=False, readonly=True, compute='_compute_is_qua_han')
 
     @api.depends('han_tra')
     def _compute_is_qua_han(self):
@@ -74,6 +74,7 @@ class MuonTra(models.Model):
                 for line in rec.danh_sach_muon:
                     line.serial_no.nguoi_muon = rec.nguoi_muon
                     line.serial_no.state = '1'
+                    line.serial_no.ma_sach.so_lan_muon +=1
                 BaoCao = self.env['bao.cao'].search(
                     [('company_id', 'in', [a.id for a in self.env.user.company_ids])]).sudo()
                 BaoCao.update_bao_cao()
@@ -84,7 +85,8 @@ class MuonTra(models.Model):
         for rec in self:
             if rec.state == '1':
                 rec.state = '2'
-                rec.nguoi_muon.count_muon_sach += 1
+                rec.is_qua_han = False
+                # rec.nguoi_muon.count_muon_sach += 1
                 rec.nguoi_muon.count_dang_muon -= rec.update_count_dang_muon()
                 if rec.type_phat in ('0', '1', '2'):
                     rec.nguoi_muon.count_error += 1
@@ -133,7 +135,8 @@ class LineMuonTra(models.Model):
                 rec.ref_muon_tra.nguoi_muon.count_dang_muon -= 1
                 if rec.ref_muon_tra.check_return_done() == True:
                     rec.ref_muon_tra.state = '2'
-                    rec.ref_muon_tra.nguoi_muon.count_muon_sach += 1
+                    rec.ref_muon_tra.is_qua_han = False
+                    # rec.ref_muon_tra.nguoi_muon.count_muon_sach += 1
                     rec.ref_muon_tra.ngay_tra = datetime.today()
                     if rec.ref_muon_tra.type_phat in ('0', '1', '2'):
                         rec.ref_muon_tra.nguoi_muon.count_error += 1

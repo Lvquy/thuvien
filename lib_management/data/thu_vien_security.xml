@@ -1,8 +1,14 @@
-<data noupdate="1">
+<data noupdate="0">
     <record id="sach_doc_rule" model="ir.rule">
         <field name="name">Sach multi company rule</field>
         <field name="model_id" ref="model_sach_doc"/>
         <field name="domain_force">[('company_id', 'in', [a.id for a in user.company_ids])]</field>
+        <field name="groups" eval="[(4, ref('base.group_no_one'))]"/>
+        <field name="perm_read" eval="True"/>
+        <field name="perm_write" eval="True"/>
+        <field name="perm_create" eval="True"/>
+        <field name="perm_unlink" eval="True"/>
+
     </record>
 
     <record id="doc_gia_rule" model="ir.rule">

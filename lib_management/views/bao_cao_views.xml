@@ -194,7 +194,7 @@
         </record>
 
         <menuitem id="menu_bao_cao" name="Thống kê" sequence="99"
-                  web_icon="lib_management,static/src/img/logo.png"
+                  web_icon="lib_management,static/src/img/report.png"
                   groups="base.group_system,lib_management.group_lib_management"/>
         <menuitem id="menu_sub_bao_cao" name="Báo cáo thống kê" parent="menu_bao_cao" action="action_view_bao_cao"
                   sequence="1" groups="base.group_system,lib_management.group_lib_management"/>

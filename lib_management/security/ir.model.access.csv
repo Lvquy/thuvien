@@ -2,6 +2,7 @@ id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 
 access_lib_management_sach_doc_root,sach.doc.root,model_sach_doc,base.group_system,1,1,1,1
 access_lib_management_sach_doc_user,sach.doc.user,model_sach_doc,lib_management.group_lib_management,1,1,1,1
+access_lib_management_sach_doc_public,sach.doc.public,model_sach_doc,,1,0,0,0
 
 access_lib_management_doc_gia_root,doc.gia.root,model_doc_gia,base.group_system,1,1,1,1
 access_lib_management_doc_gia_user,doc.gia.user,model_doc_gia,lib_management.group_lib_management,1,1,1,1
@@ -11,21 +12,26 @@ access_lib_management_ke_kho_user,ke.kho.user,model_ke_kho,lib_management.group_
 
 access_lib_management_lang_root,lang.root,model_lang,base.group_system,1,1,1,1
 access_lib_management_lang_user,lang.user,model_lang,lib_management.group_lib_management,1,1,1,1
+access_lib_management_lang_public,lang.public,model_lang,,1,0,0,0
 
 access_lib_management_nhan_vien_root,nhan.vien.root,model_nhan_vien,base.group_system,1,1,1,1
 access_lib_management_nhan_vien_user,nhan.vien.user,model_nhan_vien,lib_management.group_lib_management,1,1,1,1
 
 access_lib_management_tac_gia_root,tac.gia.root,model_tac_gia,base.group_system,1,1,1,1
 access_lib_management_tac_gia_user,tac.gia.user,model_tac_gia,lib_management.group_lib_management,1,1,1,1
+access_lib_management_tac_gia_public,tac.gia.public,model_tac_gia,,1,0,0,0
+
 
 access_lib_management_danh_muc_root,danh.muc.root,model_danh_muc,base.group_system,1,1,1,1
 access_lib_management_danh_muc_user,danh.muc.user,model_danh_muc,lib_management.group_lib_management,1,1,1,1
 
 access_lib_management_the_loai_root,the.loai.root,model_the_loai,base.group_system,1,1,1,1
 access_lib_management_the_loai_user,the.loai.user,model_the_loai,lib_management.group_lib_management,1,1,1,1
+access_lib_management_the_loai_public,the.loai.public,model_the_loai,,1,0,0,0
 
 access_lib_management_nxb_root,nxb.root,model_nxb,base.group_system,1,1,1,1
 access_lib_management_nxb_user,nxb.user,model_nxb,lib_management.group_lib_management,1,1,1,1
+access_lib_management_nxb_public,nxb.public,model_nxb,,1,0,0,0
 
 access_lib_management_lop_hoc_root,lop.hoc.root,model_lop_hoc,base.group_system,1,1,1,1
 access_lib_management_lop_hoc_user,lop.hoc.user,model_lop_hoc,lib_management.group_lib_management,1,1,1,1
@@ -47,6 +53,7 @@ access_lib_management_pur_lines_user,pur.lines.user,model_pur_lines,lib_manageme
 
 access_lib_management_serial_root,serial.root,model_serial,base.group_system,1,1,1,1
 access_lib_management_serial_user,serial.user,model_serial,lib_management.group_lib_management,1,1,1,1
+access_lib_management_serial_public,serial.public,model_serial,,1,0,0,0
 
 access_lib_management_create_serial_root,create.serial.root,model_create_serial,base.group_system,1,1,1,1
 access_lib_management_create_serial_user,create.serial.user,model_create_serial,lib_management.group_lib_management,1,1,1,1

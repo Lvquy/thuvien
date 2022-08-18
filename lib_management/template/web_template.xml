@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="menu_top_book" model="website.menu">
+            <field name="name">Top sách đọc nhiều</field>
+            <field name="url">/top_book</field>
+            <field name="parent_id" ref="website.main_menu"/>
+            <field name="sequence" type="int">10</field>
+        </record>
+        <record id="menu_list_book" model="website.menu">
+            <field name="name">Sách cho mượn</field>
+            <field name="url">/list_book</field>
+            <field name="parent_id" ref="website.main_menu"/>
+            <field name="sequence" type="int">11</field>
+        </record>
+        <record id="menu_tra_cuu" model="website.menu">
+            <field name="name">Tra cứu mượn sách</field>
+            <field name="url">/muon_tra_sach</field>
+            <field name="parent_id" ref="website.main_menu"/>
+            <field name="sequence" type="int">12</field>
+        </record>
+    </data>
+    <template id="muon_tra">
+        <t t-call="website.layout">
+            <t t-set="title">Phiếu đang mượn sách</t>
+            <div class="oe_structure">
+                <div class="container">
+                    <div class="row">
+                        <h2 class="col-12 text-success text-center mt-5 mb-2">Phiếu đang mượn sách</h2>
+                        <form action="/muon_tra_sach/" method="get" enctype="multipart/form-data" name="truong"
+                              class="s_website_form form-horizontal container-fluid mt32 mb-2">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="qua_han" id="qua_han"/>
+                                <label class="form-check-label" for="qua_han">
+                                    Chỉ lọc phiếu mượn quá hạn
+                                </label>
+                            </div>
+                            <div class="input-group ">
+                                <select name="truong" id="truong" class="custom-select">
+                                    <option value="false">Chọn trường</option>
+                                    <t t-foreach="Truong" t-as="t">
+                                        <option>
+                                            <t t-esc="t.id"/>
+                                            .
+                                            <t t-esc="t.name"/>
+                                        </option>
+                                    </t>
+                                </select>
+                                <input name="ma_doc_gia" type="text" class="form-control"
+                                       placeholder="Lọc theo mã độc giả"
+                                       aria-label="Text input with segmented dropdown button"/>
+                                <div class="input-group-append">
+                                    <input class="btn btn-outline-secondary" value="Xác nhận" type="submit"/>
+                                </div>
+                            </div>
+
+                        </form>
+
+                        <table class="table table-striped">
+                            <tr>
+                                <td>Mã phiếu mượn</td>
+                                <td>Mã độc giả</td>
+                                <td>Tên độc giả</td>
+                                <td>Ngày mượn</td>
+                                <td>Hạn trả</td>
+                                <td>Tổng số sách mượn</td>
+                            </tr>
+                            <t t-foreach="MT" t-as="l">
+                                <tr t-attf-class="#{'text-danger' if l.is_qua_han == true else ''}">
+                                    <td>
+                                        <t t-esc="l.no"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="l.nguoi_muon.ma_docgia"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="l.ma_doc_gia"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="l.ngay_muon"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="l.han_tra"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="l.total_qty"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="index">
+        <t t-call="website.layout">
+            <t t-set="title">Top Sách đọc nhiều</t>
+            <div class="oe_structure">
+                <div class="container">
+                    <div class="row">
+                        <h2 class="col-12 text-success text-center mt-5 mb-2">Top sách đọc nhiều</h2>
+                        <form action="/top_book/" method="get" enctype="multipart/form-data" name="top_book"
+                              class="s_website_form form-horizontal container-fluid mt32 mb-2">
+                            <div class="input-group">
+                                <select name="truong" class="custom-select" id="inputGroupSelect04">
+                                    <option value="false">Chọn trường...</option>
+                                    <t t-foreach="Truong" t-as="t">
+                                        <option>
+                                            <t t-esc="t.id"/>
+                                            .
+                                            <t t-esc="t.name"/>
+                                        </option>
+                                    </t>
+                                </select>
+                                <div class="input-group-append">
+                                    <input class="btn btn-outline-secondary" value="Xác nhận" type="submit"/>
+                                </div>
+                            </div>
+                        </form>
+
+                        <table class="table table-striped">
+                            <tr>
+                                <td class="align-middle text-center">#</td>
+                                <td class="align-middle text-center">Ảnh bìa</td>
+                                <td class="align-middle text-center">Mã sách</td>
+                                <td class="align-middle text-center">Tên sách</td>
+                                <td class="align-middle text-center">Số lần mượn</td>
+                            </tr>
+                            <t t-set="stt" t-value="1"/>
+                            <t t-foreach="Sach" t-as="s">
+                                <tr>
+                                    <td class="align-middle text-center">
+                                        <t t-esc="stt"/>
+                                        <t t-set="stt" t-value="stt+1"/>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <a t-att-href="'/top_book/details/%s' %slug(s)" intemprop="url" target="_blank">
+                                            <img t-att-src="'/web/image/sach.doc/%s/img' % s.id" alt="img"
+                                                 style="width:80px"/>
+                                        </a>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <a t-att-href="'/top_book/details/%s' %slug(s)" intemprop="url" target="_blank">
+                                            <t t-esc="s.ma_sach"/>
+                                        </a>
+
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <a t-att-href="'/top_book/details/%s' %slug(s)" intemprop="url">
+                                            <t t-esc="s.name"/>
+                                        </a>
+                                    </td>
+                                    <td class="align-middle text-center">
+                                        <t t-esc="s.so_lan_muon"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="sach">
+        <t t-call="website.layout">
+            <t t-set="title"><t t-esc="sach.sudo().name"/></t>
+            <div class="oe_structure">
+                <div class="container">
+                    <div class="row">
+                        <h1 class="col-12 text-success text-center mt-5 mb-2">
+                            <t t-esc="sach.sudo().name"/>
+                        </h1>
+
+                        <table class="table col-4">
+                            <tr>
+                                <td class="align-middle">
+                                    <img t-att-src="'/web/image/sach.doc/%s/img' % sach.id" alt="img"
+                                         style="width:300px"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <table class="table col-8">
+                            <tr>
+                                <td>Mã sách</td>
+                                <td>
+                                    <t t-esc="sach.sudo().ma_sach"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Số lượng sẵn có trong thư viện</td>
+                                <td>
+                                    <t t-esc="sach.sudo().so_luong"/>
+                                </td>
+                            </tr>
+                            <tr t-if="sach.so_lan_muon">
+                                <td>Số lần độc giả mượn</td>
+                                <td>
+                                    <t t-esc="sach.sudo().so_lan_muon"/>
+                                </td>
+                            </tr>
+                            <tr t-if="sach.so_trang">
+                                <td>Số trang</td>
+                                <td>
+                                    <t t-esc="sach.sudo().so_trang"/>
+                                </td>
+                            </tr>
+                            <tr t-if="sach.tac_gia">
+                                <td>Tác giả</td>
+                                <td>
+                                    <t t-esc="sach.sudo().tac_gia.name"/>
+                                </td>
+                            </tr>
+                            <tr t-if="sach.nha_xb">
+                                <td>NXB</td>
+                                <td>
+                                    <t t-esc="sach.sudo().nha_xb.name"/>
+                                </td>
+                            </tr>
+
+                            <tr t-if="sach.the_loai_sach">
+                                <td>Thể loại</td>
+                                <td>
+                                    <t t-esc="sach.sudo().the_loai_sach.name"/>
+                                </td>
+                            </tr>
+                            <tr t-if="sach.ngon_ngu">
+                                <td>Ngôn ngữ</td>
+                                <td>
+                                    <t t-esc="sach.sudo().ngon_ngu.name"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Thư viện</td>
+                                <td>
+                                    <t t-esc="sach.company_id.sudo().name"/>
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="col-12">
+                            <h4>Tóm tắt nội dung</h4>
+                            <hr/>
+                            <span>
+                                <t t-esc="sach.sudo().note"/>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <template id="list_book">
+        <t t-call="website.layout">
+            <t t-set="title">Sách</t>
+            <div class="oe_structure">
+                <div class="container">
+                    <div class="row">
+                        <h2 class="col-12 text-success text-center mt-5 mb-2">Danh sách sách trong thư viện</h2>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

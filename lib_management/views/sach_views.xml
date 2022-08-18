@@ -12,6 +12,10 @@
                     </header>
                     <sheet>
                         <div class="oe_button_box" name="button_box">
+                            <button name="action_view_none" type="object"
+                                    class="oe_stat_button" icon="fa-cubes">
+                                <field name="so_lan_muon" widget="statinfo" string="Số lần mượn sách"/>
+                            </button>
                             <button name="action_view_sach" type="object"
                                     class="oe_stat_button" icon="fa-cubes">
                                 <field name="total_qty" widget="statinfo" string="Tổng số lượng"/>
@@ -175,7 +179,7 @@
         </record>
 
         <menuitem id="menu_sach_doc" name="Danh sách Sách " sequence="1"
-                  web_icon="lib_management,static/src/img/logo.png"
+                  web_icon="lib_management,static/src/img/sach.png"
                   groups="base.group_system,lib_management.group_lib_management"/>
         <menuitem id="menu_sub_sach_doc" name="Danh sách Sách " parent="menu_sach_doc" action="action_view_sach_doc"
                   sequence="1" groups="base.group_system,lib_management.group_lib_management"/>

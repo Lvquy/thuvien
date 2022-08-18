@@ -8,7 +8,7 @@
     'author': 'Lv Quy',
     'company': 'Minh Nghĩa',
     'website': 'https://#',
-    'depends': ['base_setup', 'prt_report_attachment_preview', 'rowno_in_tree', 'web_responsive'],
+    'depends': ['base_setup', 'prt_report_attachment_preview', 'rowno_in_tree', 'web_responsive','website'],
     'data': [
         # security
         'data/thu_vien_security.xml',
@@ -39,6 +39,8 @@
         'views/checkin.xml',
         'views/template_inherit.xml',
 
+        #template
+        'template/web_template.xml',
 
 
         # menu

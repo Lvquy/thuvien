@@ -42,6 +42,7 @@ class Sach(models.Model):
     serial_list =  fields.Many2many(string='Serial sách', comodel_name='serial', compute='compute_serial',
                                     domain=lambda self: [
                                         ('company_id', 'in', [a.id for a in self.env.user.company_ids])])
+    so_lan_muon = fields.Integer(string='Số lần mượn')
 
     def onchange_serial_list(self):
         for rec in self:
@@ -92,6 +93,9 @@ class Sach(models.Model):
             'target': 'new',
             'context': "{'default_ma_sach': active_id, 'default_create_qty': 1}"
         }
+
+    def action_view_none(self):
+        return None
 
     def action_view_sach(self, context=None):
         field_ids = self.env['serial'].search([('ma_sach', '=', self.ma_sach)]).ids
