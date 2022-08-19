@@ -19,7 +19,7 @@ class Book(http.Controller):
                 domain = [('company_id', '=', truong_id)]
 
 
-                top_sach = Sach.search(domain, order='so_lan_muon asc', limit=20).sorted(key=lambda r: r.so_lan_muon,
+                top_sach = Sach.search(domain, order='so_lan_muon asc', limit=10).sorted(key=lambda r: r.so_lan_muon,
 reverse=True)
                 values.update({
                     'Sach': top_sach,
@@ -27,7 +27,7 @@ reverse=True)
 
         return request.render('lib_management.index', values)
 
-    @http.route(['/top_book/details/<model("sach.doc"):sach>'], auth='public', website=True, page=True, csrf=False)
+    @http.route(['/top_book/details/<model("sach.doc"):sach>'], auth='public', website=True, csrf=False)
     def sach(self, sach):
         values = {'sach':sach}
         return request.render('lib_management.sach', values)
@@ -59,11 +59,28 @@ reverse=True)
 
         return request.render('lib_management.muon_tra', values)
 
-    @http.route(['/list_book'], auth='public', website=True, csrf=False)
-    def list_book(self, **kw):
+    @http.route(['/list_book','/list_book/page/<int:page>'], auth='public', website=True, csrf=False)
+    def list_book(self, page=0, search='', **kw):
+        print(search, kw)
+        domain = []
+        if search:
+            domain=[('name','ilike',search)]
+
         Sach = request.env['sach.doc'].sudo()
-        company = request.env['res.company'].sudo()
+        total_sach = Sach.search_count(domain)
+        per_page = 12
+        pager = request.website.pager(url='/list_book', total= total_sach, page=page, step=per_page,scope=3, url_args=None)
+        SACH = Sach.search(domain, limit=per_page, offset=pager['offset'])
+        domain_company = []
+        company = request.env['res.company'].sudo().search(domain_company)
         values = {
-            'sach':Sach
+            'SACH':SACH,
+            'pager':pager,
+            'company':company,
         }
         return request.render('lib_management.list_book', values)
+
+    @http.route(['/list_book/details/<model("sach.doc"):sach>'], auth='public', website=True, csrf=False)
+    def sach_1(self, sach):
+        values = {'sach': sach}
+        return request.render('lib_management.sach', values)

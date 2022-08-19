@@ -166,7 +166,9 @@
 
     <template id="sach">
         <t t-call="website.layout">
-            <t t-set="title"><t t-esc="sach.sudo().name"/></t>
+            <t t-set="title">
+                <t t-esc="sach.sudo().name"/>
+            </t>
             <div class="oe_structure">
                 <div class="container">
                     <div class="row">
@@ -252,14 +254,55 @@
         </t>
     </template>
 
+    <template id="sach_search" name="Search book">
+        <form action="/list_book">
+            <t t-call="website.website_search_box">
+                <t t-set="action" t-value="'/list_book'"></t>
+            </t>
+        </form>
+
+    </template>
+
     <template id="list_book">
         <t t-call="website.layout">
             <t t-set="title">Sách</t>
             <div class="oe_structure">
                 <div class="container">
-                    <div class="row">
-                        <h2 class="col-12 text-success text-center mt-5 mb-2">Danh sách sách trong thư viện</h2>
+                    <h2 class="col-12 text-success text-center mt-5 mb-2 mt-2">Danh sách sách trong thư viện</h2>
+                    <div class="col-12 product_pager form-inline justify-content-center mt-3 mb-3">
+                        <t t-call="lib_management.sach_search"/>
                     </div>
+                    <div class="row">
+                        <t t-foreach="SACH" t-as="s">
+                            <div class="col-4 text-center">
+                                <table class="table table-bordered">
+                                    <tr>
+                                        <td style="border-right-width:0px;">
+                                            <a t-att-href="'/list_book/details/%s' %slug(s)" intemprop="url"
+                                               target="_blank">
+                                                <img t-att-src="'/web/image/sach.doc/%s/img' % s.id" alt="img"
+                                                     style="width:100px"/>
+                                            </a>
+                                        </td>
+                                        <td class="text-left" style="border-left-width:0px;">
+                                            <t t-esc="s.name"/>
+                                            <br/>
+                                            <t t-esc="s.ma_sach"/>
+                                            <br/>
+                                            <t t-esc="s.tac_gia.name"/>
+                                            <br/>
+                                            <t t-esc="s.company_id.name"/>
+                                            <br/>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </t>
+                        <div class="col-12 product_pager form-inline justify-content-center mt-3">
+                            <t t-call="website.pager"/>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </t>
