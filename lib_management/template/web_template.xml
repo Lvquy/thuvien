@@ -269,9 +269,27 @@
             <div class="oe_structure">
                 <div class="container">
                     <h2 class="col-12 text-success text-center mt-5 mb-2 mt-2">Danh sách sách trong thư viện</h2>
-                    <div class="col-12 product_pager form-inline justify-content-center mt-3 mb-3">
+                    <div class="col-12 product_pager form-inline justify-content-center mt-3 mb-3 mr-2">
+                        <form action="/list_book/" method="get" enctype="multipart/form-data" name="list_book"
+                              class="s_website_form form-horizontal container-fluid mt32 mb-2">
+                            <div class="input-group">
+                                <select name="truong" class="custom-select" id="inputGroupSelect04">
+                                    <option value="false">Chọn trường...</option>
+                                    <t t-foreach="company" t-as="t">
+                                        <option t-att-selected="t.id == id_truong"
+                                                t-att-label="t.name">
+                                            <t t-esc="t.id"/>
+                                        </option>
+                                    </t>
+                                </select>
+                                <div class="input-group-append">
+                                    <input class="btn btn-outline-secondary" value="Xác nhận" type="submit"/>
+                                </div>
+                            </div>
+                        </form>
                         <t t-call="lib_management.sach_search"/>
                     </div>
+
                     <div class="row">
                         <t t-foreach="SACH" t-as="s">
                             <div class="col-4 text-center">
@@ -301,8 +319,8 @@
                         <div class="col-12 product_pager form-inline justify-content-center mt-3">
                             <t t-call="website.pager"/>
                         </div>
-                    </div>
 
+                    </div>
                 </div>
             </div>
         </t>

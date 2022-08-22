@@ -59,12 +59,24 @@ reverse=True)
 
         return request.render('lib_management.muon_tra', values)
 
-    @http.route(['/list_book','/list_book/page/<int:page>'], auth='public', website=True, csrf=False)
+    @http.route(['/list_book','/list_book/page/<int:page>'], auth='public', website=True)
     def list_book(self, page=0, search='', **kw):
-        print(search, kw)
-        domain = []
+        id_truong = None
+        if kw:
+            if kw.get('truong') != False:
+                request.session['id_truong'] = kw['truong']
+                id_truong = int(request.session['id_truong'])
+
+
+        domain = [('company_id','=',id_truong)]
+
         if search:
-            domain=[('name','ilike',search)]
+            print(search)
+            print(request.session)
+            id_truong = int(request.session['id_truong'])
+            print(id_truong)
+
+            domain=['&',('company_id','=',id_truong),('name','ilike',search)]
 
         Sach = request.env['sach.doc'].sudo()
         total_sach = Sach.search_count(domain)
@@ -77,6 +89,7 @@ reverse=True)
             'SACH':SACH,
             'pager':pager,
             'company':company,
+            'id_truong':id_truong
         }
         return request.render('lib_management.list_book', values)
 

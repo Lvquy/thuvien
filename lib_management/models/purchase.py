@@ -63,7 +63,7 @@ class PurLines(models.Model):
     _rec_name = 'ma_sach'
     _description = 'Purchase Lines'
 
-    ma_sach = fields.Many2one(comodel_name='sach.doc', string='Mã sách')
+    ma_sach = fields.Many2one(comodel_name='sach.doc', string='Mã sách', domain=lambda self:[('company_id', 'in', [a.id for a in self.env.user.company_ids])])
     name = fields.Char(string='Tên sách', related='ma_sach.name')
     next_num = fields.Integer(string='Số serial tiếp theo', related='ma_sach.next_num')
     qty = fields.Integer(string='Số lượng', default=1)
