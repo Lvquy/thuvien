@@ -99,7 +99,7 @@ class BaoCao(models.Model):
                 'active': True,
                 'company_id': rec.company_id.id,
                 'prefix': 'BK%(y)s-',
-                'padding': 6,
+                'padding': 5,
                 'number_increment': 1
             })
             ir_seq.create({
