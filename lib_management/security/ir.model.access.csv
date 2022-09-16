@@ -72,3 +72,7 @@ access_lib_management_document_user,document.user,model_document,lib_management.
 
 access_lib_management_check_in_root,check.in.root,model_check_in,base.group_system,1,1,1,1
 access_lib_management_check_in_user,check.in.user,model_check_in,lib_management.group_lib_management,1,1,1,1
+
+
+access_lib_management_print_report_public,print.report.public,model_print_report,,1,1,1,1
+

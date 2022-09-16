@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="create_report_wizard" model="ir.ui.view">
+        <field name="name">print.report.wizard</field>
+        <field name="model">print.report</field>
+        <field name="arch" type="xml">
+            <form string="In thông tin tài liệu">
+                <sheet>
+                    <h2>In thông tin tài liệu</h2>
+                    <field name="company_id" invisible="1"/>
+                </sheet>
+                <footer>
+                    <button class="text-center btn btn-success" name="print_report" type="object"
+                            string="In thông tin tài liệu"/>
+                    <button class="btn" string="Hủy" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_view_print_report" model="ir.actions.act_window">
+        <field name="name">Print Report</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">print.report</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="create_report_wizard"/>
+
+    </record>
+    <menuitem id="menu_open_form_print" name="In thông tin sách" parent="menu_sach_doc" action="action_view_print_report"
+                  sequence="2" groups="base.group_system,lib_management.group_lib_management"/>
+
+</odoo>

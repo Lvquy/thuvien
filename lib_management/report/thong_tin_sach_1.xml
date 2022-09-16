@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="report_thong_tin_sach_1">
+        <t t-call="web.basic_layout">
+            <div class="row">
+                <div class="col-6 text-center">
+                    <t t-esc="company_dvcq"/>
+                    <br/>
+                    <t t-esc="company_name"/>
+                </div>
+                <div class="col-6 text-right">
+                    <img t-attf-src="data:image/*;base64,{{company_logo}}"
+                         style="max-height:40pt;max-width:80%;margin-top:5pt"/>
+                </div>
+            </div>
+            <h2 class="text-center">THÔNG TIN TÀI LIỆU</h2>
+            <div class="page">
+                <div class="oe_structure"/>
+                <div class="row mt32 mb32">
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th class="align-middle">#</th>
+                                <th class="align-middle">Mã sách - Serial</th>
+                                <th class="align-middle">Tên sách</th>
+                                <th class="align-middle">Tác giả</th>
+                                <th class="align-middle">Nhà XB</th>
+                                <th class="align-middle">Số trang</th>
+                                <th class="align-middle">Giá bìa</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <t t-set="stt" t-value="1"/>
+                            <t t-foreach="all_serial" t-as="line">
+                                <tr>
+                                    <td class="align-middle">
+                                        <t t-esc="stt"/>
+                                        <t t-set="stt" t-value="stt+1"/>
+                                    </td>
+                                    <td class="align-middle">
+                                        <t t-esc="line['serial_no']"/>
+                                    </td>
+                                    <td class="align-middle">
+                                        <t t-esc="line['ten_sach']"/>
+                                    </td>
+                                    <td class="align-middle">
+                                        <t t-esc="line['tac_gia']"/>
+                                    </td>
+                                    <td class="align-middle">
+                                        <t t-esc="line['nha_xb']"/>
+                                    </td>
+                                    <td class="align-middle">
+                                        <t t-esc="line['so_trang']"/>
+                                    </td>
+                                    <td class="align-middle">
+                                        <t t-esc="line['gia_sach']"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

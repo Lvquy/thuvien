@@ -36,6 +36,9 @@
             <field name="model">serial</field>
             <field name="arch" type="xml">
                 <tree string="Danh sách serial" create="false">
+                    <header>
+
+                    </header>
                     <field name="ma_sach" optional="show"/>
                     <field name="serial_no" optional="show"/>
                     <field name="ten_sach" optional="show"/>

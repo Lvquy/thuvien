@@ -8,7 +8,7 @@
     'author': 'Lv Quy',
     'company': 'Minh Nghĩa',
     'website': 'https://#',
-    'depends': ['base_setup', 'prt_report_attachment_preview', 'rowno_in_tree', 'web_responsive','website'],
+    'depends': ['base_setup','rowno_in_tree', 'web_responsive','website'],
     'data': [
         # security
         'data/thu_vien_security.xml',
@@ -51,8 +51,9 @@
         'report/menu_report.xml',
         'report/template.xml',
         'report/thong_tin_sach.xml',
+        'report/thong_tin_sach_1.xml',
         'report/phieu_muon_sach.xml',
-
+        'wizard/report_wizard.xml',
     ],
     'assets': {
         'web.assets_backend': [],

@@ -33,7 +33,7 @@ class Sach(models.Model):
                                     domain=lambda self: [
                                         ('company_id', 'in', [a.id for a in self.env.user.company_ids])])
     ma_sach = fields.Char(string='Mã sách', readonly=True, default=lambda self: 'New')
-    next_num = fields.Integer(string='Số serial tiếp theo', default=1000, readonly=True)
+    next_num = fields.Integer(string='Số serial tiếp theo', default=100, readonly=True)
     so_luong = fields.Integer(string='Số lượng trong kho',compute='onchange_serial_list')
     so_luong_muon = fields.Integer(string='Số lượng đang cho mượn',compute='onchange_serial_list')
     total_qty = fields.Integer(string='Tổng số lượng sách', compute='onchange_serial_list')
@@ -169,6 +169,7 @@ class CreateSerial(models.Model):
     ma_sach = fields.Many2one(string='Mã sách',
                               comodel_name='sach.doc',
                               required=True,
+                              ondelete='cascade',
                               domain=lambda self: [('company_id', 'in', [a.id for a in self.env.user.company_ids])])
     company_id = fields.Many2one(
         'res.company', 'Company', index=1, default=lambda self: self.env.user.company_id.id)
@@ -202,7 +203,7 @@ class Serial(models.Model):
 
     serial_no = fields.Char(string='Serial sách duy nhất', default=lambda self: 'New', readonly=True)
     ma_sach = fields.Many2one(string='Mã sách', comodel_name='sach.doc',
-                              required=True, readonly=True,
+                              required=False, readonly=True,
                               domain=lambda self: [('company_id', 'in', [a.id for a in self.env.user.company_ids])])
     company_id = fields.Many2one(
         'res.company', 'Company', index=1, default=lambda self: self.env.user.company_id.id)
@@ -233,6 +234,8 @@ class Serial(models.Model):
             [('company_id', 'in', [a.id for a in self.env.user.company_ids])]).sudo()
         BaoCao.update_bao_cao()
         return res
+
+
 
 class CreateBaoPhe(models.Model):
     _name = 'create.baophe'

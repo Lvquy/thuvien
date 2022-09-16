@@ -7,7 +7,8 @@
             <field name="arch" type="xml">
                 <form string="Danh sách Sách">
                     <header>
-                        <button name="create_serial" type="object" string="Bổ sung serial cho sách" class="btn btn-primary"/>
+                        <button name="create_serial" type="object" string="Bổ sung serial cho sách"
+                                class="btn btn-primary"/>
                         <button name="onchange_serial_list" type="object" string="F5 Refesh" class="btn btn-primary"/>
                     </header>
                     <sheet>
@@ -35,21 +36,27 @@
                         </div>
                         <field name="img" widget='image' class="oe_avatar"/>
                         <div class="oe_title">
-                            <h1 >
+                            <h1>
                                 <field name="name" class="o_text_overflow" placeholder="Tên sách" required="True"/>
                             </h1>
                         </div>
                         <group string="Thông tin sách">
                             <group string="">
                                 <field name="ma_sach"/>
-                                <field name="tac_gia" options="{'no_open': True, 'no_create': True , 'no_quick_create': True}"/>
-                                <field name="danh_muc_sach" options="{'no_open': True, 'no_create': True , 'no_quick_create': True}"/>
+                                <field name="tac_gia"
+                                       options="{'no_open': True, 'no_create': True , 'no_quick_create': True}"/>
+                                <field name="danh_muc_sach"
+                                       options="{'no_open': True, 'no_create': True , 'no_quick_create': True}"/>
                             </group>
                             <group string="">
-                                <field name="the_loai_sach" options="{'no_open': True, 'no_create': True , 'no_quick_create': True}"/>
-                                <field name="nha_xb" options="{'no_open': True, 'no_create': True , 'no_quick_create': True}"/>
-                                <field name="ke_kho" options="{'no_open': True, 'no_create': True , 'no_quick_create': True}"/>
-                                <field name="ngon_ngu" options="{'no_open': True, 'no_create': True , 'no_quick_create': True}"/>
+                                <field name="the_loai_sach"
+                                       options="{'no_open': True, 'no_create': True , 'no_quick_create': True}"/>
+                                <field name="nha_xb"
+                                       options="{'no_open': True, 'no_create': True , 'no_quick_create': True}"/>
+                                <field name="ke_kho"
+                                       options="{'no_open': True, 'no_create': True , 'no_quick_create': True}"/>
+                                <field name="ngon_ngu"
+                                       options="{'no_open': True, 'no_create': True , 'no_quick_create': True}"/>
                             </group>
                             <group string="">
                                 <field name="gia_sach"/>
@@ -186,5 +193,6 @@
                   sequence="1" groups="base.group_system,lib_management.group_lib_management"/>
         <menuitem id="menu_sub_serial" name="Serial sách" parent="menu_sach_doc" action="action_view_serial"
                   sequence="2" groups="base.group_system,lib_management.group_lib_management"/>
+
     </data>
 </odoo>
