@@ -29,7 +29,5 @@ class FormPrintReport(models.TransientModel):
                 'nha_xb': app.ma_sach.nha_xb.name,
             }
             serial_list.append(vals)
-        print(serial_list)
         data['all_serial'] = serial_list
-        print(data)
         return self.env.ref('lib_management.action_report_thongtin_sach_1').report_action(self,data=data)
