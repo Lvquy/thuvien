@@ -34,7 +34,7 @@ class Sach(models.Model):
                                         ('company_id', 'in', [a.id for a in self.env.user.company_ids])])
     ma_sach = fields.Char(string='Mã sách', readonly=True, default=lambda self: 'New')
     next_num = fields.Integer(string='Số serial tiếp theo', default=100, readonly=True)
-    so_luong = fields.Integer(string='Số lượng trong kho',compute='onchange_serial_list')
+    so_luong = fields.Integer(string='Số lượng trong kho' , compute='onchange_serial_list')
     so_luong_muon = fields.Integer(string='Số lượng đang cho mượn',compute='onchange_serial_list')
     total_qty = fields.Integer(string='Tổng số lượng sách', compute='onchange_serial_list')
     so_luong_huy = fields.Integer(string='Sách đã hủy',compute='onchange_serial_list')

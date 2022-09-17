@@ -194,7 +194,7 @@
                             <tr>
                                 <td>Số lượng sẵn có trong thư viện</td>
                                 <td>
-                                    <t t-esc="sach.sudo().so_luong"/>
+                                    <t t-esc="count_serial_list"/>
                                 </td>
                             </tr>
                             <tr t-if="sach.so_lan_muon">

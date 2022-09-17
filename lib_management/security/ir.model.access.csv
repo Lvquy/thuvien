@@ -2,7 +2,7 @@ id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 
 access_lib_management_sach_doc_root,sach.doc.root,model_sach_doc,base.group_system,1,1,1,1
 access_lib_management_sach_doc_user,sach.doc.user,model_sach_doc,lib_management.group_lib_management,1,1,1,1
-access_lib_management_sach_doc_public,sach.doc.public,model_sach_doc,,1,0,0,0
+access_lib_management_sach_doc_public,sach.doc.public,model_sach_doc,,1,1,0,0
 
 access_lib_management_doc_gia_root,doc.gia.root,model_doc_gia,base.group_system,1,1,1,1
 access_lib_management_doc_gia_user,doc.gia.user,model_doc_gia,lib_management.group_lib_management,1,1,1,1

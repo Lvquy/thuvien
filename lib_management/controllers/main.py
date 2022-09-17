@@ -4,9 +4,9 @@ from odoo.http import request
 
 
 class Book(http.Controller):
+
     @http.route(['/top_book'], auth='public', website=True, csrf=False)
     def index(self, **kw):
-
         Sach = request.env['sach.doc'].sudo()
         Truong = request.env['res.company'].sudo()
         values = {
@@ -17,14 +17,10 @@ class Book(http.Controller):
             if kw.get('truong') != 'false':
                 truong_id = int(kw['truong'].split('.')[0])
                 domain = [('company_id', '=', truong_id)]
-
-
-                top_sach = Sach.search(domain, order='so_lan_muon asc', limit=10).sorted(key=lambda r: r.so_lan_muon,
-reverse=True)
+                top_sach = Sach.search(domain, order='so_lan_muon asc', limit=10).sorted(key=lambda r: r.so_lan_muon, reverse=True)
                 values.update({
                     'Sach': top_sach,
                 })
-
         return request.render('lib_management.index', values)
 
     @http.route(['/top_book/details/<model("sach.doc"):sach>'], auth='public', website=True, csrf=False)
@@ -41,7 +37,7 @@ reverse=True)
             'Truong': Truong.search([])
         }
         if kw:
-            print(kw)
+            # print(kw)
             if kw['truong'] != 'false':
                 truong = kw['truong'].split('.')
                 if kw.get('qua_han') == 'on':
@@ -66,16 +62,13 @@ reverse=True)
             if kw.get('truong') != False:
                 request.session['id_truong'] = kw['truong']
                 id_truong = int(request.session['id_truong'])
-
-
         domain = [('company_id','=',id_truong)]
 
         if search:
-            print(search)
-            print(request.session)
+            # print(search)
+            # print(request.session)
             id_truong = int(request.session['id_truong'])
-            print(id_truong)
-
+            # print(id_truong)
             domain=['&',('company_id','=',id_truong),('name','ilike',search)]
 
         Sach = request.env['sach.doc'].sudo()
@@ -95,5 +88,9 @@ reverse=True)
 
     @http.route(['/list_book/details/<model("sach.doc"):sach>'], auth='public', website=True, csrf=False)
     def sach_1(self, sach):
-        values = {'sach': sach}
+        count_serial_list = request.env['serial'].sudo().search_count(['&',('company_id', '=', sach.company_id.id),('state','=','0'),('ma_sach','=',sach.ma_sach)])
+        values = {
+            'sach': sach,
+            'count_serial_list':count_serial_list
+            }
         return request.render('lib_management.sach', values)
