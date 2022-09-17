@@ -87,6 +87,7 @@ class MuonTra(models.Model):
                 rec.state = '2'
                 rec.is_qua_han = False
                 # rec.nguoi_muon.count_muon_sach += 1
+                rec.nguoi_muon.compute_muon_sach()
                 rec.nguoi_muon.count_dang_muon -= rec.update_count_dang_muon()
                 if rec.type_phat in ('0', '1', '2'):
                     rec.nguoi_muon.count_error += 1
@@ -137,6 +138,7 @@ class LineMuonTra(models.Model):
                     rec.ref_muon_tra.state = '2'
                     rec.ref_muon_tra.is_qua_han = False
                     # rec.ref_muon_tra.nguoi_muon.count_muon_sach += 1
+                    rec.ref_muon_tra.nguoi_muon.compute_muon_sach()
                     rec.ref_muon_tra.ngay_tra = datetime.today()
                     if rec.ref_muon_tra.type_phat in ('0', '1', '2'):
                         rec.ref_muon_tra.nguoi_muon.count_error += 1

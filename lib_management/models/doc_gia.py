@@ -28,7 +28,7 @@ class DocGia(models.Model):
     kieu_the = fields.Selection([('hs', 'Học sinh'), ('gv', 'Giáo viên'), ('other', 'Khác')], string='Loại thẻ',
                                 default='hs')
     ngay_het_han = fields.Date(string='Ngày hết hạn')
-    count_muon_sach = fields.Integer(string='Số lần mượn sách',  compute='compute_muon_sach')
+    count_muon_sach = fields.Integer(string='Số lần mượn sách')
     count_error = fields.Integer(string='Số lần quá hạn/hỏng sách',
                                  help='Là số lần độc giả trả sách quá hạn hoặc làm hỏng sách, mất sách...')
     count_dang_muon = fields.Integer(string='Sách đang mượn')
@@ -37,6 +37,7 @@ class DocGia(models.Model):
 
     def compute_muon_sach(self):
         for rec in self:
+            rec.count_muon_sach = 0
             rec.count_muon_sach = rec.env['muon.tra'].search_count(['&',('state','=','2'),('nguoi_muon','=',rec.id),('company_id', 'in', [a.id for a in self.env.user.company_ids])])
 
     def _compute_checkin(self):
