@@ -58,6 +58,14 @@ class Purchase(models.Model):
             res = super(Purchase, self).create(vals)
         return res
 
+    @api.model
+    def get_import_templates(self):
+        return [{
+            'label': ('Tải file mẫu'),
+            'template': '/lib_management/static/xls/muasach_template_sample.xlsx'
+        }]
+
+
 class PurLines(models.Model):
     _name = 'pur.lines'
     _rec_name = 'ma_sach'

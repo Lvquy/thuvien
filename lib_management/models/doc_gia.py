@@ -129,6 +129,12 @@ class DocGia(models.Model):
             BaoCao.update_bao_cao()
         return res
 
+    @api.model
+    def get_import_templates(self):
+        return [{
+            'label': ('Tải file mẫu'),
+            'template': '/lib_management/static/xls/docgia_template_sample.xlsx'
+        }]
 
 class LopHoc(models.Model):
     _name = 'lop.hoc'

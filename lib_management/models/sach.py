@@ -160,6 +160,12 @@ class Sach(models.Model):
             'name': 'Sách đã báo phế'
         }
 
+    @api.model
+    def get_import_templates(self):
+        return [{
+            'label': ('Tải file mẫu'),
+            'template': '/lib_management/static/xls/sach_template_sample.xlsx'
+        }]
 
 class CreateSerial(models.Model):
     _name = 'create.serial'
